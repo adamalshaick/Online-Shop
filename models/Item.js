@@ -20,7 +20,7 @@ const ItemSchema = new Schema({
   avatar: {
     type: String
   },
-
+  /*
   photo: {
     type: String,
     required: true
@@ -30,7 +30,7 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
-
+*/
   date: {
     type: Date,
     default: Date.now

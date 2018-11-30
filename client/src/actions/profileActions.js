@@ -86,3 +86,10 @@ export const setProfileLoading = () => {
     type: PROFILE_LOADING
   };
 };
+
+// Clear loading
+export const clearCurrentProfile = () => {
+  return {
+    type: CLEAR_CURRENT_PROFILE
+  };
+};
