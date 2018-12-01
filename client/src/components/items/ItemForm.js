@@ -31,7 +31,7 @@ class ItemForm extends Component {
     };
 
     this.props.addItem(newItem);
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ text: "" });
   };
 
   onChange = e => {

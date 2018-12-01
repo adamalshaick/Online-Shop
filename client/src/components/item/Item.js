@@ -24,7 +24,18 @@ class Item extends Component {
       );
     }
 
-    return <>{itemContent}</>;
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <Link to="/items" className="btn btn-light mb-3">
+              Back to items
+            </Link>
+            {itemContent}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

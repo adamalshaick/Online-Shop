@@ -31,7 +31,7 @@ export const addItem = itemData => dispatch => {
 export const getItems = () => dispatch => {
   dispatch(setItemLoading());
   axios
-    .get("./api/items")
+    .get("/api/items")
     .then(res =>
       dispatch({
         type: GET_ITEMS,
@@ -50,7 +50,7 @@ export const getItems = () => dispatch => {
 export const getItem = id => dispatch => {
   dispatch(setItemLoading());
   axios
-    .get("../api/items")
+    .get(`/api/items/${id}`)
     .then(res =>
       dispatch({
         type: GET_ITEM,

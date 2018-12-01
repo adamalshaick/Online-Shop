@@ -50,11 +50,7 @@ class App extends Component {
             <Route exact path="/profile/:handle" component={Profile} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/create-profile" component={CreateProfile} />
-            <Route
-              exact
-              path="/item/5c00771546dd39121894b12b"
-              component={Item}
-            />
+            <Route exact path="/item/:id" component={Item} />
             <Route exact path="/items" component={Items} />
           </>
         </Router>
