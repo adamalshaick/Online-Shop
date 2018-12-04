@@ -12,7 +12,7 @@ import {
 // Add Item
 export const addItem = itemData => dispatch => {
   axios
-    .post("./api/items", itemData)
+    .post("/api/items", itemData)
     .then(res =>
       dispatch({
         type: ADD_ITEM,

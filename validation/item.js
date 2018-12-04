@@ -14,6 +14,14 @@ module.exports = function validateItemInput(data) {
     errors.text = "Text field is required";
   }
 
+  if (isNaN(data.price)) {
+    errors.price = "Price must be a number";
+  }
+
+  if (Validator.isEmpty(data.price)) {
+    errors.price = "Price field is required";
+  }
+
   return {
     errors,
     isValid: isEmpty(errors)

@@ -13,11 +13,20 @@ const ItemSchema = new Schema({
     required: true
   },
 
+  price: {
+    type: String,
+    required: true
+  },
+
   name: {
     type: String
   },
 
   avatar: {
+    type: String
+  },
+
+  itemImage: {
     type: String
   },
   /*

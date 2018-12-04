@@ -23,7 +23,7 @@ class ItemItem extends Component {
               alt=""
             />
 
-            <p className="text-center">{item.name}</p>
+            <p>{item.price}</p>
           </div>
           <div className="col-md-10">
             <p className="lead">{item.text}</p>

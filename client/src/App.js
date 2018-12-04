@@ -16,6 +16,8 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import Dashboard from "./components/dashboard/Dashboard";
 import Item from "./components/item/Item";
 import Items from "./components/items/Items";
+import Navbar from "./components/layout/Navbar";
+import SellItem from "./components/sell-item/SellItem";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -44,6 +46,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <>
+            <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -52,6 +55,7 @@ class App extends Component {
             <Route exact path="/create-profile" component={CreateProfile} />
             <Route exact path="/item/:id" component={Item} />
             <Route exact path="/items" component={Items} />
+            <Route exact path="/sell-item" component={SellItem} />
           </>
         </Router>
       </Provider>
