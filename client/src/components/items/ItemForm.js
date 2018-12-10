@@ -10,6 +10,8 @@ class ItemForm extends Component {
     super(props);
     this.state = {
       text: "",
+      avatar: "",
+      defaultPhoto: false,
       errors: {}
     };
   }
@@ -28,11 +30,13 @@ class ItemForm extends Component {
     const newItem = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar
+      avatar: this.state.itemImage,
+      itemImage: this.state.itemImage
     };
 
     this.props.addItem(newItem);
     this.setState({ text: "" });
+    this.setState({ avatar: "" });
   };
 
   onChange = e => {

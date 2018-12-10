@@ -12,6 +12,8 @@ class SellItem extends Component {
     this.state = {
       text: "",
       price: "",
+      title: "",
+      name: "",
       selectedFile: null,
       errors: {}
     };
@@ -31,61 +33,69 @@ class SellItem extends Component {
     const newItem = {
       text: this.state.text,
       price: this.state.price,
+      title: this.state.title,
       name: user.name,
-      avatar: user.avatar,
       selectedFile: this.state.selectedFile
     };
 
     this.props.addItem(newItem);
     this.setState({ text: "" });
     this.setState({ price: "" });
+    this.setState({ title: "" });
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  fileChangedHandler = e => {
-    this.setState({
-      selectedFile: e.target.files[0]
-    });
-  };
-
-  uploadHandler = e => {
-    const data = new FormData();
-    data.append(
-      "myImage",
-      this.state.selectedFile,
-      this.state.selectedFile.name,
-      axios.post("/api/items/upload", data)
-    );
-  };
-
   render() {
     const { errors } = this.state;
     return (
       <div className="mb-3">
-        <input type="file" onChange={this.fileChangedHandler} />
-        <button className="btn btn-danger" onClick={this.uploadHandler}>
-          Upload
-        </button>
-
+        <h1 className="text-center mt-5 mb-5">Sell an item</h1>
         <div className="card card-info">
-          <form>
-            <InputGroup
-              placeholder="Add price"
-              placeholder="Price"
-              name="price"
-              icon="fab fa-dollar-sign"
-              value={this.state.price}
-              onChange={this.onChange}
-              error={errors.price}
-            />
-          </form>
+          <div className="row">
+            <div className="col-md-6">
+              <form>
+                <span>Enter a name</span>
+                <InputGroup
+                  placeholder="Add a name of your item"
+                  placeholder="Name"
+                  name="title"
+                  icon="fas fa-signature"
+                  value={this.state.title}
+                  onChange={this.onChange}
+                  error={errors.title}
+                />
+              </form>
+
+              <form>
+                <span>Enter a price</span>
+                <InputGroup
+                  placeholder="Add price"
+                  placeholder="Price (USD)"
+                  name="price"
+                  icon="fas fa-dollar-sign"
+                  value={this.state.price}
+                  onChange={this.onChange}
+                  error={errors.price}
+                />
+              </form>
+            </div>
+            <div className="col-md-6">
+              <div className="card text-center">
+                <i className="far fa-image fa-10x" />
+                <input style={{ margin: "auto" }} type="file" />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6" />
+          </div>
         </div>
         <div className="card card-info">
-          <div className="card-header bg-info text-white">
-            Add an item for sale
+          <div className="card-header">
+            <span>Add some information about your product</span>
           </div>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
@@ -98,8 +108,8 @@ class SellItem extends Component {
                 error={errors.text}
               />
             </div>
-            <button type="submit" className="btn btn-info">
-              Submit
+            <button type="submit" className="btn btn-danger">
+              Next
             </button>
           </form>
         </div>

@@ -18,8 +18,9 @@ class ItemItem extends Component {
         <div className="row">
           <div className="col-md-2">
             <img
-              className="rounded-circle d-none d-md-block"
-              src={item.avatar}
+              style={{ width: "150px", height: "150px" }}
+              className=" d-none d-md-block"
+              src={`./../uploads/post_image/${item.itemImage}`}
               alt=""
             />
 

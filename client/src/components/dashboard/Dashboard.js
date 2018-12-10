@@ -27,10 +27,20 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p>
+            <h1>
               Welcome <Link to={"/profile/${profile.handle}"}>{user.name}</Link>
-            </p>
+            </h1>
             <ProfileActions />
+
+            <div className="row">
+              <Link className="sell" to="/sell-item" className="col-md-6">
+                JD
+              </Link>
+              <Link className="sell" to="/items" className="col-md-6">
+                <img className="col-12" src="./assets/images/buy.jpg" />
+              </Link>
+            </div>
+
             <div style={{ marginBottom: "60px" }}>
               <button
                 onClick={this.onDeleteClick.bind(this)}
@@ -39,7 +49,7 @@ class Dashboard extends Component {
                 Delete My Account
               </button>
 
-              <Link to="/sell-item" className="btn btn-lg btn-info">
+              <Link to="/sell-item" className="btn  btn-info">
                 Sell an item
               </Link>
             </div>

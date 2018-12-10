@@ -13,6 +13,7 @@ const TextAreaFieldGroup = ({
   return (
     <div className="form-group">
       <textarea
+        style={{ height: "200px" }}
         className={classnames("form-control form-control-lg", {
           "is-invalid": error
         })}

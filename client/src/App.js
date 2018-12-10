@@ -48,14 +48,17 @@ class App extends Component {
           <>
             <Navbar />
             <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile/:handle" component={Profile} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/create-profile" component={CreateProfile} />
-            <Route exact path="/item/:id" component={Item} />
-            <Route exact path="/items" component={Items} />
-            <Route exact path="/sell-item" component={SellItem} />
+
+            <div className="container">
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/create-profile" component={CreateProfile} />
+              <Route exact path="/item/:id" component={Item} />
+              <Route exact path="/items" component={Items} />
+              <Route exact path="/sell-item" component={SellItem} />
+            </div>
           </>
         </Router>
       </Provider>
