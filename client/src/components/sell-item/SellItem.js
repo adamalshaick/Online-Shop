@@ -25,18 +25,28 @@ class SellItem extends Component {
     }
   }
 
+  fileSelectedHandler = e => {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
     const { user } = this.props.auth;
 
-    const newItem = {
-      text: this.state.text,
-      price: this.state.price,
-      title: this.state.title,
-      name: user.name,
-      selectedFile: this.state.selectedFile
-    };
+    const newItem = new FormData();
+
+    newItem.append(
+      "myImage",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+
+    newItem.append("text", this.state.text);
+    newItem.append("price", this.state.price);
+    newItem.append("title", this.state.title);
 
     this.props.addItem(newItem);
     this.setState({ text: "" });
@@ -85,7 +95,11 @@ class SellItem extends Component {
             <div className="col-md-6">
               <div className="card text-center">
                 <i className="far fa-image fa-10x" />
-                <input style={{ margin: "auto" }} type="file" />
+                <input
+                  onChange={this.fileSelectedHandler}
+                  style={{ margin: "auto" }}
+                  type="file"
+                />
               </div>
             </div>
           </div>
@@ -108,7 +122,7 @@ class SellItem extends Component {
                 error={errors.text}
               />
             </div>
-            <button type="submit" className="btn btn-danger">
+            <button onClick={this.onSubmit} className="btn btn-danger">
               Next
             </button>
           </form>
