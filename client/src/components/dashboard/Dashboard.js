@@ -27,7 +27,7 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <h1>
+            <h1 className="mt-5">
               Welcome <Link to={"/profile/${profile.handle}"}>{user.name}</Link>
             </h1>
 
