@@ -30,27 +30,75 @@ class Dashboard extends Component {
             <h1>
               Welcome <Link to={"/profile/${profile.handle}"}>{user.name}</Link>
             </h1>
-            <ProfileActions />
 
-            <div className="row">
-              <Link className="sell" to="/sell-item" className="col-md-6">
-                JD
-              </Link>
-              <Link className="sell" to="/items" className="col-md-6">
-                <img className="col-12" src="./assets/images/buy.jpg" />
-              </Link>
+            <div className="row mt-5">
+              <div
+                style={{ background: "white" }}
+                className="col-md-5 mb-4 p-0 m-0 image-wrapper"
+              >
+                <Link to="/sell-item" className="link">
+                  <img
+                    style={{
+                      maxWidth: "100%",
+                      borderBottom: "black solid 1px",
+                      borderRadius: "5px",
+                      borderBottomLeftRadius: "0px",
+                      borderBottomRightRadius: "0px",
+                      boxShadow:
+                        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+                    }}
+                    src="./assets/images/sell.jpg"
+                  />
+                  <div
+                    style={{ width: "100%", fontWeight: "bold" }}
+                    className="btn btn-dark"
+                  >
+                    Sell an item
+                  </div>
+                </Link>
+              </div>
+
+              <div className="col-md-2" />
+              <div
+                style={{ background: "white" }}
+                className="col-md-5 mb-4 p-0 m-0 image-wrapper"
+              >
+                <Link to="/items" className="link">
+                  <img
+                    style={{
+                      maxWidth: "100%",
+                      borderBottom: "black solid 1px",
+                      borderRadius: "5px",
+                      borderBottomLeftRadius: "0px",
+                      borderBottomRightRadius: "0px",
+                      boxShadow:
+                        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+                    }}
+                    src="./assets/images/buy.jpg"
+                  />
+                  <div
+                    style={{ width: "100%", fontWeight: "bold" }}
+                    className="btn btn-dark"
+                  >
+                    Buy an item
+                  </div>
+                </Link>
+              </div>
             </div>
 
-            <div style={{ marginBottom: "60px" }}>
+            <div className="float-right mt-5">
               <button
                 onClick={this.onDeleteClick.bind(this)}
                 className="btn btn-danger"
               >
                 Delete My Account
               </button>
+            </div>
 
-              <Link to="/sell-item" className="btn  btn-info">
-                Sell an item
+            <div className=" mt-5 mr-3 float-right">
+              <Link to="/edit-profile" className="btn btn-dark">
+                <i className="fas fa-user-circle text-light mr-1" /> Edit My
+                Profile
               </Link>
             </div>
           </div>
@@ -71,10 +119,7 @@ class Dashboard extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <p>Dashboard</p>
-            {dashboardContent}
-          </div>
+          <div className="col-md-12">{dashboardContent}</div>
         </div>
       </div>
     );
