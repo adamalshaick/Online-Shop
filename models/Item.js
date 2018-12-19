@@ -18,12 +18,9 @@ const ItemSchema = new Schema({
     required: true
   },
 
-  name: {
-    type: String
-  },
-
-  avatar: {
-    type: String
+  title: {
+    type: String,
+    required: true
   },
 
   itemImage: {

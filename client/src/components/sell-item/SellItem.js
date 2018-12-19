@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { addItem } from "../../actions/itemActions";
-import axios from "axios";
 
 class SellItem extends Component {
   constructor(props) {
@@ -49,9 +48,7 @@ class SellItem extends Component {
     newItem.append("title", this.state.title);
 
     this.props.addItem(newItem);
-    this.setState({ text: "" });
-    this.setState({ price: "" });
-    this.setState({ title: "" });
+    this.setState({ text: "" }, { price: "" }, { title: "" });
   };
 
   onChange = e => {
@@ -93,14 +90,7 @@ class SellItem extends Component {
               </form>
             </div>
             <div className="col-md-6">
-              <div className="card text-center">
-                <i className="far fa-image fa-10x" />
-                <input
-                  onChange={this.fileSelectedHandler}
-                  style={{ margin: "auto" }}
-                  type="file"
-                />
-              </div>
+              <div className="card text-center">{/*upload*/}</div>
             </div>
           </div>
           <div className="row">

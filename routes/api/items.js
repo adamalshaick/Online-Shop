@@ -10,8 +10,6 @@ const Item = require("../../models/Item");
 // Profile model
 const Profile = require("../../models/Profile");
 
-const Uploader = require("../../models/Uploader");
-
 // Validation
 const validateItemInput = require("../../validation/item");
 
@@ -51,28 +49,6 @@ function checkFileType(file, cb) {
   }
 }
 
-// @route POST api/items/upload
-router.post("/upload", (req, res) => {
-  upload(req, res, error => {
-    if (error) {
-      console.log("errors", error);
-      res.json({ error: error });
-    } else {
-      // If File not found
-      if (req.file === undefined) {
-        console.log("Error: No File Selected");
-        res.json("Error: No File Selected");
-      } else {
-        // If Success
-        const data = new Uploader({
-          itemImage: req.file.filename
-        });
-        data.save().then(file => res.json(file));
-      }
-    }
-  });
-});
-
 // @route GET api/items/test
 // @desc Tests items route
 // @access Public
@@ -106,24 +82,26 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateItemInput(req.body);
+    upload(req, res, error => {
+      const { errors, isValid } = validateItemInput(req.body, req.file, error);
+      // Check Validation
+      if (!isValid) {
+        // If any errors, send 400 with errors object
+        return res.status(400).json(errors);
+      }
 
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-
-    const newItem = new Item({
-      text: req.body.text,
-      price: req.body.price,
-      name: req.body.name,
-      avatar: req.body.avatar,
-      user: req.user.id,
-      itemImage: req.file.filename
+      {
+        const newItem = new Item({
+          itemImage: req.file.filename,
+          text: req.body.text,
+          price: req.body.price,
+          title: req.body.title,
+          user: req.user.id
+        });
+        newItem.save().then(item => res.json(item));
+      }
+      console.log(error);
     });
-
-    newItem.save().then(item => res.json(item));
   }
 );
 
