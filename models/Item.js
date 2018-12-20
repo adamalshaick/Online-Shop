@@ -23,20 +23,15 @@ const ItemSchema = new Schema({
     required: true
   },
 
-  itemImage: {
-    type: String
-  },
-  /*
-  photo: {
+  category: {
     type: String,
     required: true
   },
 
-  price: {
-    type: String,
-    required: true
+  itemImage: {
+    type: String
   },
-*/
+
   date: {
     type: Date,
     default: Date.now

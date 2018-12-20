@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { addItem } from "../../actions/itemActions";
+import UploadFileGroup from "../common/UploadFileGroup";
 
 class SellItem extends Component {
   constructor(props) {
@@ -37,18 +38,22 @@ class SellItem extends Component {
 
     const newItem = new FormData();
 
-    newItem.append(
-      "myImage",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    );
+    if (this.state.selectedFile) {
+      newItem.append(
+        "myImage",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
 
     newItem.append("text", this.state.text);
     newItem.append("price", this.state.price);
     newItem.append("title", this.state.title);
 
     this.props.addItem(newItem);
-    this.setState({ text: "" }, { price: "" }, { title: "" });
+    this.setState({ text: "" });
+    this.setState({ price: "" });
+    this.setState({ title: "" });
   };
 
   onChange = e => {
@@ -90,7 +95,13 @@ class SellItem extends Component {
               </form>
             </div>
             <div className="col-md-6">
-              <div className="card text-center">{/*upload*/}</div>
+              <UploadFileGroup
+                error={errors.file}
+                icon="far fa-image fa-10x"
+                type="file"
+                name="file"
+                onChange={this.fileSelectedHandler}
+              />
             </div>
           </div>
           <div className="row">
@@ -112,8 +123,11 @@ class SellItem extends Component {
                 error={errors.text}
               />
             </div>
-            <button onClick={this.onSubmit} className="btn btn-danger">
-              Next
+            <button
+              onClick={this.onSubmit}
+              className="btn btn-danger float-right mr-5"
+            >
+              Upload
             </button>
           </form>
         </div>

@@ -7,6 +7,7 @@ module.exports = function validateItemInput(data, formData, uploadError) {
   data.text = !isEmpty(data.text) ? data.text : "";
   data.title = !isEmpty(data.title) ? data.title : "";
   data.price = !isEmpty(data.price) ? data.price : "";
+  data.category = !isEmpty(data.category) ? data.category : "";
 
   if (Validator.isEmpty(data.title)) {
     errors.title = "Name field is required";
@@ -34,6 +35,10 @@ module.exports = function validateItemInput(data, formData, uploadError) {
 
   if (uploadError) {
     errors.file = uploadError;
+  }
+
+  if (Validator.isEmpty(data.category)) {
+    errors.category = "Select a category";
   }
 
   return {
