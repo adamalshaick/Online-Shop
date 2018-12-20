@@ -38,7 +38,7 @@ module.exports = function validateItemInput(data, formData, uploadError) {
   }
 
   if (Validator.isEmpty(data.category)) {
-    errors.category = "Select a category";
+    errors.category = "Select category";
   }
 
   return {

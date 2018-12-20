@@ -5,6 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { addItem } from "../../actions/itemActions";
 import UploadFileGroup from "../common/UploadFileGroup";
+import SelectListGroup from "../common/SelectListGroup";
 
 class SellItem extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class SellItem extends Component {
       price: "",
       title: "",
       name: "",
+      category: "",
       selectedFile: null,
       errors: {}
     };
@@ -49,11 +51,14 @@ class SellItem extends Component {
     newItem.append("text", this.state.text);
     newItem.append("price", this.state.price);
     newItem.append("title", this.state.title);
+    newItem.append("category", this.state.category);
 
     this.props.addItem(newItem);
     this.setState({ text: "" });
     this.setState({ price: "" });
     this.setState({ title: "" });
+    this.setState({ category: "" });
+    this.setState({ selectedFile: null });
   };
 
   onChange = e => {
@@ -62,6 +67,14 @@ class SellItem extends Component {
 
   render() {
     const { errors } = this.state;
+
+    const options = [
+      { label: "* Select category", value: "" },
+      { label: "Clothes", value: "Clothes" },
+      { label: "Electronics", value: "Clothes" },
+      { label: "Shoes", value: "Clothes" }
+    ];
+
     return (
       <div className="mb-3">
         <h1 className="text-center mt-5 mb-5">Sell an item</h1>
@@ -91,6 +104,17 @@ class SellItem extends Component {
                   value={this.state.price}
                   onChange={this.onChange}
                   error={errors.price}
+                />
+              </form>
+
+              <form>
+                <SelectListGroup
+                  placeholder="* Category"
+                  name="category"
+                  value={this.state.category}
+                  options={options}
+                  error={errors.category}
+                  onChange={this.onChange}
                 />
               </form>
             </div>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const UploadFileGroup = ({ error, icon, type, name, onChange }) => {
   return (
-    <div className="input-group">
+    <div className="input-group mt-3">
       <div className="input-group-prepend">
         <div className="card text-center">
           <i className={icon} />

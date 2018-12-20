@@ -90,17 +90,15 @@ router.post(
         return res.status(400).json(errors);
       }
 
-      {
-        const newItem = new Item({
-          itemImage: req.file.filename,
-          text: req.body.text,
-          price: req.body.price,
-          title: req.body.title,
-          user: req.user.id
-        });
-        newItem.save().then(item => res.json(item));
-      }
-      console.log(error);
+      const newItem = new Item({
+        itemImage: req.file.filename,
+        text: req.body.text,
+        price: req.body.price,
+        title: req.body.title,
+        category: req.body.category,
+        user: req.user.id
+      });
+      newItem.save().then(item => res.json(item));
     });
   }
 );
