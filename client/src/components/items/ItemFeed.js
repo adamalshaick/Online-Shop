@@ -6,7 +6,13 @@ class ItemFeed extends Component {
   render() {
     const { items } = this.props;
 
-    return items.map(item => <ItemItem key={item._id} item={item} />);
+    return (
+      <div className="row">
+        {items.map(item => (
+          <ItemItem key={item._id} item={item} />
+        ))}
+      </div>
+    );
   }
 }
 

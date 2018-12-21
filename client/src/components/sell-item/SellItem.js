@@ -71,8 +71,8 @@ class SellItem extends Component {
     const options = [
       { label: "* Select category", value: "" },
       { label: "Clothes", value: "Clothes" },
-      { label: "Electronics", value: "Clothes" },
-      { label: "Shoes", value: "Clothes" }
+      { label: "Electronics", value: "Electronics" },
+      { label: "Shoes", value: "Shoes" }
     ];
 
     return (

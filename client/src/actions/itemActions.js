@@ -46,7 +46,7 @@ export const getItems = () => dispatch => {
     );
 };
 
-// Get Item
+// Get Item by id
 export const getItem = id => dispatch => {
   dispatch(setItemLoading());
   axios

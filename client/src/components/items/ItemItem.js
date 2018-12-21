@@ -14,33 +14,35 @@ class ItemItem extends Component {
     const { item, auth, showActions } = this.props;
 
     return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <img
-              style={{ width: "150px", height: "150px" }}
-              className=" d-none d-md-block"
-              src={`./../uploads/post_image/${item.itemImage}`}
-              alt=""
-            />
+      <div className="col-md-4">
+        <div style={{ height: "300px" }} className="card card-body mb-3 ">
+          <div className="row">
+            <div className="">
+              <img
+                style={{ maxWidth: "150px", maxHeight: "150px" }}
+                className=" d-none d-md-block"
+                src={`./../uploads/post_image/${item.itemImage}`}
+                alt=""
+              />
 
-            <p>{item.price}</p>
+              <p>{item.price}</p>
+            </div>
+            <div className="">
+              <p className="lead">{item.text}</p>
+            </div>
+            {showActions ? (
+              <span>
+                <Link to={`/item/${item._id}`} className="btn btn-info mr-1">
+                  Items
+                </Link>
+                {item.user === auth.user.id ? (
+                  <button type="button" className="btn btn-danger mr-1">
+                    <i className="fas fa-times" />
+                  </button>
+                ) : null}
+              </span>
+            ) : null}
           </div>
-          <div className="col-md-10">
-            <p className="lead">{item.text}</p>
-          </div>
-          {showActions ? (
-            <span>
-              <Link to={`/item/${item._id}`} className="btn btn-info mr-1">
-                Items
-              </Link>
-              {item.user === auth.user.id ? (
-                <button type="button" className="btn btn-danger mr-1">
-                  <i className="fas fa-times" />
-                </button>
-              ) : null}
-            </span>
-          ) : null}
         </div>
       </div>
     );

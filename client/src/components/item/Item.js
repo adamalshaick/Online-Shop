@@ -4,30 +4,11 @@ import PropTypes from "prop-types";
 import ItemItem from "../items/ItemItem";
 import { getItem } from "../../actions/itemActions";
 import Link from "react-router-dom/Link";
-import axios from "axios";
-import { setCurrentUser } from "../../actions/authActions";
-import authReducer from "../../reducers/authReducer";
 
 class Item extends Component {
   componentDidMount() {
     this.props.getItem(this.props.match.params.id);
   }
-
-  fileChangedHandler = e => {
-    this.setState({
-      selectedFile: e.target.files[0]
-    });
-  };
-
-  uploadHandler = e => {
-    const data = new FormData();
-    data.append(
-      "myImage",
-      this.state.selectedFile,
-      this.state.selectedFile.name,
-      axios.post("/api/items/upload", data)
-    );
-  };
 
   render() {
     const { item, loading } = this.props.item;
@@ -48,20 +29,6 @@ class Item extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {item.user === auth.user.id && item.itemImage === undefined ? (
-              <p>
-                <input type="file" onChange={this.fileChangedHandler} />
-                <button className="btn btn-danger" onClick={this.uploadHandler}>
-                  Upload
-                </button>
-              </p>
-            ) : (
-              <p />
-            )}
-            <input type="file" onChange={this.fileChangedHandler} />
-            <button className="btn btn-danger" onClick={this.uploadHandler}>
-              Upload
-            </button>
             <Link to="/items" className="btn btn-light mb-3">
               Back to items
             </Link>

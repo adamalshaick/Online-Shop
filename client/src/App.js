@@ -18,6 +18,7 @@ import Item from "./components/item/Item";
 import Items from "./components/items/Items";
 import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
+import EditProfile from "./components/edit-profile/EditProfile";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -58,6 +59,7 @@ class App extends Component {
               <Route exact path="/item/:id" component={Item} />
               <Route exact path="/items" component={Items} />
               <Route exact path="/sell-item" component={SellItem} />
+              <Route exact path="/edit-profile" component={EditProfile} />
             </div>
           </>
         </Router>
