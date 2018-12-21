@@ -8,6 +8,8 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import PrivateRoute from "./components/common/PrivateRoute";
+
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -54,12 +56,29 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profile/:handle" component={Profile} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/create-profile" component={CreateProfile} />
-              <Route exact path="/item/:id" component={Item} />
               <Route exact path="/items" component={Items} />
-              <Route exact path="/sell-item" component={SellItem} />
-              <Route exact path="/edit-profile" component={EditProfile} />
+
+              <Switch>
+                <PrivateRoute exact path="/item/:id" component={Item} />
+              </Switch>
+
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <Route exact path="/create-profile" component={CreateProfile} />
+              </Switch>
+
+              <Switch>
+                <PrivateRoute exact path="/sell-item" component={SellItem} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                />
+              </Switch>
             </div>
           </>
         </Router>
