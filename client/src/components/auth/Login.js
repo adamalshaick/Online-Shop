@@ -55,6 +55,7 @@ class Login extends Component {
             value={this.state.email}
             onChange={this.onChange}
             error={errors.email}
+            id="email"
           />
 
           <TextFieldGroup
@@ -64,9 +65,12 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.onChange}
             error={errors.password}
+            id="password"
           />
 
-          <input type="submit" className="btn btn-info btn-block mt-4" />
+          <button type="submit" className="btn btn-dark btn-block mt-4">
+            Sign In
+          </button>
         </form>
       </div>
     );
