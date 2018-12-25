@@ -5,7 +5,7 @@ import ItemForm from "./ItemForm.js";
 import { getItems } from "../../actions/itemActions";
 import ItemFeed from "./ItemFeed";
 
-class Items extends Component {
+export class Items extends Component {
   componentDidMount() {
     this.props.getItems();
   }

@@ -5,7 +5,7 @@ import ItemItem from "../items/ItemItem";
 import { getItem } from "../../actions/itemActions";
 import Link from "react-router-dom/Link";
 
-class Item extends Component {
+export class Item extends Component {
   componentDidMount() {
     this.props.getItem(this.props.match.params.id);
   }

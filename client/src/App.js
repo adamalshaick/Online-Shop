@@ -5,10 +5,10 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { clearCurrentProfile } from "./actions/profileActions";
 
-import { Provider } from "react-redux";
 import store from "./store";
 
 import PrivateRoute from "./components/common/PrivateRoute";
+import { Provider } from "react-redux";
 
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
@@ -46,43 +46,41 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <>
-            <Navbar />
-            <Route exact path="/" component={Landing} />
+      <Router>
+        <>
+          <Navbar />
+          <Route exact path="/" component={Landing} />
 
-            <div className="container">
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/profile/:handle" component={Profile} />
-              <Route exact path="/items" component={Items} />
+          <div className="container">
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile/:handle" component={Profile} />
+            <Route exact path="/items" component={Items} />
 
-              <Switch>
-                <PrivateRoute exact path="/item/:id" component={Item} />
-              </Switch>
+            <Switch>
+              <PrivateRoute exact path="/item/:id" component={Item} />
+            </Switch>
 
-              <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
-              <Switch>
-                <Route exact path="/create-profile" component={CreateProfile} />
-              </Switch>
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <Route exact path="/create-profile" component={CreateProfile} />
+            </Switch>
 
-              <Switch>
-                <PrivateRoute exact path="/sell-item" component={SellItem} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/edit-profile"
-                  component={EditProfile}
-                />
-              </Switch>
-            </div>
-          </>
-        </Router>
-      </Provider>
+            <Switch>
+              <PrivateRoute exact path="/sell-item" component={SellItem} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+              />
+            </Switch>
+          </div>
+        </>
+      </Router>
     );
   }
 }
