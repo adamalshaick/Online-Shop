@@ -7,6 +7,10 @@ let wrapped;
 const Props = {
   value: "new value",
   name: "new name",
+  options: [
+    { label: "option a", option: "option a" },
+    { label: "option b", option: "option b" }
+  ],
   onChange: e => {
     e.target.name = e.target.value;
   }
@@ -21,5 +25,5 @@ it("can type", () => {
     target: { value: "new input" }
   });
   wrapped.update();
-  expect(wrapped.find("input").prop("value")).toEqual("new value");
+  expect(wrapped.find("select").prop("value")).toEqual("new value");
 });

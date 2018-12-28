@@ -120,6 +120,7 @@ class SellItem extends Component {
             </div>
             <div className="col-md-6">
               <UploadFileGroup
+                value={this.state.selectedFile}
                 error={errors.file}
                 icon="far fa-image fa-10x"
                 type="file"

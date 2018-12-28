@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const UploadFileGroup = ({ error, icon, type, name, onChange }) => {
+const UploadFileGroup = ({ error, icon, type, name, onChange, value }) => {
   return (
     <div className="input-group mt-3">
       <div className="input-group-prepend">
@@ -15,6 +15,7 @@ const UploadFileGroup = ({ error, icon, type, name, onChange }) => {
             onChange={onChange}
             type={type}
             name={name}
+            value={value}
             style={{ margin: "auto" }}
           />
           {error && <div className="invalid-feedback">{error}</div>}
@@ -29,6 +30,7 @@ UploadFileGroup.propTypes = {
   icon: PropTypes.string,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
