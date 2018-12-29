@@ -1,21 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render InputGroup render input group component 1`] = `
+exports[`Render TextAreaFieldGroup render text area field group component 1`] = `
 <div
-  className="input-group mb-3"
+  className="form-group"
 >
-  <div
-    className="input-group-prepend"
-  >
-    <span
-      className="input-group-text"
-    >
-      <i />
-    </span>
-  </div>
-  <input
+  <textarea
     className="form-control form-control-lg"
-    type="text"
+    style={
+      Object {
+        "height": "200px",
+      }
+    }
   />
 </div>
 `;
