@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render InputGroup render input group component 1`] = `
+<div
+  className="input-group mb-3"
+>
+  <div
+    className="input-group-prepend"
+  >
+    <span
+      className="input-group-text"
+    >
+      <i />
+    </span>
+  </div>
+  <input
+    className="form-control form-control-lg"
+    type="text"
+  />
+</div>
+`;

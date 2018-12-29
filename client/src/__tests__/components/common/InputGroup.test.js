@@ -1,8 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import InputGroup from "../../../components/common/InputGroup";
-
-let wrapped;
+import renderer from "react-test-renderer";
 
 const Props = {
   value: "new value",
@@ -12,14 +11,21 @@ const Props = {
   }
 };
 
-beforeEach(() => {
-  wrapped = shallow(<InputGroup {...Props} />);
+describe("Render InputGroup", () => {
+  it("render input group component", () => {
+    const InputGroupComponent = renderer.create(<InputGroup />).toJSON();
+    expect(InputGroupComponent).toMatchSnapshot();
+  });
 });
 
-it("can type", () => {
-  wrapped.find("input").simulate("change", {
-    target: { value: "new input" }
-  });
-  wrapped.update();
-  expect(wrapped.find("input").prop("value")).toEqual("new value");
-});
+// beforeEach(() => {
+//   wrapped = shallow(<InputGroup {...Props} />);
+// });
+
+// it("can type", () => {
+//   wrapped.find("input").simulate("change", {
+//     target: { value: "new input" }
+//   });
+//   wrapped.update();
+//   expect(wrapped.find("input").prop("value")).toEqual("new value");
+// });
