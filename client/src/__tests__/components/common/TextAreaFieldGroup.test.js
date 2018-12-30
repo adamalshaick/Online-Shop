@@ -3,8 +3,6 @@ import { shallow } from "enzyme";
 import TextAreaFieldGroup from "../../../components/common/TextAreaFieldGroup";
 import renderer from "react-test-renderer";
 
-let wrapped;
-
 const Props = {
   value: "new value",
   name: "new name",

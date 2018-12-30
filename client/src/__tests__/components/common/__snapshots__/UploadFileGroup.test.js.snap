@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render UploadFileGroup render upload file group component 1`] = `
+<div
+  className="input-group mt-3"
+>
+  <div
+    className="input-group-prepend"
+  >
+    <div
+      className="card text-center"
+    >
+      <i />
+      <input
+        className="form-control form-control-lg"
+        style={
+          Object {
+            "margin": "auto",
+          }
+        }
+        type="file"
+      />
+    </div>
+  </div>
+</div>
+`;
