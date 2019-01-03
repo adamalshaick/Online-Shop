@@ -36,7 +36,11 @@ class ItemItem extends Component {
                   Items
                 </Link>
                 {item.user === auth.user.id ? (
-                  <button type="button" className="btn btn-danger mr-1">
+                  <button
+                    onClick={this.onDeleteClick.bind(this, item._id)}
+                    type="button"
+                    className="btn btn-danger mr-1"
+                  >
                     <i className="fas fa-times" />
                   </button>
                 ) : null}

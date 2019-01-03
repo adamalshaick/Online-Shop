@@ -30,7 +30,6 @@ UploadFileGroup.propTypes = {
   icon: PropTypes.string,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
