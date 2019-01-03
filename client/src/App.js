@@ -21,6 +21,7 @@ import Items from "./components/items/Items";
 import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
+import NotFound from "./components/not-found/NotFound";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -49,34 +50,34 @@ class App extends Component {
       <Router>
         <>
           <Navbar />
-          <Route exact path="/" component={Landing} />
 
           <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile/:handle" component={Profile} />
-            <Route exact path="/items" component={Items} />
-
             <Switch>
+              <Route exact path="/" component={Landing} />
+
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/items" component={Items} />
+
               <PrivateRoute exact path="/item/:id" component={Item} />
-            </Switch>
 
-            <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
-            <Switch>
-              <Route exact path="/create-profile" component={CreateProfile} />
-            </Switch>
 
-            <Switch>
+              <PrivateRoute
+                exact
+                path="/create-profile"
+                component={CreateProfile}
+              />
+
               <PrivateRoute exact path="/sell-item" component={SellItem} />
-            </Switch>
-            <Switch>
+
               <PrivateRoute
                 exact
                 path="/edit-profile"
                 component={EditProfile}
               />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </>
