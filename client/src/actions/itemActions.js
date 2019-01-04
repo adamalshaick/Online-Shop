@@ -6,7 +6,8 @@ import {
   GET_ITEMS,
   GET_ITEM,
   DELETE_ITEM,
-  ITEM_LOADING
+  ITEM_LOADING,
+  ADDTOCARD_ITEM
 } from "./types";
 
 // Add Item
@@ -72,6 +73,24 @@ export const deleteItem = id => dispatch => {
     .then(res =>
       dispatch({
         type: DELETE_ITEM,
+        payload: id
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Add Item to the card
+export const addToCardItem = id => dispatch => {
+  axios
+    .post(`./api/items/${id}`)
+    .then(res =>
+      dispatch({
+        type: ADDTOCARD_ITEM,
         payload: id
       })
     )

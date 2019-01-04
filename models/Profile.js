@@ -43,6 +43,17 @@ const ProfileSchema = new Schema({
     }
   },
 
+  card: {
+    items: [
+      {
+        item: {
+          type: Schema.Types.ObjectId,
+          ref: "item"
+        }
+      }
+    ]
+  },
+
   date: {
     type: Date,
     default: Date.now

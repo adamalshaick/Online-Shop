@@ -18,9 +18,14 @@ describe("Render InputGroup", () => {
   });
 });
 
-// beforeEach(() => {
-//   wrapped = shallow(<InputGroup {...Props} />);
-// });
+describe("InputGroup logic", () => {
+  InputGroupComponent = mount(<InputGroup {...Props} />);
+
+})
+
+ beforeEach(() => {
+   wrapped = shallow(<InputGroup {...Props} />);
+});
 
 // it("can type", () => {
 //   wrapped.find("input").simulate("change", {

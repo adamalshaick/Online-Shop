@@ -10,6 +10,10 @@ class ItemItem extends Component {
     this.props.deleteItem(id);
   }
 
+  onAddClick(id) {
+    this.props.addToCardItem(id);
+  }
+
   render() {
     const { item, auth, showActions } = this.props;
 
@@ -21,20 +25,18 @@ class ItemItem extends Component {
               <img
                 style={{ maxWidth: "150px", maxHeight: "150px" }}
                 className=" d-none d-md-block"
-                src={`./../uploads/post_image/${item.itemImage}`}
+                src={`../../uploads/post_image/${item.itemImage}`}
                 alt=""
               />
 
-              <p>{item.price}</p>
+              <p>{item.price} $</p>
             </div>
             <div className="">
               <p className="lead">{item.text}</p>
+              <p>{item.category}</p>
             </div>
             {showActions ? (
               <span>
-                <Link to={`/item/${item._id}`} className="btn btn-info mr-1">
-                  Items
-                </Link>
                 {item.user === auth.user.id ? (
                   <button
                     onClick={this.onDeleteClick.bind(this, item._id)}
@@ -43,7 +45,14 @@ class ItemItem extends Component {
                   >
                     <i className="fas fa-times" />
                   </button>
-                ) : null}
+                ) : (
+                  <button
+                    onClick={this.onAddClick.bind(this, item._id)}
+                    className="btn btn-dark"
+                  >
+                    Add to a card
+                  </button>
+                )}
               </span>
             ) : null}
           </div>
