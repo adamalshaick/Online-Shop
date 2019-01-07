@@ -14,18 +14,18 @@ import {
 export const addItem = itemData => dispatch => {
   axios
     .post("/api/items", itemData)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: ADD_ITEM,
         payload: res.data
-      })
-    )
-    .catch(err =>
+      });
+    })
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
+      });
+    });
 };
 
 // Get Items
@@ -33,18 +33,20 @@ export const getItems = () => dispatch => {
   dispatch(setItemLoading());
   axios
     .get("/api/items")
-    .then(res =>
+    .then(res => {
       dispatch({
         type: GET_ITEMS,
         payload: res.data
-      })
-    )
-    .catch(err =>
+      });
+      return response;
+    })
+    .catch(err => {
       dispatch({
         type: GET_ITEMS,
         payload: null
-      })
-    );
+      });
+      return err;
+    });
 };
 
 // Get Item by id
@@ -52,24 +54,26 @@ export const getItem = id => dispatch => {
   dispatch(setItemLoading());
   axios
     .get(`/api/items/${id}`)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: GET_ITEM,
         payload: res.data
-      })
-    )
-    .catch(err =>
+      });
+      return response;
+    })
+    .catch(err => {
       dispatch({
         type: GET_ITEM,
         payload: null
-      })
-    );
+      });
+      return err;
+    });
 };
 
 // Delete Item
 export const deleteItem = id => dispatch => {
   axios
-    .delete(`./api/items/${id}`)
+    .delete(`/api/items/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_ITEM,
@@ -87,7 +91,7 @@ export const deleteItem = id => dispatch => {
 // Add Item to the card
 export const addToCardItem = id => dispatch => {
   axios
-    .post(`./api/items/${id}`)
+    .post(`/api/items/${id}`)
     .then(res =>
       dispatch({
         type: ADDTOCARD_ITEM,
