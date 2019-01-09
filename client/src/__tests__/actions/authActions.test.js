@@ -1,14 +1,23 @@
-import {SET_CURRENT_USERS, GET_ERRORS} from "../../actions/types"
-import {setCurrentUser} from "../../actions/authActions"
+import configureMockStore from "redux-mock-store";
+import * as authActions from "../../actions/authActions";
+import * as types from "../../actions/types";
+import mockAdapter from "axios-mock-adapter";
+import axios from "axios";
 
-describe("setCurrentUser", () => {
-  it("has a correct type", () => {
-    const action = setCurrentUser();
-    expect(action.type).toEqual(SET_USERS);
-  });
+let store;
+let httpMock;
+const flushAllPromises = () => new Promise(resolve => setImmediate(resolve));
 
-  it("has a correct payload", () => {
-    const action = setCurrentUser("New Comment");
-    expect(action.payload).toEqual("New Comment");
+beforeEach(() => {
+  httpMock = new mockAdapter(axios);
+  const mockStore = configureMockStore();
+  store = mockStore({});
+});
+
+describe("login actions", () => {
+  it("sets current user", () => {
+    const decoded = "1234";
+    const action = authActions.setCurrentUser(decoded);
+    expect(action).toEqual({ type: types.SET_CURRENT_USER, payload: decoded });
   });
 });
