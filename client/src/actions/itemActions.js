@@ -38,14 +38,12 @@ export const getItems = () => dispatch => {
         type: GET_ITEMS,
         payload: res.data
       });
-      return response;
     })
     .catch(err => {
       dispatch({
         type: GET_ITEMS,
         payload: null
       });
-      return err;
     });
 };
 
@@ -59,14 +57,12 @@ export const getItem = id => dispatch => {
         type: GET_ITEM,
         payload: res.data
       });
-      return response;
     })
     .catch(err => {
       dispatch({
         type: GET_ITEM,
         payload: null
       });
-      return err;
     });
 };
 
