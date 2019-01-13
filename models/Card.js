@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Card = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 //Create Schema
 const CardSchema = new Schema({
@@ -11,8 +11,11 @@ const CardSchema = new Schema({
   items: [
     {
       item: {
-        type: Schema.Types.ObjectId,
-        ref: "item"
+        type: String
+      },
+
+      quantity: {
+        type: String
       }
     }
   ],
@@ -23,4 +26,4 @@ const CardSchema = new Schema({
   }
 });
 
-module.exports = Item = mongoose.model("card", ItemSchema);
+module.exports = Item = mongoose.model("card", CardSchema);
