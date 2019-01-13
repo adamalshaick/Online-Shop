@@ -64,4 +64,22 @@ router.post(
       });
   }
 );
+
+// @route   GET api/card
+// @desc    Get items from card
+// @access  Private
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Card.findOne({ user: req.user.id }).then(card => {
+      if (card) {
+        res.json(card);
+      } else {
+        res.json("There are no items on your card yet.");
+      }
+    });
+  }
+);
+
 module.exports = router;
