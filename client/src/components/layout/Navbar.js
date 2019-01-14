@@ -26,6 +26,12 @@ class Navbar extends Component {
             Dashboard
           </Link>
         </li>
+        <li>
+          <Link className="nav-link" to="/card">
+            Cart
+            <i className="ml-2 fas fa-shopping-cart" />
+          </Link>
+        </li>
         <li className="nav-item">
           <a
             href=""

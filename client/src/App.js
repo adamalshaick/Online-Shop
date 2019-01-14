@@ -16,11 +16,11 @@ import Login from "./components/auth/Login";
 import Profile from "./components/profile/Profile";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import Dashboard from "./components/dashboard/Dashboard";
-import Item from "./components/item/Item";
 import Items from "./components/items/Items";
 import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
+import Card from "./components/buy-item/Card";
 import NotFound from "./components/not-found/NotFound";
 
 // Check for token
@@ -60,8 +60,6 @@ class App extends Component {
               <Route exact path="/profile/:handle" component={Profile} />
               <Route exact path="/items" component={Items} />
 
-              <PrivateRoute exact path="/item/:id" component={Item} />
-
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
 
               <PrivateRoute
@@ -71,6 +69,8 @@ class App extends Component {
               />
 
               <PrivateRoute exact path="/sell-item" component={SellItem} />
+
+              <PrivateRoute exact path="/card" component={Card} />
 
               <PrivateRoute
                 exact

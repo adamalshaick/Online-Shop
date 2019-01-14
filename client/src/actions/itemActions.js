@@ -87,6 +87,7 @@ export const deleteItem = id => dispatch => {
 
 // Get items from a card
 export const getItemsFromCard = () => dispatch => {
+  dispatch(setItemLoading());
   axios
     .get("/api/card")
     .then(res => {
@@ -105,15 +106,12 @@ export const getItemsFromCard = () => dispatch => {
 
 // Add Item to the card
 export const addItemToCard = itemData => dispatch => {
-  axios
-    .post("/api/card", itemData)
-    .then(res => dispatch(getItemsFromCard()))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+  axios.post("/api/card", itemData).catch(err =>
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    })
+  );
 };
 
 // Set loading state

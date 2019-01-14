@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ItemForm from "./ItemForm.js";
 import { getItems } from "../../actions/itemActions";
 import ItemFeed from "./ItemFeed";
 
@@ -24,10 +23,7 @@ export class Items extends Component {
       <div className="feed">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <ItemForm />
-              {itemContent}
-            </div>
+            <div className="col-md-12">{itemContent}</div>
           </div>
         </div>
       </div>

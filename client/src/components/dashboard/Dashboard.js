@@ -28,7 +28,7 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <h1 className="mt-5">
-              Welcome <Link to={"/profile/${profile.handle}"}>{user.name}</Link>
+              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </h1>
 
             <div className="row mt-5">
