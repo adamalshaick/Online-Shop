@@ -48,10 +48,10 @@ class ItemItem extends Component {
                   </button>
                 ) : (
                   <button
-                    onClick={this.onAddClick.bind(this, item._id)}
+                    onClick={this.onAddClick.bind(this, item)}
                     className="btn btn-dark"
                   >
-                    Add to a card
+                    Add to your card
                   </button>
                 )}
               </span>
@@ -69,7 +69,7 @@ ItemItem.defaultProps = {
 
 ItemItem.propTypes = {
   deleteItem: PropTypes.func.isRequired,
-  addToCardItem: PropTypes.func.isRequired,
+  addItemToCard: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
