@@ -19,13 +19,13 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateCardInput(req.body);
+    // const { errors, isValid } = validateCardInput(req.body);
 
     // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
+    // if (!isValid) {
+    //   // If any errors, send 400 with errors object
+    //   return res.status(400).json(errors);
+    // }
     Item.findOne({ _id: req.body.id })
       .then(item => {
         return Promise.all([item, Card.findOne({ user: req.user.id })]);
@@ -33,17 +33,16 @@ router.post(
       .then(results => {
         const item = results[0];
         const card = results[1];
-
         if (item) {
           if (card) {
             card.items.some(element => {
               card.value = +card.value + +req.body.price;
-              if (element.item === req.body.id) {
+              if (element.item.id === req.body.id) {
                 element.quantity = +element.quantity + +1;
                 card.save().then(card => res.json(card));
                 return element;
               } else {
-                card.items.unshift({ item: req.body.id, quantity: 1 });
+                card.items.unshift({ item: req.body, quantity: 1 });
                 card.save().then(card => res.json(card));
                 return element;
               }
@@ -51,12 +50,14 @@ router.post(
           } else {
             const cardFields = {
               user: req.user.id,
-              items: [{ item: req.body.id, quantity: 1 }],
+              items: [{ item: req.body, quantity: 1 }],
               value: req.body.price
             };
 
             new Card(cardFields).save().then(card => res.json(card));
           }
+        } else {
+          return res.status(404).json("Item not found");
         }
       })
       .catch(err => {
@@ -72,13 +73,13 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Card.findOne({ user: req.user.id }).then(card => {
-      if (card) {
+    Card.findOne({ user: req.user.id })
+      .then(card => {
         res.json(card);
-      } else {
-        res.json("There are no items on your card yet.");
-      }
-    });
+      })
+      .catch(err => {
+        res.json(err);
+      });
   }
 );
 

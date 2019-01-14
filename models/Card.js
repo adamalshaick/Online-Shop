@@ -10,9 +10,7 @@ const CardSchema = new Schema({
 
   items: [
     {
-      item: {
-        type: String
-      },
+      item: {},
 
       quantity: {
         type: String
