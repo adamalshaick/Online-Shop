@@ -7,7 +7,8 @@ import {
   GET_ITEM,
   DELETE_ITEM,
   ITEM_LOADING,
-  ADDTOCARD_ITEM
+  ADDTOCARD_ITEM,
+  GET_CARD
 } from "./types";
 
 // Add Item
@@ -84,16 +85,29 @@ export const deleteItem = id => dispatch => {
     );
 };
 
-// Add Item to the card
-export const addToCardItem = id => dispatch => {
+// Get items from a card
+export const getItemsFromCard = () => dispatch => {
   axios
-    .post(`/api/items/${id}`)
-    .then(res =>
+    .get("/api/card")
+    .then(res => {
       dispatch({
-        type: ADDTOCARD_ITEM,
-        payload: id
-      })
-    )
+        type: GET_CARD,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_CARD,
+        payload: null
+      });
+    });
+};
+
+// Add Item to the card
+export const addItemToCard = itemData => dispatch => {
+  axios
+    .post("/api/card", itemData)
+    .then(res => dispatch(getItemsFromCard()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

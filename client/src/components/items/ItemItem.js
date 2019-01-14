@@ -4,14 +4,15 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deleteItem } from "../../actions/itemActions";
+import { addItemToCard } from "../../actions/itemActions";
 
 class ItemItem extends Component {
   onDeleteClick(id) {
     this.props.deleteItem(id);
   }
 
-  onAddClick(id) {
-    this.props.addToCardItem(id);
+  onAddClick(item) {
+    this.props.addItemToCard(item);
   }
 
   render() {
@@ -68,6 +69,7 @@ ItemItem.defaultProps = {
 
 ItemItem.propTypes = {
   deleteItem: PropTypes.func.isRequired,
+  addToCardItem: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -78,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteItem }
+  { deleteItem, addItemToCard }
 )(ItemItem);
