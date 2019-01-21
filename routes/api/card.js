@@ -26,7 +26,7 @@ router.post(
     //   // If any errors, send 400 with errors object
     //   return res.status(400).json(errors);
     // }
-    Item.findOne({ _id: req.body.id })
+    Item.findOne({ _id: req.body._id })
       .then(item => {
         return Promise.all([item, Card.findOne({ user: req.user.id })]);
       })
@@ -57,6 +57,7 @@ router.post(
             new Card(cardFields).save().then(card => res.json(card));
           }
         } else {
+          console.log(req.body);
           return res.status(404).json("Item not found");
         }
       })

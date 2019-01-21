@@ -14,16 +14,15 @@ class Landing extends Component {
       <div className="landing-page">
         <div className="landing-image" />
         <div className=" text-center">
-          <h1 className="display-1 text-white d-inline mt-5">
+          <h1 className="display-1 text-white d-block mt-5">
             <strong>Online Shop</strong>
           </h1>
 
-          <p className="lead mt-5">Sell, buy, talk - all in one place</p>
-          <Link to="/login" className="btn btn-info">
+          <Link to="/login" className="btn btn-dark btn-lg m-5">
             Login
           </Link>
-          <p className="lead mt-5">Don't have an account yet?</p>
-          <Link to="/register" className="btn btn-info">
+
+          <Link to="/register" className="btn btn-dark btn-lg m-5">
             Sign up
           </Link>
         </div>

@@ -29,6 +29,7 @@
     "validator": "^10.8.0"
   },
   "devDependencies": {
+    "fetch-mock": "^7.3.0",
     "nodemon": "^1.18.4"
   }
 }
