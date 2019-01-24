@@ -16,24 +16,16 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { errors, isValid } = validateCartInput(req.body);
-
-    // Check Validation
-    // if (!isValid) {
-    //   // If any errors, send 400 with errors object
-    //   return res.status(400).json(errors);
-    // }
-
     Cart.findOne({ user: req.user.id })
       .then(cart => {
         if (cart) {
-          cart.items.unshift({ item: req.body });
+          cart.items.unshift(req.body);
           cart.value = +card.value + +req.body.price;
-          cart.save().then(card => res.json(card));
+          cart.save().then(cart => res.json(cart));
         } else {
           const cartFields = {
             user: req.user.id,
-            items: [{ item: req.body }],
+            items: [req.body],
             value: req.body.price
           };
 

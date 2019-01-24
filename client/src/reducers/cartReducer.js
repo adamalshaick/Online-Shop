@@ -1,4 +1,4 @@
-import { GET_CART } from "../actions/types";
+import { GET_CART, CART_LOADING } from "../actions/types";
 
 const initialState = {
   cart: {}
@@ -11,6 +11,12 @@ export default function(state = initialState, action) {
         ...state,
         cart: action.payload,
         loading: false
+      };
+
+    case CART_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

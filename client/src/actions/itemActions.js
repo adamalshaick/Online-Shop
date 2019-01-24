@@ -8,7 +8,8 @@ import {
   DELETE_ITEM,
   ITEM_LOADING,
   ADDTOCARD_ITEM,
-  GET_CART
+  GET_CART,
+  CART_LOADING
 } from "./types";
 
 // Add Item
@@ -87,7 +88,7 @@ export const deleteItem = id => dispatch => {
 
 // Get items from card
 export const getItemsFromCard = () => dispatch => {
-  dispatch(setItemLoading());
+  dispatch(setCartLoading());
   axios
     .get("/api/cart")
     .then(res => {
@@ -118,5 +119,11 @@ export const addItemToCard = itemData => dispatch => {
 export const setItemLoading = () => {
   return {
     type: ITEM_LOADING
+  };
+};
+
+export const setCartLoading = () => {
+  return {
+    type: CART_LOADING
   };
 };

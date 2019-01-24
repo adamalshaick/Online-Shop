@@ -16,6 +16,7 @@ export class Items extends Component {
     if (items === null || loading) {
       itemContent = <p>Loading ...</p>;
     } else {
+      console.log(items);
       itemContent = <ItemFeed items={items} />;
     }
 
