@@ -85,7 +85,7 @@ export const deleteItem = id => dispatch => {
     );
 };
 
-// Get items from a card
+// Get items from card
 export const getItemsFromCard = () => dispatch => {
   dispatch(setItemLoading());
   axios

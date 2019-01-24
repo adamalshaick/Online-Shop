@@ -2,21 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Create Schema
-const CardSchema = new Schema({
+const CartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
   },
 
-  items: [
-    {
-      item: {},
-
-      quantity: {
-        type: String
-      }
-    }
-  ],
+  items: [],
 
   value: {
     type: String,
@@ -24,4 +16,4 @@ const CardSchema = new Schema({
   }
 });
 
-module.exports = Item = mongoose.model("card", CardSchema);
+module.exports = Item = mongoose.model("cart", CartSchema);

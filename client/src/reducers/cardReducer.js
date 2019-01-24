@@ -1,7 +1,7 @@
 import { GET_CARD } from "../actions/types";
 
 const initialState = {
-  cardItems: []
+  cart: {}
 };
 
 export default function(state = initialState, action) {
@@ -9,7 +9,8 @@ export default function(state = initialState, action) {
     case GET_CARD:
       return {
         ...state,
-        cardItems: action.payload
+        cart: action.payload,
+        loading: false
       };
     default:
       return state;

@@ -7,19 +7,16 @@ const passport = require("passport");
 const Item = require("../../models/Item");
 
 // Card model
-const Card = require("../../models/Card");
+const Cart = require("../../models/Cart");
 
-// Validation
-const validateCardInput = require("../../validation/card");
-
-// @route   POST api/card
-// @desc    Add item to card
+// @route   POST api/cart
+// @desc    Add item to cart
 // @access  Private
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { errors, isValid } = validateCardInput(req.body);
+    // const { errors, isValid } = validateCartInput(req.body);
 
     // Check Validation
     // if (!isValid) {
@@ -27,20 +24,20 @@ router.post(
     //   return res.status(400).json(errors);
     // }
 
-    Card.findOne({ user: req.user.id })
-      .then(card => {
-        if (card) {
-          card.items.unshift({ item: req.body });
-          card.value = +card.value + +req.body.price;
-          card.save().then(card => res.json(card));
+    Cart.findOne({ user: req.user.id })
+      .then(cart => {
+        if (cart) {
+          cart.items.unshift({ item: req.body });
+          cart.value = +card.value + +req.body.price;
+          cart.save().then(card => res.json(card));
         } else {
-          const cardFields = {
+          const cartFields = {
             user: req.user.id,
             items: [{ item: req.body }],
             value: req.body.price
           };
 
-          new Card(cardFields).save().then(card => res.json(card));
+          new Cart(cartFields).save().then(cart => res.json(cart));
         }
       })
 
@@ -50,16 +47,16 @@ router.post(
   }
 );
 
-// @route   GET api/card
-// @desc    Get items from card
+// @route   GET api/cart
+// @desc    Get items from cart
 // @access  Private
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Card.findOne({ user: req.user.id })
-      .then(card => {
-        res.json(card);
+    Cart.findOne({ user: req.user.id })
+      .then(cart => {
+        res.json(cart);
       })
       .catch(err => {
         res.json(err);
