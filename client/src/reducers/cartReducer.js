@@ -1,4 +1,4 @@
-import { GET_CARD } from "../actions/types";
+import { GET_CART } from "../actions/types";
 
 const initialState = {
   cart: {}
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_CARD:
+    case GET_CART:
       return {
         ...state,
         cart: action.payload,

@@ -9,20 +9,13 @@ class Card extends Component {
   }
 
   render() {
-    const { cart, loading } = this.props.cardItems;
+    const { cart, loading } = this.props.cart;
 
     let itemContent;
     if (cart === null || loading) {
       itemContent = <p>Loading ...</p>;
     } else {
       console.log(cart.items);
-      const xD = cart.items;
-      console.log(xD);
-      itemContent = "xD";
-
-      const array = [0, 1, 2, 3];
-
-      // cardItems.items.map();
     }
 
     return <div>{itemContent}</div>;
@@ -30,7 +23,7 @@ class Card extends Component {
 }
 
 const mapStateToProps = state => ({
-  cardItems: state.cardItems
+  cart: state.cart
 });
 
 export default connect(
