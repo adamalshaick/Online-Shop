@@ -26,41 +26,24 @@ router.post(
     //   // If any errors, send 400 with errors object
     //   return res.status(400).json(errors);
     // }
-    Item.findOne({ _id: req.body._id })
-      .then(item => {
-        return Promise.all([item, Card.findOne({ user: req.user.id })]);
-      })
-      .then(results => {
-        const item = results[0];
-        const card = results[1];
-        if (item) {
-          if (card) {
-            card.items.some(element => {
-              card.value = +card.value + +req.body.price;
-              if (element.item.id === req.body.id) {
-                element.quantity = +element.quantity + +1;
-                card.save().then(card => res.json(card));
-                return element;
-              } else {
-                card.items.unshift({ item: req.body, quantity: 1 });
-                card.save().then(card => res.json(card));
-                return element;
-              }
-            });
-          } else {
-            const cardFields = {
-              user: req.user.id,
-              items: [{ item: req.body, quantity: 1 }],
-              value: req.body.price
-            };
 
-            new Card(cardFields).save().then(card => res.json(card));
-          }
+    Card.findOne({ user: req.user.id })
+      .then(card => {
+        if (card) {
+          card.items.unshift({ item: req.body });
+          card.value = +card.value + +req.body.price;
+          card.save().then(card => res.json(card));
         } else {
-          console.log(req.body);
-          return res.status(404).json("Item not found");
+          const cardFields = {
+            user: req.user.id,
+            items: [{ item: req.body }],
+            value: req.body.price
+          };
+
+          new Card(cardFields).save().then(card => res.json(card));
         }
       })
+
       .catch(err => {
         res.json(err);
       });
