@@ -69,7 +69,7 @@ router.get("/", (req, res) => {
 // @access Public
 router.get("/item", (req, res) => {
   Item.findOne(req.body.id)
-    .then(item => res.json({ item }))
+    .then(item => res.json(item))
     .catch(err =>
       res.status(404).json({ noitemfound: "No item found with that ID" })
     );

@@ -50,10 +50,10 @@ export const getItems = () => dispatch => {
 };
 
 // Get Item by id
-export const getItem = id => dispatch => {
+export const getItem = itemId => dispatch => {
   dispatch(setItemLoading());
   axios
-    .get("/api/items/item", id)
+    .get("/api/items/item", itemId)
     .then(res => {
       dispatch({
         type: GET_ITEM,

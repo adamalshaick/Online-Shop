@@ -8,17 +8,25 @@ class CartItem extends Component {
     this.props.getItem(this.props.id);
   }
   render() {
-    return <div>JD</div>;
+    const { cartItem } = this.props.cartItem;
+
+    console.log(cartItem.category);
+    return (
+      <div>
+        {cartItem.category}
+        {/* {item.item._id} */}
+      </div>
+    );
   }
 }
 
 CartItem.propTypes = {
   getItem: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  cartItem: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  item: state.item
+  cartItem: state.cartItem
 });
 
 export default connect(
