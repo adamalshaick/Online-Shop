@@ -43,6 +43,17 @@ const ProfileSchema = new Schema({
     }
   },
 
+  cart: {
+    items: [
+      {
+        item: {
+          type: Schema.Types.ObjectId,
+          ref: "items"
+        }
+      }
+    ]
+  },
+
   date: {
     type: Date,
     default: Date.now

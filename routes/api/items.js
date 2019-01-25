@@ -64,11 +64,11 @@ router.get("/", (req, res) => {
     .catch(err => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
-// @route GET api/items/:id
+// @route GET api/items/item
 // @desc Get item by id
 // @access Public
-router.get("/:id", (req, res) => {
-  Item.findById(req.params.id)
+router.get("/item", (req, res) => {
+  Item.findOne(req.body.id)
     .then(item => res.json({ item }))
     .catch(err =>
       res.status(404).json({ noitemfound: "No item found with that ID" })
