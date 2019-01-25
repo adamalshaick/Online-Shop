@@ -12,3 +12,4 @@ export const ADD_ITEM = "ADD_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const GET_CART = "GET_CART";
 export const CART_LOADING = "CART_LOADING";
+export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";

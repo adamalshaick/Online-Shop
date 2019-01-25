@@ -35,12 +35,7 @@ router.delete(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        // profile.cart.items.forEach(item => {
-        //   console.log(item._id);
-        // });
         // // Check to see if item exists
-        console.log(req.body.id);
-        console.log("jd");
         profile.cart.items.forEach(item => console.log(item._id.toString()));
         if (
           profile.cart.items.filter(item => item._id.toString() === req.body.id)

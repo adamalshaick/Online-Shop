@@ -20,7 +20,7 @@ import Items from "./components/items/Items";
 import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
-import Card from "./components/buy-item/Card";
+import Cart from "./components/buy-item/Cart";
 import NotFound from "./components/not-found/NotFound";
 
 // Check for token
@@ -70,7 +70,7 @@ class App extends Component {
 
               <PrivateRoute exact path="/sell-item" component={SellItem} />
 
-              <PrivateRoute exact path="/card" component={Card} />
+              <PrivateRoute exact path="/cart" component={Cart} />
 
               <PrivateRoute
                 exact

@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
-import { addItemToCard } from "../../actions/itemActions";
+import { addItemToCart } from "../../actions/itemActions";
 
 class ItemItem extends Component {
   onDeleteClick(id) {
     this.props.deleteItem(id);
   }
 
-  onAddClick(item) {
-    this.props.addItemToCard(item);
+  onAddClick(id) {
+    const itemId = {
+      _id: id
+    };
+
+    this.props.addItemToCart(itemId);
   }
 
   render() {
@@ -41,7 +45,6 @@ class ItemItem extends Component {
               <span>
                 {item.user === auth.user.id ? (
                   <button
-                    style={{}}
                     onClick={this.onDeleteClick.bind(this, item._id)}
                     type="button"
                     className="btn btn-danger mr-1"
@@ -50,7 +53,7 @@ class ItemItem extends Component {
                   </button>
                 ) : (
                   <button
-                    onClick={this.onAddClick.bind(this, item)}
+                    onClick={this.onAddClick.bind(this, item._id)}
                     className="btn btn-dark"
                   >
                     Add to your card
@@ -71,7 +74,7 @@ ItemItem.defaultProps = {
 
 ItemItem.propTypes = {
   deleteItem: PropTypes.func.isRequired,
-  addItemToCard: PropTypes.func.isRequired,
+  addItemToCart: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -82,5 +85,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteItem, addItemToCard }
+  { deleteItem, addItemToCart }
 )(ItemItem);

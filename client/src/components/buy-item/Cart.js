@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getItemsFromCard } from "../../actions/itemActions";
-import ItemFeed from "../items/ItemFeed";
+import { getItemsFromCart } from "../../actions/itemActions";
+import CartItem from "./CartItem";
+import CartFeed from "./CartFeed";
 
-class Card extends Component {
+class Cart extends Component {
   componentDidMount() {
-    this.props.getItemsFromCard();
+    this.props.getItemsFromCart();
   }
 
   render() {
@@ -15,7 +16,7 @@ class Card extends Component {
     if (cart === null || loading) {
       itemContent = <p>Loading ...</p>;
     } else {
-      console.log(cart.items);
+      itemContent = <CartFeed ids={cart} />;
     }
 
     return <div>{itemContent}</div>;
@@ -28,5 +29,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getItemsFromCard }
-)(Card);
+  { getItemsFromCart }
+)(Cart);

@@ -7,9 +7,9 @@ import {
   GET_ITEM,
   DELETE_ITEM,
   ITEM_LOADING,
-  ADDTOCARD_ITEM,
   GET_CART,
-  CART_LOADING
+  CART_LOADING,
+  ADD_ITEM_TO_CART
 } from "./types";
 
 // Add Item
@@ -53,7 +53,7 @@ export const getItems = () => dispatch => {
 export const getItem = id => dispatch => {
   dispatch(setItemLoading());
   axios
-    .get(`/api/items/${id}`)
+    .get("/api/items/item", id)
     .then(res => {
       dispatch({
         type: GET_ITEM,
@@ -86,8 +86,8 @@ export const deleteItem = id => dispatch => {
     );
 };
 
-// Get items from card
-export const getItemsFromCard = () => dispatch => {
+// Get items from cart
+export const getItemsFromCart = () => dispatch => {
   dispatch(setCartLoading());
   axios
     .get("/api/cart")
@@ -105,14 +105,22 @@ export const getItemsFromCard = () => dispatch => {
     });
 };
 
-// Add Item to the card
-export const addItemToCard = itemData => dispatch => {
-  axios.post("/api/cart", itemData).catch(err =>
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
+// Add Item to the cart
+export const addItemToCart = itemId => dispatch => {
+  axios
+    .post("/api/cart", itemId)
+    .then(res => {
+      dispatch({
+        type: ADD_ITEM_TO_CART,
+        payload: res.data
+      });
     })
-  );
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // Set loading state
