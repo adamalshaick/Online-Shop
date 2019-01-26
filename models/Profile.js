@@ -46,9 +46,25 @@ const ProfileSchema = new Schema({
   cart: {
     items: [
       {
-        item: {
+        user: {
           type: Schema.Types.ObjectId,
-          ref: "items"
+          ref: "users"
+        },
+        text: {
+          type: String,
+          required: true
+        },
+        price: {
+          type: String,
+          required: true
+        },
+        title: {
+          type: String,
+          required: true
+        },
+        itemImage: {
+          type: String,
+          required: true
         }
       }
     ]

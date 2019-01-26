@@ -4,32 +4,42 @@ import { getItem } from "../../actions/itemActions";
 import PropTypes from "prop-types";
 
 class CartItem extends Component {
-  componentDidMount() {
-    this.props.getItem(this.props.id);
-  }
   render() {
-    const { cartItem } = this.props.cartItem;
+    const { item } = this.props;
+    // const { cartItem } = this.props.cartItem;
 
-    console.log(cartItem.category);
+    // console.log(cartItem._id);
     return (
-      <div>
-        {cartItem.category}
-        {/* {item.item._id} */}
+      <div className="col-4">
+        <div>
+          <div
+            style={{
+              boxShadow:
+                " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+            }}
+            className="text-center m-3"
+          >
+            <img
+              style={{ width: "100%", maxHeight: "500px" }}
+              className=" d-none d-md-block"
+              src={`../../uploads/post_image/${item.itemImage}`}
+              alt=""
+            />
+            <p className="lead">
+              <strong>{item.title}</strong>
+            </p>
+            <p style={{ fontSize: "2rem" }}>{item.price} $</p>
+          </div>
+        </div>
+
+        {/* <div className="col-12">{cartItem._id}</div> */}
       </div>
     );
   }
 }
 
 CartItem.propTypes = {
-  getItem: PropTypes.func.isRequired,
-  cartItem: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  cartItem: state.cartItem
-});
-
-export default connect(
-  mapStateToProps,
-  { getItem }
-)(CartItem);
+export default CartItem;

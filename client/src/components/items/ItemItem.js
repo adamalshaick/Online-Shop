@@ -9,12 +9,15 @@ class ItemItem extends Component {
     this.props.deleteItem(id);
   }
 
-  onAddClick(id) {
-    const itemId = {
-      _id: id
+  onAddClick(item) {
+    const itemData = {
+      user: item.user,
+      text: item.text,
+      price: item.price,
+      title: item.title,
+      itemImage: item.itemImage
     };
-
-    this.props.addItemToCart(itemId);
+    this.props.addItemToCart(itemData);
   }
 
   render() {
@@ -53,7 +56,7 @@ class ItemItem extends Component {
                   </button>
                 ) : (
                   <button
-                    onClick={this.onAddClick.bind(this, item._id)}
+                    onClick={this.onAddClick.bind(this, item)}
                     className="btn btn-dark"
                   >
                     Add to your card

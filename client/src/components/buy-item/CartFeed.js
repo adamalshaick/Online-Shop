@@ -4,13 +4,13 @@ import CartItem from "./CartItem";
 
 class CartFeed extends Component {
   render() {
-    const { ids } = this.props;
+    const { cartItems } = this.props;
     return (
       <div>
         <div className="row">
-          {/* {ids.forEach(id => ( */}
-          <CartItem id={"5c43b9121b93f75300271aa8"} />
-          {/* ))} */}
+          {cartItems.map(item => (
+            <CartItem key={item._id} item={item} />
+          ))}
         </div>
       </div>
     );
@@ -18,7 +18,7 @@ class CartFeed extends Component {
 }
 
 CartFeed.propTypes = {
-  ids: PropTypes.array.isRequired
+  cartItems: PropTypes.array.isRequired
 };
 
 export default CartFeed;

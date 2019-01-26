@@ -16,7 +16,7 @@ class Cart extends Component {
     if (cart === null || loading) {
       itemContent = <p>Loading ...</p>;
     } else {
-      itemContent = <CartFeed ids={cart} />;
+      itemContent = <CartFeed cartItems={cart} />;
     }
 
     return <div>{itemContent}</div>;

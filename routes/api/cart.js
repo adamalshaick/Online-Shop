@@ -17,7 +17,15 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        profile.cart.items.unshift(req.body._id);
+        const itemFields = {
+          user: req.body.user,
+          text: req.body.text,
+          price: req.body.price,
+          title: req.body.title,
+          itemImage: req.body.itemImage
+        };
+
+        profile.cart.items.unshift(itemFields);
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => {

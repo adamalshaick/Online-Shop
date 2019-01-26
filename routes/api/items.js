@@ -49,11 +49,6 @@ function checkFileType(file, cb) {
   }
 }
 
-// @route GET api/items/test
-// @desc Tests items route
-// @access Public
-router.get("/test", (req, res) => res.json({ msg: "items works" }));
-
 // @route GET api/items
 // @desc Get items
 // @access Public
@@ -68,11 +63,13 @@ router.get("/", (req, res) => {
 // @desc Get item by id
 // @access Public
 router.get("/item", (req, res) => {
-  Item.findOne(req.body.id)
-    .then(item => res.json(item))
-    .catch(err =>
-      res.status(404).json({ noitemfound: "No item found with that ID" })
-    );
+  console.log(req.body);
+  res.json(req.body);
+  // Item.findOne(req.body.id)
+  //   .then(item => res.json(item))
+  //   .catch(err =>
+  //     res.status(404).json({ noitemfound: "No item found with that ID" })
+  //   );
 });
 
 // @route POST api/items

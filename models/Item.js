@@ -23,12 +23,12 @@ const ItemSchema = new Schema({
     required: true
   },
 
-  category: {
+  itemImage: {
     type: String,
     required: true
   },
 
-  itemImage: {
+  category: {
     type: String,
     required: true
   },
