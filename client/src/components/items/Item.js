@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
-import { addItemToCart } from "../../actions/itemActions";
+import { addItemToCart } from "../../actions/cartActions";
 
-class ItemItem extends Component {
+class Item extends Component {
   onDeleteClick(id) {
     this.props.deleteItem(id);
   }
@@ -71,11 +71,11 @@ class ItemItem extends Component {
   }
 }
 
-ItemItem.defaultProps = {
+Item.defaultProps = {
   showActions: true
 };
 
-ItemItem.propTypes = {
+Item.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
@@ -89,4 +89,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { deleteItem, addItemToCart }
-)(ItemItem);
+)(Item);

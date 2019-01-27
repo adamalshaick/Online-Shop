@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getItemsFromCart } from "../../actions/itemActions";
-import CartItem from "./CartItem";
+import { getItemsFromCart } from "../../actions/cartActions";
 import CartFeed from "./CartFeed";
 
 class Cart extends Component {

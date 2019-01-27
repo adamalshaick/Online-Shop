@@ -6,10 +6,7 @@ import {
   GET_ITEMS,
   GET_ITEM,
   DELETE_ITEM,
-  ITEM_LOADING,
-  GET_CART,
-  CART_LOADING,
-  ADD_ITEM_TO_CART
+  ITEM_LOADING
 } from "./types";
 
 // Add Item
@@ -86,52 +83,9 @@ export const deleteItem = id => dispatch => {
     );
 };
 
-// Get items from cart
-export const getItemsFromCart = () => dispatch => {
-  dispatch(setCartLoading());
-  axios
-    .get("/api/cart")
-    .then(res => {
-      dispatch({
-        type: GET_CART,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_CART,
-        payload: null
-      });
-    });
-};
-
-// Add Item to the cart
-export const addItemToCart = itemId => dispatch => {
-  axios
-    .post("/api/cart", itemId)
-    .then(res => {
-      dispatch({
-        type: ADD_ITEM_TO_CART,
-        payload: res.data
-      });
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 // Set loading state
 export const setItemLoading = () => {
   return {
     type: ITEM_LOADING
-  };
-};
-
-export const setCartLoading = () => {
-  return {
-    type: CART_LOADING
   };
 };

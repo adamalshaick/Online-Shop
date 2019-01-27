@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ItemItem from "./ItemItem";
+import Item from "./Item";
 
 class ItemFeed extends Component {
   render() {
@@ -11,7 +11,7 @@ class ItemFeed extends Component {
         <h1 className="m-5">Items for sale</h1>
         <div className="row">
           {items.map(item => (
-            <ItemItem key={item._id} item={item} />
+            <Item key={item._id} item={item} />
           ))}
         </div>
       </>

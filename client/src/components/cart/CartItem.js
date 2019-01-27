@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { removeItemFromCart } from "../../actions/cartActions";
 
 class CartItem extends Component {
+  onDeleteClick(id) {
+    this.props.removeItemFromCart(id);
+  }
+
   render() {
     const { item } = this.props;
     return (
@@ -14,7 +20,8 @@ class CartItem extends Component {
         {item.title}
         <button
           style={{ float: "right" }}
-          // onClick={this.onDeleteClick()}
+          onClick={this.onDeleteClick.bind(this, item._id)}
+          type="button"
           className="btn btn-danger ml-3"
         >
           Remove
@@ -30,7 +37,15 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  removeItemFromCart: PropTypes.func.isRequired
 };
 
-export default CartItem;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { removeItemFromCart }
+)(CartItem);

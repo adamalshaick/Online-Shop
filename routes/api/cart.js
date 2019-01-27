@@ -34,27 +34,27 @@ router.post(
   }
 );
 
-// @route   DELETE api/cart
+// @route   DELETE api/cart/:id
 // @desc    Remove item from cart
 // @access  Private
 router.delete(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        // // Check to see if item exists
-        profile.cart.items.forEach(item => console.log(item._id.toString()));
+        // // Check to see if item is in cart
         if (
-          profile.cart.items.filter(item => item._id.toString() === req.body.id)
-            .length === 0
+          profile.cart.items.filter(
+            item => item._id.toString() === req.params.id
+          ).length === 0
         ) {
           return res.status(404).json({ itemnotexists: "Item doesn't exist" });
         }
         // Get remove index
         const removeIndex = profile.cart.items
           .map(item => item._id.toString())
-          .indexOf(req.body.id);
+          .indexOf(req.params.id);
 
         //Splice comment out of array
         profile.cart.items.splice(removeIndex, 1);

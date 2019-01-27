@@ -20,7 +20,7 @@ import Items from "./components/items/Items";
 import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
-import Cart from "./components/buy-item/Cart";
+import Cart from "./components/cart/Cart";
 import NotFound from "./components/not-found/NotFound";
 
 // Check for token

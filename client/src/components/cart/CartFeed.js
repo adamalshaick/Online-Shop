@@ -23,6 +23,7 @@ class CartFeed extends Component {
           }}
         >
           <span style={{ fontSize: "18px" }} className="d-inline align-middle">
+            <i className="mr-2 fas fa-shopping-cart" />
             <strong>Your cart</strong>
           </span>
           <span
