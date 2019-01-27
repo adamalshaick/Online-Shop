@@ -3,8 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
 import { addItemToCart } from "../../actions/cartActions";
+import ReactTimeout from "react-timeout";
+import Alert from "../common/Alert";
 
 class Item extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAlert: false
+    };
+  }
   onDeleteClick(id) {
     this.props.deleteItem(id);
   }
@@ -18,6 +26,10 @@ class Item extends Component {
       itemImage: item.itemImage
     };
     this.props.addItemToCart(itemData);
+    this.setState({ showAlert: true });
+    this.props.setTimeout(() => {
+      this.setState({ showAlert: false });
+    }, 3000);
   }
 
   render() {
@@ -34,15 +46,13 @@ class Item extends Component {
             className="text-center m-3"
           >
             <img
-              style={{ width: "100%", maxHeight: "500px" }}
+              style={{ width: "100%", maxHeight: "400px" }}
               className=" d-none d-md-block"
               src={`../../uploads/post_image/${item.itemImage}`}
               alt=""
             />
-            <p className="lead">
-              <strong>{item.title}</strong>
-            </p>
-            <p style={{ fontSize: "2rem" }}>{item.price} $</p>
+            <p>{item.title}</p>
+            <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
 
             {showActions ? (
               <span>
@@ -54,18 +64,29 @@ class Item extends Component {
                   >
                     <i className="fas fa-times" />
                   </button>
+                ) : this.state.showAlert ? (
+                  <Alert
+                    showAlert={this.state.showAlert}
+                    text={item.title + " added to cart"}
+                  />
                 ) : (
                   <button
                     onClick={this.onAddClick.bind(this, item)}
                     className="btn btn-dark"
                   >
-                    Add to your card
+                    Add to your cart
                   </button>
                 )}
               </span>
             ) : null}
           </div>
         </div>
+        {/* {this.state.showAlert ? (
+          <Alert
+            showAlert={this.state.showAlert}
+            text={item.title + " added to cart"}
+          />
+        ) : null} */}
       </div>
     );
   }
@@ -86,7 +107,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { deleteItem, addItemToCart }
-)(Item);
+export default ReactTimeout(
+  connect(
+    mapStateToProps,
+    { deleteItem, addItemToCart }
+  )(Item)
+);
