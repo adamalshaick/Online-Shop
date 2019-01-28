@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import ProfileActions from "./ProfileActions";
+import isEmpty from "../../validation/is-empty";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -27,9 +28,92 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <h2 className="mt-5">Welcome {user.name}</h2>
-
+            <div
+              className="text-center"
+              style={{
+                width: "100%",
+                backgroundColor: "whitesmoke",
+                height: "60px",
+                border: "solid lightgrey 1px",
+                marginBottom: "20px",
+                marginTop: "50px",
+                padding: "16px",
+                fontSize: "18px"
+              }}
+            >
+              <strong>Your Dashboard</strong>
+            </div>
             <div className="row mt-5">
+              <div
+                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+                className="col-md-6 text-center"
+              >
+                <img
+                  className="rounded-circle"
+                  src={profile.user.avatar}
+                  alt=""
+                />
+                <div className="text-center">
+                  <div className="mt-3">{user.name}</div>
+
+                  {isEmpty(profile.bio) ? (
+                    <div className="mt-3 text-muted">
+                      <i>User doesn't have a bio yet</i>
+                    </div>
+                  ) : (
+                    <div className="mt-3">{profile.bio}</div>
+                  )}
+                </div>
+                {/* <div className="text-center">
+              <div className="display-4 text-center">{profile.user.name}</div>
+              <p className="lead text-center">
+                {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+              </p> */}
+              </div>
+              <div className="col-md-6 text-center">
+                <button
+                  style={{ border: "lightgray solid 1px", width: "100%" }}
+                  type="button"
+                  className="btn btn-light btn-lg"
+                >
+                  Add your item for sale
+                </button>
+                <span className="text-muted">Sell your item</span>
+                <hr />
+                <button
+                  style={{ border: "lightgray solid 1px", width: "100%" }}
+                  type="button"
+                  className="btn btn-light btn-lg"
+                >
+                  Browse items
+                </button>
+                <span className="text-muted">Browse items for sale</span>
+                <hr />
+                <button
+                  style={{ border: "lightgray solid 1px", width: "100%" }}
+                  type="button"
+                  className="btn btn-light btn-lg"
+                >
+                  Bought items
+                </button>
+                <span className="text-muted">
+                  History of items that you've bought
+                </span>
+                <hr />
+                <button
+                  style={{ border: "lightgray solid 1px", width: "100%" }}
+                  type="button"
+                  className="btn btn-light btn-lg"
+                >
+                  Sold items
+                </button>
+                <span className="text-muted">
+                  History of items that you've sold
+                </span>
+                <hr />
+              </div>
+            </div>
+            {/* <div className="row mt-5">
               <div
                 style={{ background: "white" }}
                 className="col-md-5 mb-4 p-0 m-0 image-wrapper"
@@ -82,20 +166,20 @@ class Dashboard extends Component {
                   </div>
                 </Link>
               </div>
-            </div>
+            </div> */}
 
             <div className="float-right mt-5">
               <button
                 onClick={this.onDeleteClick.bind(this)}
                 className="btn btn-danger"
               >
-                Delete My Account
+                Delete Account
               </button>
             </div>
 
             <div className=" mt-5 mr-3 float-right">
               <Link to="/edit-profile" className="btn btn-dark">
-                <i className="fas fa-user-circle text-light mr-1" /> Edit My
+                <i className="fas fa-user-circle text-light mr-1" /> Edit
                 Profile
               </Link>
             </div>

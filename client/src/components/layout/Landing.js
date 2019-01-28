@@ -4,6 +4,8 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
 class Landing extends Component {
+  handleDrop = () => {};
+
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -17,7 +19,6 @@ class Landing extends Component {
           <h1 className="display-1 text-white d-block mt-5">
             <strong>Online Shop</strong>
           </h1>
-
           <Link to="/login" className="btn btn-dark btn-lg m-5">
             Login
           </Link>
