@@ -46,25 +46,6 @@ export const getItems = () => dispatch => {
     });
 };
 
-// Get Item by id
-export const getItem = itemId => dispatch => {
-  dispatch(setItemLoading());
-  axios
-    .get("/api/items/item", itemId)
-    .then(res => {
-      dispatch({
-        type: GET_ITEM,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ITEM,
-        payload: null
-      });
-    });
-};
-
 // Delete Item
 export const deleteItem = id => dispatch => {
   axios

@@ -48,34 +48,6 @@ describe("getting items actions", () => {
       { type: types.GET_ITEMS, payload: null }
     ]);
   });
-
-  it("fetches one item", async () => {
-    const id = "5c30067f986d6054c862d812";
-    httpMock.onGet(`/api/items/${id}`).reply(200, {
-      item: { name: "item" }
-    });
-
-    itemActions.getItem(id)(store.dispatch);
-    await flushAllPromises();
-    expect(store.getActions()).toEqual([
-      { type: types.ITEM_LOADING },
-      { payload: { item: { name: "item" } }, type: types.GET_ITEM }
-    ]);
-  });
-
-  it("doesn't fetch one item on error", async () => {
-    const id = "5c30067f986d6054c862d812";
-    httpMock.onGet(`/api/items/${id}`).reply(400, {
-      item: { name: "item" }
-    });
-
-    itemActions.getItem(id)(store.dispatch);
-    await flushAllPromises();
-    expect(store.getActions()).toEqual([
-      { type: types.ITEM_LOADING },
-      { payload: null, type: types.GET_ITEM }
-    ]);
-  });
 });
 
 describe("adding items actions", () => {
