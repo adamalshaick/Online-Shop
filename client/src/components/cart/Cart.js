@@ -11,14 +11,14 @@ class Cart extends Component {
   render() {
     const { cart, loading } = this.props.cart;
 
-    let itemContent;
+    let cartContent;
     if (cart === null || loading) {
-      itemContent = <p>Loading ...</p>;
+      cartContent = <p>Loading ...</p>;
     } else {
-      itemContent = <CartFeed cartItems={cart} />;
+      cartContent = <CartFeed cartItems={cart} />;
     }
 
-    return <div>{itemContent}</div>;
+    return <div className="entry">{cartContent}</div>;
   }
 }
 

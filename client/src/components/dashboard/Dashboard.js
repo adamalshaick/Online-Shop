@@ -27,7 +27,7 @@ class Dashboard extends Component {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div>
+          <div className="entry">
             <div
               className="text-center"
               style={{
