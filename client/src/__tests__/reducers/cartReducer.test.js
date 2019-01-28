@@ -4,7 +4,7 @@ import * as types from "../../actions/types";
 describe("INITIAL_STATE", () => {
   it("returns initial state", () => {
     const action = { type: "dummy_action" };
-    const initialState = { cart: [] };
+    const initialState = { cart: [], loading: false };
     expect(cartReducer(undefined, action)).toEqual(initialState);
   });
 });
