@@ -18,7 +18,7 @@ class Cart extends Component {
       cartContent = <CartFeed cartItems={cart} />;
     }
 
-    return <div className="entry">{cartContent}</div>;
+    return <div>{cartContent}</div>;
   }
 }
 

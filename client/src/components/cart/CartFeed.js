@@ -10,7 +10,7 @@ class CartFeed extends Component {
       cartValue = +item.price + cartValue;
     });
     return (
-      <>
+      <div className="entry">
         <div
           style={{
             width: "100%",
@@ -37,7 +37,7 @@ class CartFeed extends Component {
         {cartItems.map(item => (
           <CartItem key={item._id} item={item} />
         ))}
-      </>
+      </div>
     );
   }
 }
