@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
@@ -45,34 +46,44 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <h1>Login</h1>
-        <form onSubmit={this.onSubmit}>
-          <TextFieldGroup
-            placeholder="Email Adress"
-            name="email"
-            type="email"
-            value={this.state.email}
-            onChange={this.onChange}
-            error={errors.email}
-            id="email"
-          />
+      <>
+        <div className="row mt-5">
+          <div className="col-md-2 col-lg-3" />
+          <div className="col-md-8 col-lg-6 card mt-5 text-center p-0">
+            <div className="card-body p-5">
+              <h3 className="mb-5">Log in to your account</h3>
+              <form onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  placeholder="Email Adress"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                  id="email"
+                />
 
-          <TextFieldGroup
-            placeholder="Password"
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.onChange}
-            error={errors.password}
-            id="password"
-          />
+                <TextFieldGroup
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.password}
+                  id="password"
+                />
 
-          <button type="submit" className="btn btn-dark btn-block mt-4">
-            Sign In
-          </button>
-        </form>
-      </div>
+                <button type="submit" className="btn btn-dark btn-block mt-4">
+                  Log In
+                </button>
+              </form>
+            </div>
+            <div className="text-muted card-footer mt-3">
+              Don't have an account yet? <Link to="/register">Sign Up</Link>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
