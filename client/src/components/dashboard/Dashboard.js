@@ -6,6 +6,7 @@ import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import ProfileActions from "./ProfileActions";
 import isEmpty from "../../validation/is-empty";
 import Loading from "../common/Loading";
+import ReviewForm from "../reviews/ReviewForm";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -199,7 +200,12 @@ class Dashboard extends Component {
         );
       }
     }
-    return <>{dashboardContent}</>;
+    return (
+      <>
+        {dashboardContent}
+        <ReviewForm />
+      </>
+    );
   }
 }
 
