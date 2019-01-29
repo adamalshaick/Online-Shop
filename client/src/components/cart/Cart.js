@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getItemsFromCart } from "../../actions/cartActions";
 import CartFeed from "./CartFeed";
+import Loading from "../common/Loading";
 
 class Cart extends Component {
   componentDidMount() {
@@ -13,12 +14,12 @@ class Cart extends Component {
 
     let cartContent;
     if (cart === null || loading) {
-      cartContent = <p>Loading ...</p>;
+      cartContent = <Loading />;
     } else {
       cartContent = <CartFeed cartItems={cart} />;
     }
 
-    return <div>{cartContent}</div>;
+    return <>{cartContent}</>;
   }
 }
 

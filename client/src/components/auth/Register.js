@@ -53,7 +53,7 @@ class Register extends Component {
       <>
         <div className="row mt-5">
           <div className="col-md-2 col-lg-3" />
-          <div className="col-md-8 col-lg-6 card mt-5 text-center p-0">
+          <div className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry">
             <div className="card-body p-5">
               <h3 className="mb-5">Sign up</h3>
               <form noValidate onSubmit={this.onSubmit}>

@@ -8,7 +8,7 @@ body {
 }
 
 .entry {
-  animation: entry 1.5s;
+  animation: entry 0.75s;
 }
 
 @keyframes entry {

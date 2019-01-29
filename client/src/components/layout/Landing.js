@@ -50,7 +50,7 @@ class Landing extends Component {
   }
   render() {
     return (
-      <div className="landing-page">
+      <div className="landing-page entry">
         <div className="landing-image" />
         <div className="text-center">
           <h3 className="mt-5 mb-5">Online Shop</h3>

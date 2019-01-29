@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import ProfileActions from "./ProfileActions";
 import isEmpty from "../../validation/is-empty";
+import Loading from "../common/Loading";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class Dashboard extends Component {
     let dashboardContent;
 
     if (profile === null || loading) {
-      dashboardContent = <p>Loading...</p>;
+      dashboardContent = <Loading />;
     } else {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
@@ -71,22 +72,22 @@ class Dashboard extends Component {
               </p> */}
               </div>
               <div className="col-md-6 text-center">
-                <button
+                <Link
+                  to="/sell-item"
                   style={{ border: "lightgray solid 1px", width: "100%" }}
-                  type="button"
                   className="btn btn-light btn-lg"
                 >
                   Add your item for sale
-                </button>
+                </Link>
                 <span className="text-muted">Sell your item</span>
                 <hr />
-                <button
+                <Link
+                  to="/items"
                   style={{ border: "lightgray solid 1px", width: "100%" }}
-                  type="button"
                   className="btn btn-light btn-lg"
                 >
                   Browse items
-                </button>
+                </Link>
                 <span className="text-muted">Browse items for sale</span>
                 <hr />
                 <button
@@ -198,13 +199,7 @@ class Dashboard extends Component {
         );
       }
     }
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">{dashboardContent}</div>
-        </div>
-      </div>
-    );
+    return <>{dashboardContent}</>;
   }
 }
 
