@@ -26,6 +26,7 @@ class Items extends Component {
   render() {
     const { items, loading } = this.props.item;
     let itemContent;
+    let itemsArray;
 
     const sortOptions = [
       { label: "* Sort by", value: "" },
@@ -43,14 +44,26 @@ class Items extends Component {
     if (items === null || loading) {
       itemContent = <Loading />;
     } else {
-      const arr = items.filter(
-        item => item.category === this.state.selectedCategory
-      );
+      if (this.state.selectedCategory !== "") {
+        itemsArray = items.filter(
+          item => item.category === this.state.selectedCategory
+        );
+      } else {
+        itemsArray = items;
+      }
 
       if (this.state.sortBy !== "") {
-        arr.sort(function(a, b) {
-          return a.price - b.price;
-        });
+        if (this.state.sortBy === "ascending") {
+          itemsArray.sort(function(a, b) {
+            return a.price - b.price;
+          });
+        }
+
+        if (this.state.sortBy === "descending") {
+          itemsArray.sort(function(a, b) {
+            return b.price - a.price;
+          });
+        }
       }
       itemContent = (
         <div className="feed">
@@ -85,7 +98,7 @@ class Items extends Component {
                   </div>
                 </div>
 
-                <ItemFeed items={arr} />
+                <ItemFeed items={itemsArray} />
               </div>
             </div>
           </div>
