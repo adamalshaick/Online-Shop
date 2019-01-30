@@ -5,6 +5,12 @@ import { deleteItem } from "../../actions/itemActions";
 import { addItemToCart } from "../../actions/cartActions";
 import ReactTimeout from "react-timeout";
 import Alert from "../common/Alert";
+import styled from "styled-components";
+
+const ItemCard = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+`;
 
 class Item extends Component {
   constructor(props) {
@@ -36,24 +42,17 @@ class Item extends Component {
     const { item, auth, showActions } = this.props;
 
     return (
-      <div className="col-md-4 p-0">
+      <div className="col-md-6 col-lg-4 p-0">
         <div>
-          <div
-            style={{
-              boxShadow:
-                " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-            }}
-            className="text-center m-3"
-          >
+          <ItemCard className="text-center m-3">
             <img
               style={{ width: "100%", maxHeight: "400px" }}
-              className=" d-none d-md-block"
               src={`../../uploads/post_image/${item.itemImage}`}
               alt=""
             />
+
             <p>{item.title}</p>
             <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
-
             {showActions ? (
               <span>
                 {item.user === auth.user.id ? (
@@ -65,10 +64,21 @@ class Item extends Component {
                     <i className="fas fa-times" />
                   </button>
                 ) : this.state.showAlert ? (
-                  <Alert
-                    showAlert={this.state.showAlert}
-                    text={item.title + " added to cart"}
-                  />
+                  <>
+                    <div
+                      style={{
+                        width: "200px",
+                        height: "38px",
+                        visibility: "hidden"
+                      }}
+                    />
+                    <Alert
+                      className="entry"
+                      style={{}}
+                      showAlert={this.state.showAlert}
+                      text={item.title + " added to cart"}
+                    />
+                  </>
                 ) : (
                   <button
                     onClick={this.onAddClick.bind(this, item)}
@@ -79,7 +89,7 @@ class Item extends Component {
                 )}
               </span>
             ) : null}
-          </div>
+          </ItemCard>
         </div>
         {/* {this.state.showAlert ? (
           <Alert

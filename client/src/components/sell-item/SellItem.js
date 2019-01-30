@@ -54,11 +54,13 @@ class SellItem extends Component {
     newItem.append("category", this.state.category);
 
     this.props.addItem(newItem);
-    this.setState({ text: "" });
-    this.setState({ price: "" });
-    this.setState({ title: "" });
-    this.setState({ category: "" });
-    this.setState({ selectedFile: null });
+    this.setState({
+      text: "",
+      price: "",
+      title: "",
+      category: "",
+      selectedFile: null
+    });
   };
 
   onChange = e => {

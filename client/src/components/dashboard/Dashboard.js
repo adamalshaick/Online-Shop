@@ -9,6 +9,13 @@ import Loading from "../common/Loading";
 import ReviewForm from "../reviews/ReviewForm";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showReviewInput: false
+    };
+  }
+
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -16,6 +23,24 @@ class Dashboard extends Component {
   onDeleteClick(e) {
     this.props.deleteAccount();
   }
+
+  onReviewClick(e) {
+    this.setState({ showReviewInput: true });
+  }
+
+  onHideClick(e) {
+    this.setState({ showReviewInput: false });
+  }
+
+  onClickRev = e => {
+    this.state.showReviewInput
+      ? this.setState({ showReviewInput: false })
+      : this.setState({ showReviewInput: true });
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -56,7 +81,9 @@ class Dashboard extends Component {
                   alt=""
                 />
                 <div className="text-center">
-                  <div className="mt-3">{user.name}</div>
+                  <div className="mt-3">
+                    <strong>{user.name}</strong>
+                  </div>
 
                   {isEmpty(profile.bio) ? (
                     <div className="mt-3 text-muted">
@@ -66,13 +93,36 @@ class Dashboard extends Component {
                     <div className="mt-3">{profile.bio}</div>
                   )}
                 </div>
+                <div className="row">
+                  <div className="col-lg-6 mt-5">
+                    <p className="mt-4">
+                      <strong>Rating average: 5/5</strong>
+                    </p>
+                  </div>
+                  <div className="col-lg-6">
+                    <Link
+                      to="/:handle/reviews"
+                      style={{ border: "lightgray solid 1px", width: "100%" }}
+                      className="btn btn-light btn-lg mt-5"
+                    >
+                      Show reviews
+                    </Link>
+                    <button
+                      style={{ border: "lightgray solid 1px", width: "100%" }}
+                      className="btn btn-light btn-lg mt-2"
+                      onClick={this.onClickRev}
+                    >
+                      Write a review
+                    </button>
+                  </div>
+                </div>
                 {/* <div className="text-center">
               <div className="display-4 text-center">{profile.user.name}</div>
               <p className="lead text-center">
                 {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
               </p> */}
               </div>
-              <div className="col-md-6 text-center">
+              <div className="col-md-6 text-center mt-5 mt-md-0">
                 <Link
                   to="/sell-item"
                   style={{ border: "lightgray solid 1px", width: "100%" }}
@@ -115,60 +165,6 @@ class Dashboard extends Component {
                 <hr />
               </div>
             </div>
-            {/* <div className="row mt-5">
-              <div
-                style={{ background: "white" }}
-                className="col-md-5 mb-4 p-0 m-0 image-wrapper"
-              >
-                <Link to="/sell-item" className="link">
-                  <img
-                    style={{
-                      maxWidth: "100%",
-                      borderBottom: "black solid 1px",
-                      borderRadius: "5px",
-                      borderBottomLeftRadius: "0px",
-                      borderBottomRightRadius: "0px",
-                      boxShadow:
-                        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-                    }}
-                    src="./assets/images/sell.jpg"
-                  />
-                  <div
-                    style={{ width: "100%", fontWeight: "bold" }}
-                    className="btn btn-dark"
-                  >
-                    Sell an item
-                  </div>
-                </Link>
-              </div>
-
-              <div className="col-md-2" />
-              <div
-                style={{ background: "white" }}
-                className="col-md-5 mb-4 p-0 m-0 image-wrapper"
-              >
-                <Link to="/items" className="link">
-                  <img
-                    style={{
-                      maxWidth: "100%",
-                      borderBottom: "black solid 1px",
-                      borderRadius: "5px",
-                      borderBottomLeftRadius: "0px",
-                      borderBottomRightRadius: "0px",
-                      boxShadow:
-                        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-                    }}
-                    src="./assets/images/buy.jpg"
-                  />
-                  <div
-                    style={{ width: "100%", fontWeight: "bold" }}
-                    className="btn btn-dark"
-                  >
-                    Buy an item
-                  </div>
-                </Link>
-              </div>
-            </div> */}
 
             <div className="float-right mt-5">
               <button
@@ -203,7 +199,16 @@ class Dashboard extends Component {
     return (
       <>
         {dashboardContent}
-        <ReviewForm />
+
+        {this.state.showReviewInput ? (
+          <ReviewForm
+            showReviewInput={this.state.showReviewInput}
+            onClickRev={this.onClickRev}
+          />
+        ) : null}
+        {/* {this.state.showReviewInput ? (
+          <ReviewForm onHideClick={this.onHideClick.bind(this)} />
+        ) : null} */}
       </>
     );
   }

@@ -8,7 +8,6 @@ class ItemFeed extends Component {
 
     return (
       <>
-        <h1 className="m-5">Items for sale</h1>
         <div className="row">
           {items.map(item => (
             <Item key={item._id} item={item} />

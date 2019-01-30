@@ -9,18 +9,21 @@ const Alert = ({ showAlert, text }) => {
         <div
           className="text-white p-2 text-center"
           style={{
-            position: "relative",
-            left: "50%",
             width: "200px",
             height: "40px",
             backgroundColor: "#2DCC70",
             borderRadius: "10px",
-            transform: "translateX(-50%)"
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)"
           }}
         >
           {text}
         </div>
-      ) : null}
+      ) : (
+        <div style={{ width: "200px", height: "40px", visibility: "hidden" }} />
+      )}
     </>
   );
 };
