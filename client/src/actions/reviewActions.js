@@ -1,13 +1,6 @@
 import axios from "axios";
 
-import {
-  ADD_REVIEW,
-  GET_ERRORS,
-  GET_ITEMS,
-  GET_ITEM,
-  DELETE_ITEM,
-  REVIEW_LOADING
-} from "./types";
+import { ADD_REVIEW, GET_ERRORS, REVIEW_LOADING } from "./types";
 
 // Add Review
 export const addReview = reviewData => dispatch => {
