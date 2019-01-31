@@ -58,64 +58,56 @@ class Item extends Component {
     const { item, auth, showActions } = this.props;
 
     return (
-      <>
-        <div className="col-md-6 col-lg-4 p-0 entry-2x">
-          <div>
-            <ItemCard className="text-center m-3">
-              <Image
-                style={this.getStyle()}
-                src={`../../uploads/post_image/${item.itemImage}`}
-                alt=""
-                onLoad={this.imageLoaded}
-              />
-              <p>{item.title}</p>
-              <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
-              {showActions ? (
-                <span>
-                  {item.user === auth.user.id ? (
-                    <button
-                      onClick={this.onDeleteClick.bind(this, item._id)}
-                      type="button"
-                      className="btn btn-danger mr-1"
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  ) : this.state.showAlert ? (
-                    <>
-                      <div
-                        style={{
-                          width: "200px",
-                          height: "38px",
-                          visibility: "hidden"
-                        }}
-                      />
-                      <Alert
-                        className="entry"
-                        style={{}}
-                        showAlert={this.state.showAlert}
-                        text={item.title + " added to cart"}
-                      />
-                    </>
-                  ) : (
-                    <button
-                      onClick={this.onAddClick.bind(this, item)}
-                      className="btn btn-dark"
-                    >
-                      Add to your cart
-                    </button>
-                  )}
-                </span>
-              ) : null}
-            </ItemCard>
-          </div>
-          {/* {this.state.showAlert ? (
-          <Alert
-            showAlert={this.state.showAlert}
-            text={item.title + " added to cart"}
-          />
-        ) : null} */}
+      <div className="col-md-6 col-lg-4 p-0 entry-2x">
+        <div>
+          <ItemCard className="text-center m-3">
+            <Image
+              style={this.getStyle()}
+              src={`../../uploads/post_image/${item.itemImage}`}
+              alt=""
+              onLoad={this.imageLoaded}
+            />
+            <p>{item.title}</p>
+            <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
+            {showActions ? (
+              <span>
+                {item.user === auth.user.id ? (
+                  <button
+                    onClick={this.onDeleteClick.bind(this, item._id)}
+                    type="button"
+                    className="btn btn-danger mr-1"
+                  >
+                    <i className="fas fa-times" />
+                  </button>
+                ) : this.state.showAlert ? (
+                  <>
+                    <div
+                      style={{
+                        width: "200px",
+                        height: "38px",
+                        visibility: "hidden"
+                      }}
+                    />
+                    <Alert
+                      className="entry"
+                      style={{}}
+                      showAlert={this.state.showAlert}
+                      text={item.title + " added to cart"}
+                    />
+                  </>
+                ) : (
+                  <button
+                    onClick={this.onAddClick.bind(this, item)}
+                    className="btn btn-dark"
+                  >
+                    Add to your cart
+                  </button>
+                )}
+              </span>
+            ) : null}
+          </ItemCard>
         </div>
-      </>
+      </div>
     );
   }
 }

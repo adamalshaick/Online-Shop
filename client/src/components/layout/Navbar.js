@@ -4,6 +4,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
+import styled from "styled-components";
+
+const StyledNavbar = styled.header`
+  width: 100%;
+  height: 6rem;
+  box-shadow: 0px 8px 20px 0px rgba(204, 204, 204, 0.7);
+  color: white;
+  display: flex;
+`;
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -15,28 +24,37 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/items">
+      <ul
+        style={{
+          display: "flex",
+          position: "absolute",
+          right: "50%",
+          transform: "translateX(50%)",
+          marginTop: "2.3rem",
+          fontSize: "1.2rem"
+        }}
+      >
+        <li>
+          <Link style={{ color: "black" }} to="/items">
             Browse Items
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
+        <li>
+          <Link style={{ color: "black" }} to="/dashboard">
             Dashboard
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/cart">
+          <Link style={{ color: "black" }} to="/cart">
             Cart
             <i className="ml-2 fas fa-shopping-cart" />
           </Link>
         </li>
-        <li className="nav-item">
-          <a
-            href=""
+        <li>
+          <Link
+            style={{ color: "black" }}
+            to="/"
             onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
           >
             <img
               src={user.avatar}
@@ -44,7 +62,7 @@ class Navbar extends Component {
               style={{ width: "25px", marginRight: "5px" }}
             />
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     );
@@ -65,9 +83,17 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <StyledNavbar className="text-center">
         {isAuthenticated ? authLinks : guestLinks}
-      </nav>
+      </StyledNavbar>
+      // <ul style={{ display: "flex" }}>
+      //   <li>
+      //     <Link to="/items">JD</Link>
+      //   </li>
+      //   <li>
+      //     <Link to="/items">JD</Link>
+      //   </li>
+      // </ul>
     );
   }
 }

@@ -3,16 +3,19 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import ProfileActions from "./ProfileActions";
+import { addReview } from "../../actions/reviewActions";
 import isEmpty from "../../validation/is-empty";
 import Loading from "../common/Loading";
 import ReviewForm from "../reviews/ReviewForm";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showReviewInput: false
+      showReviewInput: false,
+      text: "",
+      rate: ""
     };
   }
 
@@ -24,14 +27,6 @@ class Dashboard extends Component {
     this.props.deleteAccount();
   }
 
-  onReviewClick(e) {
-    this.setState({ showReviewInput: true });
-  }
-
-  onHideClick(e) {
-    this.setState({ showReviewInput: false });
-  }
-
   onClickRev = e => {
     this.state.showReviewInput
       ? this.setState({ showReviewInput: false })
@@ -40,6 +35,18 @@ class Dashboard extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const reviewData = {
+      text: this.state.text,
+      rate: this.state.rate,
+      id: "5bff486a3b260014f83075b8"
+    };
+
+    this.props.addReview(reviewData);
   };
 
   render() {
@@ -116,11 +123,6 @@ class Dashboard extends Component {
                     </button>
                   </div>
                 </div>
-                {/* <div className="text-center">
-              <div className="display-4 text-center">{profile.user.name}</div>
-              <p className="lead text-center">
-                {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
-              </p> */}
               </div>
               <div className="col-md-6 text-center mt-5 mt-md-0">
                 <Link
@@ -185,30 +187,22 @@ class Dashboard extends Component {
         );
       } else {
         // User is logged in but has no profile
-        dashboardContent = (
-          <div>
-            <p> Welcome {user.name}</p>
-            <p> Create a profile</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create profile
-            </Link>
-          </div>
-        );
+        return <Redirect to="/create-profile" />;
       }
     }
     return (
       <>
         {dashboardContent}
-
         {this.state.showReviewInput ? (
           <ReviewForm
             showReviewInput={this.state.showReviewInput}
             onClickRev={this.onClickRev}
+            textState={this.state.text}
+            rateState={this.state.rate}
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
           />
         ) : null}
-        {/* {this.state.showReviewInput ? (
-          <ReviewForm onHideClick={this.onHideClick.bind(this)} />
-        ) : null} */}
       </>
     );
   }
@@ -228,5 +222,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount }
+  { getCurrentProfile, addReview, deleteAccount }
 )(Dashboard);
