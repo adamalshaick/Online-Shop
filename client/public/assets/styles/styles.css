@@ -11,6 +11,10 @@ body {
   animation: entry 0.75s;
 }
 
+.entry-2x {
+  animation: entry 1.5s;
+}
+
 @keyframes entry {
   from {
     opacity: 0;

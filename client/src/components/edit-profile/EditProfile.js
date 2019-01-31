@@ -149,65 +149,70 @@ class CreateProfile extends Component {
     }
 
     return (
-      <div className="create-profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Edit Your Profile</h1>
-              <p className="lead text-center">
-                Add some information about You!
-              </p>
-              <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="Your username"
-                />
+      <div className="create-profile mt-5 entry">
+        <div className="row">
+          <div
+            style={{
+              boxShadow:
+                "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+              padding: "2rem"
+            }}
+            className="col-md-8 m-auto"
+          >
+            <h1 style={{ fontSize: "1.7rem" }} className="text-center mb-4">
+              Edit Your Profile
+            </h1>
 
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="Your Location"
-                />
+            <small className="d-block pb-3">* = required fields</small>
+            <form onSubmit={this.onSubmit}>
+              <TextFieldGroup
+                placeholder="* Profile Handle"
+                name="handle"
+                value={this.state.handle}
+                onChange={this.onChange}
+                error={errors.handle}
+                info="Your username"
+              />
 
-                <TextAreaFieldGroup
-                  placeholder="Short Bio"
-                  name="bio"
-                  value={this.state.bio}
-                  onChange={this.onChange}
-                  error={errors.bio}
-                  info="Tell us a little about yourself"
-                />
+              <TextFieldGroup
+                placeholder="Location"
+                name="location"
+                value={this.state.location}
+                onChange={this.onChange}
+                error={errors.location}
+                info="Your Location"
+              />
 
-                <div className="mb-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
-                    }}
-                    className="btn btn-info"
-                  >
-                    Add Social Media Links
-                  </button>
-                  <span className="text-muted">Optional</span>
-                </div>
-                {socialInputs}
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
-            </div>
+              <TextAreaFieldGroup
+                placeholder="Short Bio"
+                name="bio"
+                value={this.state.bio}
+                onChange={this.onChange}
+                error={errors.bio}
+                info="Tell us a little about yourself"
+              />
+
+              <div className="mb-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.setState(prevState => ({
+                      displaySocialInputs: !prevState.displaySocialInputs
+                    }));
+                  }}
+                  className="btn btn-dark"
+                >
+                  Add Social Media Links
+                </button>
+                <small className="text-muted d-block">(Optional)</small>
+              </div>
+              {socialInputs}
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-dark float-right mt-4"
+              />
+            </form>
           </div>
         </div>
       </div>

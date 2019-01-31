@@ -78,7 +78,7 @@ class SellItem extends Component {
     ];
 
     return (
-      <div className="mb-3">
+      <div className="mb-3 entry">
         <h1 className="text-center mt-5 mb-5">Sell an item</h1>
         <div
           style={{
