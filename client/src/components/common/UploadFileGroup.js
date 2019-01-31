@@ -6,17 +6,17 @@ const UploadFileGroup = ({ error, icon, type, name, onChange, value }) => {
   return (
     <div className="input-group mt-3">
       <div className="input-group-prepend">
-        <div className="card text-center">
-          <i className={icon} />
+        <div className=" text-center">
+          <i className={`${icon} mb-4 ml-3 mt-3`} />
           <input
-            className={classnames("form-control form-control-lg", {
+            className={classnames("form-control", {
               "is-invalid": error
             })}
             onChange={onChange}
             type={type}
             name={name}
             value={value}
-            style={{ margin: "auto" }}
+            style={{ marginLeft: "1rem" }}
           />
           {error && <div className="invalid-feedback">{error}</div>}
         </div>
