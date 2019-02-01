@@ -5,7 +5,7 @@ import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Login extends Component {
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,6 +54,7 @@ class Login extends Component {
               <h3 className="mb-5">Log in to your account</h3>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
+                  id="#email"
                   placeholder="Email Adress"
                   name="email"
                   type="email"
@@ -64,6 +65,7 @@ class Login extends Component {
                 />
 
                 <TextFieldGroup
+                  id="#password"
                   placeholder="Password"
                   name="password"
                   type="password"

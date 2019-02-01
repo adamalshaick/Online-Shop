@@ -1,28 +1,38 @@
 import React from "react";
-import Login from "../../../components/auth/Login";
-import { Provider } from "react-redux";
-import { mount, shallow } from "enzyme";
-import TextFieldGroup from "../../../components/common/TextFieldGroup";
-import configureStore from "redux-mock-store";
-import toJson from "enzyme-to-json";
+import { Login } from "../../../components/auth/Login";
+import { shallow } from "enzyme";
 
-const mockStore = configureStore();
-const initialState = {
-  auth: {},
+const mockLoginfn = jest.fn();
+const Props = {
+  auth: {
+    isAuthenticated: false
+  },
   errors: {}
 };
+let wrapper;
 
-const store = mockStore(initialState);
-
-let wrapped;
+wrapper = shallow(<Login {...Props} loginUser={mockLoginfn} />);
 
 it("displays TextFieldGroups and a button", () => {
-  const wrapped = shallow(<Login store={store} />);
+  expect(wrapper.find("form").length).toEqual(1);
+});
 
-  const component = wrapped.dive();
+it("should call the mock login function", () => {
+  wrapper.find("form").simulate("submit", { preventDefault() {} });
+  expect(mockLoginfn.mock.calls.length).toBe(1);
+});
 
-  expect(toJson(wrapped)).toMatchSnapshot();
-  expect(toJson(component)).toMatchSnapshot();
-  // expect(wrapped.find(TextFieldGroup).length).toEqual(2);
-  // expect(wrapped.find("button").length).toEqual(1);
+wrapper
+  .find("#email")
+  .simulate("change", { target: { name: "email", value: "test@gmail.com" } });
+
+wrapper
+  .find("#password")
+  .simulate("change", { target: { name: "password", value: "passwordTest" } });
+
+it("calls function with correct date", () => {
+  expect(mockLoginfn.mock.calls[0][0]).toEqual({
+    email: "test@gmail.com",
+    password: "passwordTest"
+  });
 });
