@@ -6,7 +6,7 @@ import { registerUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Register extends Component {
+export class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -58,6 +58,7 @@ class Register extends Component {
               <h3 className="mb-5">Sign up</h3>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
+                  id="name"
                   placeholder="Name"
                   name="name"
                   value={this.state.name}
@@ -65,6 +66,7 @@ class Register extends Component {
                   error={errors.name}
                 />
                 <TextFieldGroup
+                  id="email"
                   placeholder="Email"
                   name="email"
                   type="email"
@@ -73,6 +75,7 @@ class Register extends Component {
                   error={errors.email}
                 />
                 <TextFieldGroup
+                  id="password"
                   placeholder="Password"
                   name="password"
                   type="password"
@@ -81,6 +84,7 @@ class Register extends Component {
                   error={errors.password}
                 />
                 <TextFieldGroup
+                  id="password2"
                   placeholder="Confirm Password"
                   name="password2"
                   type="password"
