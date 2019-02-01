@@ -4,7 +4,7 @@ import { getItemsFromCart } from "../../actions/cartActions";
 import CartFeed from "./CartFeed";
 import Loading from "../common/Loading";
 
-class Cart extends Component {
+export class Cart extends Component {
   componentDidMount() {
     this.props.getItemsFromCart();
   }
