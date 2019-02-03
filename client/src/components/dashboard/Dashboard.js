@@ -15,8 +15,15 @@ class Dashboard extends Component {
     this.state = {
       showReviewInput: false,
       text: "",
-      rate: ""
+      rate: "",
+      errors: {}
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
+    }
   }
 
   componentDidMount() {
@@ -50,6 +57,7 @@ class Dashboard extends Component {
   };
 
   render() {
+    const { errors } = this.state;
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
@@ -195,10 +203,10 @@ class Dashboard extends Component {
         {dashboardContent}
         {this.state.showReviewInput ? (
           <ReviewForm
-            showReviewInput={this.state.showReviewInput}
             onClickRev={this.onClickRev}
-            textState={this.state.text}
-            rateState={this.state.rate}
+            text={this.state.text}
+            rate={this.state.rate}
+            errors={errors}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
           />
@@ -212,12 +220,14 @@ Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(

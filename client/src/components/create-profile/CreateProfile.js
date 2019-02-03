@@ -7,7 +7,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile } from "../../actions/profileActions";
 
-class CreateProfile extends Component {
+export class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,6 +59,7 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
+            id="twitter"
             placeholder="Twitter Profile URL"
             name="twitter"
             icon="fab fa-twitter"
@@ -68,6 +69,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="facebook"
             placeholder="Facebook Page URL"
             name="facebook"
             icon="fab fa-facebook"
@@ -77,6 +79,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="linkedin"
             placeholder="Linkedin Profile URL"
             name="linkedin"
             icon="fab fa-linkedin"
@@ -86,6 +89,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="youtube"
             placeholder="YouTube Channel URL"
             name="youtube"
             icon="fab fa-youtube"
@@ -95,6 +99,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
+            id="instagram"
             placeholder="Instagram Page URL"
             name="instagram"
             icon="fab fa-instagram"
@@ -127,6 +132,7 @@ class CreateProfile extends Component {
             <small className="d-block pb-3">* = required fields</small>
             <form onSubmit={this.onSubmit}>
               <TextFieldGroup
+                id="handle"
                 placeholder="* Profile Handle"
                 name="handle"
                 value={this.state.handle}
@@ -136,6 +142,7 @@ class CreateProfile extends Component {
               />
 
               <TextFieldGroup
+                id="location"
                 placeholder="Location"
                 name="location"
                 value={this.state.location}
@@ -145,6 +152,7 @@ class CreateProfile extends Component {
               />
 
               <TextAreaFieldGroup
+                id="bio"
                 placeholder="Short Bio"
                 name="bio"
                 value={this.state.bio}

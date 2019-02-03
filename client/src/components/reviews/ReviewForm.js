@@ -3,6 +3,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import NumberInput from "../common/NumberInput";
 
 const ReviewWrapper = styled.div`
   background-color: white;
@@ -15,14 +16,7 @@ const ReviewWrapper = styled.div`
   filter: brightness(10%);
 `;
 
-const ReviewGroup = ({
-  onClickRev,
-  error,
-  textState,
-  rateState,
-  onSubmit,
-  onChange
-}) => {
+const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
   return (
     <>
       <ReviewWrapper />
@@ -60,32 +54,23 @@ const ReviewGroup = ({
                     }}
                   >
                     Add a Rating:
-                    <input
+                    <NumberInput
                       name="rate"
-                      value={rateState}
+                      value={rate}
+                      error={errors.rate}
+                      type="text"
                       onChange={onChange}
-                      style={{ width: "30px", fontSize: "1.2rem" }}
-                      className={classnames(
-                        "form-control form-control-sm ml-3",
-                        {
-                          "is-invalid": error
-                        }
-                      )}
                     />
                     /5
                   </div>
-                  <textarea
-                    style={{ height: "200px" }}
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": error
-                    })}
-                    placeholder="Write a review"
-                    name="text"
-                    value={textState}
-                    onChange={onChange}
-                  />
-                  {error && <div className="invalid-feedback">{error}</div>}
                 </div>
+                <TextAreaFieldGroup
+                  name="text"
+                  value={text}
+                  error={errors.text}
+                  type="text"
+                  onChange={onChange}
+                />
                 <button type="submit" className="btn btn-dark float-right">
                   Submit
                 </button>
@@ -98,18 +83,13 @@ const ReviewGroup = ({
   );
 };
 
-// InputGroup.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   placeholder: PropTypes.string,
-//   value: PropTypes.string.isRequired,
-//   icon: PropTypes.string,
-//   error: PropTypes.string,
-//   type: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired
-// };
+ReviewForm.propTypes = {
+  onClickRev: PropTypes.func.isRequired,
+  errors: PropTypes.object,
+  text: PropTypes.string.isRequired,
+  rate: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
+};
 
-// InputGroup.defaultProps = {
-//   type: "text"
-// };
-
-export default ReviewGroup;
+export default ReviewForm;
