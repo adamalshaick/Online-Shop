@@ -34,7 +34,7 @@ class Dashboard extends Component {
     this.props.deleteAccount();
   }
 
-  onClickRev = e => {
+  onClickRev = () => {
     this.state.showReviewInput
       ? this.setState({ showReviewInput: false })
       : this.setState({ showReviewInput: true });
@@ -44,13 +44,13 @@ class Dashboard extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = e => {
+  onSubmit = userId => e => {
     e.preventDefault();
 
     const reviewData = {
       text: this.state.text,
       rate: this.state.rate,
-      id: "5bff486a3b260014f83075b8"
+      id: userId
     };
 
     this.props.addReview(reviewData);
@@ -110,9 +110,31 @@ class Dashboard extends Component {
                 </div>
                 <div className="row">
                   <div className="col-lg-6 mt-5">
-                    <p className="mt-4">
+                    <div className="mt-4">
                       <strong>Rating average: 5/5</strong>
-                    </p>
+                      <div>
+                        <img
+                          style={{ width: "25px" }}
+                          src="./assets/icons/star.svg"
+                        />
+                        <img
+                          style={{ width: "25px" }}
+                          src="./assets/icons/star.svg"
+                        />
+                        <img
+                          style={{ width: "25px" }}
+                          src="./assets/icons/star.svg"
+                        />
+                        <img
+                          style={{ width: "25px" }}
+                          src="./assets/icons/star.svg"
+                        />
+                        <img
+                          style={{ width: "25px" }}
+                          src="./assets/icons/star.svg"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="col-lg-6">
                     <Link
@@ -208,7 +230,7 @@ class Dashboard extends Component {
             rate={this.state.rate}
             errors={errors}
             onChange={this.onChange}
-            onSubmit={this.onSubmit}
+            onSubmit={this.onSubmit(user.id)}
           />
         ) : null}
       </>

@@ -122,10 +122,7 @@ export class CreateProfile extends Component {
             }}
             className="col-md-8 m-auto"
           >
-            <h1
-              style={{ fontSize: "1.7rem" }}
-              className="display-4 text-center"
-            >
+            <h1 style={{ fontSize: "1.7rem" }} className="mb-4 text-center">
               Create Your Profile
             </h1>
 
@@ -203,4 +200,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createProfile }
-)(withRouter(CreateProfile));
+)(CreateProfile);

@@ -8,9 +8,8 @@ const Props = {
   cart: {},
   loading: true
 };
-let wrapper;
 
-wrapper = shallow(<Cart {...Props} getItemsFromCart={mockCartfn} />);
+const wrapper = shallow(<Cart {...Props} getItemsFromCart={mockCartfn} />);
 
 it("should call the mock cart function", () => {
   expect(mockCartfn.mock.calls.length).toBe(1);

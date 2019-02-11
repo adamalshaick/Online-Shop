@@ -1,8 +1,8 @@
 import React from "react";
-import { Login } from "../../../components/auth/Login";
+import { CreateProfile } from "../../../components/create-profile/CreateProfile";
 import { shallow } from "enzyme";
 
-const mockLoginfn = jest.fn();
+const mockCreateProfilefn = jest.fn();
 const Props = {
   auth: {
     isAuthenticated: false
@@ -11,7 +11,7 @@ const Props = {
 };
 let wrapper;
 
-wrapper = shallow(<Login {...Props} loginUser={mockLoginfn} />);
+wrapper = shallow(<Login {...Props} createProfile={mockLoginfn} />);
 
 it("displays form", () => {
   expect(wrapper.find("form").length).toEqual(1);

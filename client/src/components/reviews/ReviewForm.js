@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
@@ -28,7 +27,7 @@ const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
             left: "50%",
             transform: "translate(-50%, -50%)"
           }}
-          className="col-md-3"
+          className="col-md-6 col-lg-4"
         >
           <div className="card">
             <div className="card-header text-right">

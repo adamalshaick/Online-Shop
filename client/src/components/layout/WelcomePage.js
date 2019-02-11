@@ -31,7 +31,7 @@ const Text = styled.figcaption`
   font-size: 1.1rem;
   width: 34%;
   margin-top: 19%;
-  float: ${props => (props.left ? "right" : "left")};
+  float: right;
   transition: all 0.5s;
   color: black;
 `;
@@ -39,34 +39,47 @@ const Text = styled.figcaption`
 const Image = styled.img`
   width: 66%;
   height: 100%;
-  float: ${props => (props.left ? "left" : "right")};
+  float: left;
 `;
 
-class Landing extends Component {
+class WelcomePage extends Component {
   render() {
     return (
       <div className="landing-page entry">
         <div className="text-center">
-          <h3 className="mt-5 mb-5">Online Shop</h3>
+          <h3 className="mt-5 mb-4">Welcome {this.props.auth.user.name}</h3>
           <Button>
-            <Link to="/login">
-              <Image left src="./assets/images/portfolio-85.jpg" />
-              <Text left>Login</Text>
+            <Link to="/dashboard">
+              <Image left src="./assets/images/rsz_dashboard.jpg" />
+              <Text left> Dashboard</Text>
             </Link>
           </Button>
-          <Button>
-            <Link to="/register">
-              <Image src="./assets/images/rsz_buy.jpg" />
-              <Text>Sign Up</Text>
+        </div>
+        <div className="row mt-5">
+          <div className="col-md-2" />
+          <div className="col-md-8">
+            <Link
+              to="/items"
+              style={{ border: "lightgrey solid 1px" }}
+              className="col-lg-12 btn btn-light btn-lg"
+            >
+              Browse items for sale
             </Link>
-          </Button>
+            <Link
+              to="/sell-item"
+              style={{ border: "lightgrey solid 1px" }}
+              className="col-lg-12 btn btn-light mt-4 btn-lg"
+            >
+              Sell Your item
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-Landing.propTypes = {
+WelcomePage.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
@@ -74,4 +87,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps)(WelcomePage);

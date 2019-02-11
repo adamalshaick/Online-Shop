@@ -22,6 +22,7 @@ import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Cart from "./components/cart/Cart";
 import NotFound from "./components/not-found/NotFound";
+import WelcomePage from "./components/layout/WelcomePage";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -57,26 +58,22 @@ class App extends Component {
 
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/profile/:handle" component={Profile} />
-              <Route exact path="/items" component={Items} />
-
+              <PrivateRoute exact path="/items" component={Items} />
+              <PrivateRoute exact path="/profile/:handle" component={Profile} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-
               <PrivateRoute
                 exact
                 path="/create-profile"
                 component={CreateProfile}
               />
-
               <PrivateRoute exact path="/sell-item" component={SellItem} />
-
               <PrivateRoute exact path="/cart" component={Cart} />
-
               <PrivateRoute
                 exact
                 path="/edit-profile"
                 component={EditProfile}
               />
+              <PrivateRoute exact path="/welcome" component={WelcomePage} />
               <Route component={NotFound} />
             </Switch>
           </div>

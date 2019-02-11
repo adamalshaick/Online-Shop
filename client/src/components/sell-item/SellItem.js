@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import { addItem } from "../../actions/itemActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import UploadFileGroup from "../common/UploadFileGroup";
 import SelectListGroup from "../common/SelectListGroup";
 
@@ -19,6 +20,10 @@ class SellItem extends Component {
       selectedFile: null,
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
   }
 
   componentWillReceiveProps(newProps) {
@@ -68,7 +73,7 @@ class SellItem extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, profile } = this.state;
 
     const options = [
       { label: "* Select category", value: "" },
@@ -173,15 +178,19 @@ class SellItem extends Component {
 SellItem.propTypes = {
   addItem: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
+  getCurrentProfile: PropTypes.func.isRequired,
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { addItem }
+  { addItem, getCurrentProfile }
 )(SellItem);

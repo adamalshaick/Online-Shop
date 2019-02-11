@@ -14,6 +14,23 @@ const StyledNavbar = styled.header`
   display: flex;
 `;
 
+const List = styled.ul`
+  display: flex;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  margin-top: 1.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: black;
+`;
+
+const ListElement = styled.li`
+  color: black;
+  margin: 0 4rem 4rem 0;
+  list-style: none;
+`;
+
 class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
@@ -23,83 +40,68 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
+
     const authLinks = (
-      <ul
-        style={{
-          display: "flex",
-          position: "absolute",
-          right: "50%",
-          transform: "translateX(50%)",
-          marginTop: "2.3rem",
-          fontSize: "1.2rem"
-        }}
-      >
-        <li>
-          <Link style={{ color: "black" }} to="/items">
+      <List>
+        <ListElement>
+          <Link style={{ color: "black" }} className="link" to="/items">
             Browse Items
           </Link>
-        </li>
-        <li>
+        </ListElement>
+        <ListElement>
           <Link style={{ color: "black" }} to="/dashboard">
             Dashboard
           </Link>
-        </li>
-        <li>
+        </ListElement>
+        <ListElement>
           <Link style={{ color: "black" }} to="/cart">
             Cart
             <i className="ml-2 fas fa-shopping-cart" />
           </Link>
-        </li>
-        <li>
+        </ListElement>
+        <ListElement>
           <Link
             style={{ color: "black" }}
             to="/"
             onClick={this.onLogoutClick.bind(this)}
           >
+            Logout
             <img
               src={user.avatar}
               alt={user.name}
-              style={{ width: "25px", marginRight: "5px" }}
+              style={{ width: "35px", marginLeft: "5px" }}
             />
-            Logout
           </Link>
-        </li>
-      </ul>
+        </ListElement>
+      </List>
     );
 
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link btn btn-danger text-white mr-2" to="/login">
+      <List>
+        <ListElement>
+          <Link style={{ color: "black" }} className="link" to="/login">
             Login
           </Link>
-        </li>
-        <li>
-          <Link className="nav-link btn btn-danger text-white" to="/register">
+        </ListElement>
+        <ListElement>
+          <Link style={{ color: "black" }} to="/register">
             Sign Up
           </Link>
-        </li>
-      </ul>
+        </ListElement>
+      </List>
     );
 
     return (
       <StyledNavbar className="text-center">
         {isAuthenticated ? authLinks : guestLinks}
       </StyledNavbar>
-      // <ul style={{ display: "flex" }}>
-      //   <li>
-      //     <Link to="/items">JD</Link>
-      //   </li>
-      //   <li>
-      //     <Link to="/items">JD</Link>
-      //   </li>
-      // </ul>
     );
   }
 }
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  clearCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
