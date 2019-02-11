@@ -26,9 +26,25 @@ router.post(
       text: req.body.text,
       rate: req.body.rate,
       seller: req.params.id,
-      buyer: req.user.id
+      buyer: req.params.handle
     });
     newReview.save().then(review => res.json(review));
+  }
+);
+
+// @route POST api/reviews
+// @desc  Get reviews
+// @access Private
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Review.find()
+      .sort({ date: -1 })
+      .then(reviews => res.json(reviews))
+      .catch(err =>
+        res.status(404).json({ noreviewsfound: "No reviews found" })
+      );
   }
 );
 

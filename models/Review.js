@@ -9,8 +9,8 @@ const ReviewSchema = new Schema({
   },
 
   buyer: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
+    type: String,
+    required: true
   },
 
   text: {

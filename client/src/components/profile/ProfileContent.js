@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import isEmpty from "../../validation/is-empty";
 import ReviewForm from "../reviews/ReviewForm";
 
+import Reviews from "../reviews/Reviews";
+
 const Header = styled.header`
   width: 100%;
   background-color: whitesmoke;
@@ -44,13 +46,14 @@ class ProfileContent extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = userId => e => {
+  onSubmit = (handle, id) => e => {
     e.preventDefault();
 
     const reviewData = {
       text: this.state.text,
       rate: this.state.rate,
-      id: userId
+      handle: handle,
+      id: id
     };
 
     this.props.addReview(reviewData);
@@ -61,7 +64,7 @@ class ProfileContent extends Component {
 
     return (
       <>
-        <div className="entry">
+        <div className="row">
           <Header className="text-center">
             <strong>{profile.handle}'s Profile</strong>
           </Header>
@@ -87,27 +90,12 @@ class ProfileContent extends Component {
               <div className="col-lg-6 mt-5">
                 <div className="mt-4">
                   <strong>Rating average: 5/5</strong>
-                  <div>
-                    <img
-                      style={{ width: "25px" }}
-                      src="./assets/icons/star.svg"
-                    />
-                    <img
-                      style={{ width: "25px" }}
-                      src="./assets/icons/star.svg"
-                    />
-                    <img
-                      style={{ width: "25px" }}
-                      src="./assets/icons/star.svg"
-                    />
-                    <img
-                      style={{ width: "25px" }}
-                      src="./assets/icons/star.svg"
-                    />
-                    <img
-                      style={{ width: "25px" }}
-                      src="./assets/icons/star.svg"
-                    />
+                  <div style={{ color: "gold" }}>
+                    <i className="fas fa-star" />
+                    <i className="fas fa-star" />
+                    <i className="fas fa-star" />
+                    <i className="fas fa-star" />
+                    <i className="fas fa-star" />
                   </div>
                 </div>
               </div>
@@ -120,6 +108,9 @@ class ProfileContent extends Component {
               Write a review
             </button>
           </div>
+          <div className="col-md-6">
+            <Reviews currentProfile={profile} />
+          </div>
         </div>
         {this.state.showReviewInput ? (
           <ReviewForm
@@ -128,7 +119,7 @@ class ProfileContent extends Component {
             rate={this.state.rate}
             errors={errors}
             onChange={this.onChange}
-            onSubmit={this.onSubmit(auth.user.id)}
+            onSubmit={this.onSubmit(profile.handle, profile.user._id)}
           />
         ) : null}
       </>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ADD_REVIEW, GET_ERRORS, REVIEW_LOADING } from "./types";
+import { ADD_REVIEW, GET_REVIEWS, GET_ERRORS, REVIEW_LOADING } from "./types";
 
 // Add Review
 export const addReview = reviewData => dispatch => {
@@ -20,6 +20,25 @@ export const addReview = reviewData => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+// Get Reviews
+export const getReviews = () => dispatch => {
+  dispatch(setReviewLoading());
+  axios
+    .get("/api/reviews")
+    .then(res =>
+      dispatch({
+        type: GET_REVIEWS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_REVIEWS,
+        payload: null
+      })
+    );
 };
 
 // Set loading state
