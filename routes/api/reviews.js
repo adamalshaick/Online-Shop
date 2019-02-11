@@ -26,7 +26,7 @@ router.post(
       text: req.body.text,
       rate: req.body.rate,
       seller: req.params.id,
-      buyer: req.params.handle
+      buyer: req.body.handle
     });
     newReview.save().then(review => res.json(review));
   }
