@@ -80,6 +80,25 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
+// Get profile by id
+export const getProfileById = user_id => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/user/${user_id}`)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 // Profile loading
 export const setProfileLoading = () => {
   return {
