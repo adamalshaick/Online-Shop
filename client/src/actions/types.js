@@ -17,3 +17,4 @@ export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const REVIEW_LOADING = "REVIEW_LOADING";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const ADD_REVIEW = "ADD_REVIEW";
+export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";

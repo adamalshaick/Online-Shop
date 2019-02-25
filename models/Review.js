@@ -13,6 +13,11 @@ const ReviewSchema = new Schema({
     required: true
   },
 
+  avatar: {
+    type: String,
+    required: true
+  },
+
   text: {
     type: String,
     required: true

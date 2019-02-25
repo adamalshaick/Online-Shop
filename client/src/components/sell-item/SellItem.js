@@ -7,6 +7,7 @@ import { addItem } from "../../actions/itemActions";
 import { getCurrentProfile } from "../../actions/profileActions";
 import UploadFileGroup from "../common/UploadFileGroup";
 import SelectListGroup from "../common/SelectListGroup";
+import Navbar from "../layout/Navbar";
 
 class SellItem extends Component {
   constructor(props) {
@@ -40,8 +41,6 @@ class SellItem extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    const { user } = this.props.auth;
 
     const newItem = new FormData();
 
@@ -83,94 +82,97 @@ class SellItem extends Component {
     ];
 
     return (
-      <div className="mb-3 entry">
-        <h1 className="text-center mt-5 mb-5">Sell an item</h1>
-        <div
-          style={{
-            boxShadow:
-              "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-            padding: "2rem"
-          }}
-        >
-          <div>
-            <div className="row">
-              <div className="col-md-6">
-                <form>
-                  <span>Enter a name</span>
-                  <InputGroup
-                    placeholder="Add a name of your item"
-                    placeholder="Name"
-                    name="title"
-                    icon="fas fa-signature"
-                    value={this.state.title}
-                    onChange={this.onChange}
-                    error={errors.title}
-                  />
-                </form>
-
-                <form>
-                  <span>Enter a price</span>
-                  <InputGroup
-                    placeholder="Add price"
-                    placeholder="Price (USD)"
-                    name="price"
-                    icon="fas fa-dollar-sign"
-                    value={this.state.price}
-                    onChange={this.onChange}
-                    error={errors.price}
-                  />
-                </form>
-
-                <form>
-                  <SelectListGroup
-                    placeholder="* Category"
-                    name="category"
-                    value={this.state.category}
-                    options={options}
-                    error={errors.category}
-                    onChange={this.onChange}
-                  />
-                </form>
-              </div>
-              <div className="col-md-6">
-                <UploadFileGroup
-                  error={errors.file}
-                  icon="fas fa-file-upload fa-8x"
-                  type="file"
-                  name="file"
-                  onChange={this.fileSelectedHandler}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6" />
-            </div>
-          </div>
-          <div>
+      <>
+        <Navbar />
+        <div className="mb-3 entry container">
+          <h1 className="text-center mt-5 mb-5">Sell an item</h1>
+          <div
+            style={{
+              boxShadow:
+                "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+              padding: "2rem"
+            }}
+          >
             <div>
-              <span>Add some information about your product</span>
-            </div>
-            <form className="p-3" onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <TextAreaFieldGroup
-                  className="form-control form-control-lg"
-                  placeholder="Add description"
-                  name="text"
-                  value={this.state.text}
-                  onChange={this.onChange}
-                  error={errors.text}
-                />
+              <div className="row">
+                <div className="col-md-6">
+                  <form>
+                    <span>Enter a name</span>
+                    <InputGroup
+                      placeholder="Add a name of your item"
+                      placeholder="Name"
+                      name="title"
+                      icon="fas fa-signature"
+                      value={this.state.title}
+                      onChange={this.onChange}
+                      error={errors.title}
+                    />
+                  </form>
+
+                  <form>
+                    <span>Enter a price</span>
+                    <InputGroup
+                      placeholder="Add price"
+                      placeholder="Price (USD)"
+                      name="price"
+                      icon="fas fa-dollar-sign"
+                      value={this.state.price}
+                      onChange={this.onChange}
+                      error={errors.price}
+                    />
+                  </form>
+
+                  <form>
+                    <SelectListGroup
+                      placeholder="* Category"
+                      name="category"
+                      value={this.state.category}
+                      options={options}
+                      error={errors.category}
+                      onChange={this.onChange}
+                    />
+                  </form>
+                </div>
+                <div className="col-md-6">
+                  <UploadFileGroup
+                    error={errors.file}
+                    icon="fas fa-file-upload fa-8x"
+                    type="file"
+                    name="file"
+                    onChange={this.fileSelectedHandler}
+                  />
+                </div>
               </div>
-              <button
-                onClick={this.onSubmit}
-                className="btn btn-danger float-right mr-5"
-              >
-                Upload
-              </button>
-            </form>
+              <div className="row">
+                <div className="col-md-6" />
+              </div>
+            </div>
+            <div>
+              <div>
+                <span>Add some information about your product</span>
+              </div>
+              <form className="p-3" onSubmit={this.onSubmit}>
+                <div className="form-group">
+                  <TextAreaFieldGroup
+                    className="form-control form-control-lg"
+                    placeholder="Add description"
+                    name="text"
+                    value={this.state.text}
+                    onChange={this.onChange}
+                    error={errors.text}
+                  />
+                </div>
+                <button
+                  onClick={this.onSubmit}
+                  className="btn btn-danger float-right mr-5"
+                >
+                  Upload
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

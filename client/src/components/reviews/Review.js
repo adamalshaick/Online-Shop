@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getProfileByHandle } from "../../actions/profileActions";
+import { getProfileById } from "../../actions/profileActions";
 import Loading from "../common/Loading";
 
 const ReviewItem = styled.div`
@@ -16,48 +16,34 @@ const ReviewItem = styled.div`
 `;
 
 class Review extends Component {
-  componentDidMount() {
-    getProfileByHandle();
-  }
-
   render() {
     const { review, auth } = this.props;
-    const { profile, loading } = this.props.profile;
+    const { loading, profile } = this.props.profile;
     let reviewItem;
 
     if (profile === null || loading) {
       reviewItem = <Loading />;
     } else {
       reviewItem = (
-        <ReviewItem>
-          <div className="row">
-            <div className="col-md-6">
-              <img
-                style={{ width: "120px" }}
-                className="rounded-circle"
-                src={profile.user.avatar}
-                alt=""
-              />
-              <div>
-                <strong>{review.buyer}</strong>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  transform: "translateY(-50%)"
-                }}
-              >
-                {review.text}
-              </div>
-              <div className="float-right">
-                <strong>rate: {review.rate}/5</strong>
-              </div>
+        <div className="row">
+          <div className="row mt-3">
+            <img
+              style={{ width: "40px", height: "40px" }}
+              className="rounded-circle  ml-4"
+              src={review.avatar}
+              alt=""
+            />
+
+            <div className="text-center mt-2 ml-2 ">
+              <strong>rate: {review.rate}</strong>
             </div>
           </div>
-        </ReviewItem>
+          <div className="col-12">
+            <div style={{ fontSize: "0.9rem" }} className="float-left ml-2">
+              {review.text}
+            </div>
+          </div>
+        </div>
       );
     }
     return <>{reviewItem}</>;
@@ -67,7 +53,8 @@ class Review extends Component {
 Review.propTypes = {
   review: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  getProfileByHandle: PropTypes.func.isRequired
+  getProfileById: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -77,5 +64,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfileByHandle }
+  { getProfileById }
 )(Review);

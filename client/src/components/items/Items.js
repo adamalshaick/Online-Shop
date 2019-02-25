@@ -5,6 +5,7 @@ import { getItems } from "../../actions/itemActions";
 import ItemFeed from "./ItemFeed";
 import Loading from "../common/Loading";
 import SelectListGroup from "../common/SelectListGroup";
+import Navbar from "../layout/Navbar";
 
 class Items extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class Items extends Component {
       }
       itemContent = (
         <div className="feed">
+          <Navbar />
           <div className="container">
             <div className="row">
               <div className="col-md-12">

@@ -26,7 +26,8 @@ router.post(
       text: req.body.text,
       rate: req.body.rate,
       seller: req.params.id,
-      buyer: req.body.handle
+      buyer: req.body.name,
+      avatar: req.body.avatar
     });
     newReview.save().then(review => res.json(review));
   }
@@ -40,7 +41,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Review.find()
-      .sort({ date: -1 })
+
       .then(reviews => res.json(reviews))
       .catch(err =>
         res.status(404).json({ noreviewsfound: "No reviews found" })

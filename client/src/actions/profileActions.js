@@ -6,7 +6,8 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER,
-  GET_PROFILES
+  GET_PROFILES,
+  GET_PROFILE_BY_ID
 } from "./types";
 
 // Get profile by handle
@@ -26,6 +27,25 @@ export const getProfileByHandle = handle => dispatch => {
         payload: null
       })
     );
+};
+
+// Get Profiles
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/profiles")
+    .then(res => {
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      });
+    });
 };
 
 // Get current profile
@@ -51,7 +71,11 @@ export const getCurrentProfile = () => dispatch => {
 export const createProfile = (profileData, history) => dispatch => {
   axios
     .post("/api/profile", profileData)
-    .then(res => history.push("/welcome"))
+
+    .then(res => {
+      dispatch(getCurrentProfile());
+      history.push("/dashboard");
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -87,13 +111,13 @@ export const getProfileById = user_id => dispatch => {
     .get(`/user/${user_id}`)
     .then(res => {
       dispatch({
-        type: GET_PROFILE,
+        type: GET_PROFILE_BY_ID,
         payload: res.data
       });
     })
     .catch(err =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_PROFILE_BY_ID,
         payload: null
       })
     );

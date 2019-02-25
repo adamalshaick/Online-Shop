@@ -6,10 +6,14 @@ import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import { addReview } from "../../actions/reviewActions";
 import isEmpty from "../../validation/is-empty";
 import Loading from "../common/Loading";
+//b
 import ReviewForm from "../reviews/ReviewForm";
+//b
 import { Redirect } from "react-router-dom";
+import Navbar from "../layout/Navbar";
 
 class Dashboard extends Component {
+  // b
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +29,7 @@ class Dashboard extends Component {
       this.setState({ errors: newProps.errors });
     }
   }
-
+  // b
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -34,6 +38,7 @@ class Dashboard extends Component {
     this.props.deleteAccount();
   }
 
+  // b
   onClickRev = () => {
     this.state.showReviewInput
       ? this.setState({ showReviewInput: false })
@@ -55,7 +60,7 @@ class Dashboard extends Component {
 
     this.props.addReview(reviewData);
   };
-
+  // b
   render() {
     const { errors } = this.state;
     const { user } = this.props.auth;
@@ -109,48 +114,15 @@ class Dashboard extends Component {
                   )}
                 </div>
                 <div className="row">
-                  <div className="col-lg-6 mt-5">
-                    <div className="mt-4">
-                      <strong>Rating average: 5/5</strong>
-                      <div>
-                        <img
-                          style={{ width: "25px" }}
-                          src="./assets/icons/star.svg"
-                        />
-                        <img
-                          style={{ width: "25px" }}
-                          src="./assets/icons/star.svg"
-                        />
-                        <img
-                          style={{ width: "25px" }}
-                          src="./assets/icons/star.svg"
-                        />
-                        <img
-                          style={{ width: "25px" }}
-                          src="./assets/icons/star.svg"
-                        />
-                        <img
-                          style={{ width: "25px" }}
-                          src="./assets/icons/star.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-6" />
+                  <div className="col-lg-6 mt-3">
                     <Link
-                      to="/:handle/reviews"
+                      to={`/profile/${profile.handle}`}
                       style={{ border: "lightgray solid 1px", width: "100%" }}
                       className="btn btn-light btn-lg mt-5"
                     >
                       Show reviews
                     </Link>
-                    <button
-                      style={{ border: "lightgray solid 1px", width: "100%" }}
-                      className="btn btn-light btn-lg mt-2"
-                      onClick={this.onClickRev}
-                    >
-                      Write a review
-                    </button>
                   </div>
                 </div>
               </div>
@@ -217,22 +189,25 @@ class Dashboard extends Component {
         );
       } else {
         // User is logged in but has no profile
-        return <Redirect to="/create-profile" />;
+        this.props.history.push("/create-profile");
       }
     }
     return (
       <>
-        {dashboardContent}
-        {this.state.showReviewInput ? (
-          <ReviewForm
-            onClickRev={this.onClickRev}
-            text={this.state.text}
-            rate={this.state.rate}
-            errors={errors}
-            onChange={this.onChange}
-            onSubmit={this.onSubmit(user.id)}
-          />
-        ) : null}
+        <Navbar />
+        <div className="container">
+          {dashboardContent}
+          {this.state.showReviewInput ? (
+            <ReviewForm
+              onClickRev={this.onClickRev}
+              text={this.state.text}
+              rate={this.state.rate}
+              errors={errors}
+              onChange={this.onChange}
+              onSubmit={this.onSubmit(user.id)}
+            />
+          ) : null}
+        </div>
       </>
     );
   }

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getProfileByHandle } from "../../actions/profileActions";
 import Loading from "../common/Loading";
 import ProfileContent from "./ProfileContent";
+import Navbar from "../layout/Navbar";
 
 class Profile extends Component {
   componentDidMount() {
@@ -29,11 +30,14 @@ class Profile extends Component {
       profileContent = <ProfileContent profile={profile} />;
     }
     return (
-      <div>
-        <div className="row">
-          <div className="col-md-12">{profileContent}</div>
+      <>
+        <Navbar />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">{profileContent}</div>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

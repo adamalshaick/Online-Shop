@@ -46,14 +46,15 @@ class ProfileContent extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (handle, id) => e => {
+  onSubmit = (id, name, avatar) => e => {
     e.preventDefault();
 
     const reviewData = {
       text: this.state.text,
       rate: this.state.rate,
-      handle: handle,
-      id: id
+      id: id,
+      name: name,
+      avatar: avatar
     };
 
     this.props.addReview(reviewData);
@@ -75,7 +76,7 @@ class ProfileContent extends Component {
             <img className="rounded-circle" src={profile.user.avatar} alt="" />
             <div className="text-center">
               <div className="mt-3">
-                <strong>{auth.user.name}</strong>
+                <strong>{profile.user.name}</strong>
               </div>
 
               {isEmpty(profile.bio) ? (
@@ -86,20 +87,7 @@ class ProfileContent extends Component {
                 <div className="mt-3">{profile.bio}</div>
               )}
             </div>
-            <div className="row">
-              <div className="col-lg-6 mt-5">
-                <div className="mt-4">
-                  <strong>Rating average: 5/5</strong>
-                  <div style={{ color: "gold" }}>
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <button
               style={{ border: "lightgray solid 1px", width: "100%" }}
               className="btn btn-light btn-lg mt-2 mb-3"
@@ -119,7 +107,11 @@ class ProfileContent extends Component {
             rate={this.state.rate}
             errors={errors}
             onChange={this.onChange}
-            onSubmit={this.onSubmit(profile.handle, profile.user._id)}
+            onSubmit={this.onSubmit(
+              profile.user._id,
+              auth.user.name,
+              auth.user.avatar
+            )}
           />
         ) : null}
       </>
@@ -136,7 +128,8 @@ ProfileContent.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  currentProfile: state.profile
 });
 
 export default connect(

@@ -10,7 +10,7 @@ const StyledNavbar = styled.header`
   width: 100%;
   height: 6rem;
   box-shadow: 0px 8px 20px 0px rgba(204, 204, 204, 0.7);
-  color: white;
+  background-color: white;
   display: flex;
 `;
 

@@ -93,7 +93,8 @@ router.post(
         price: req.body.price,
         title: req.body.title,
         category: req.body.category,
-        user: req.user.id
+        user: req.user.id,
+        handle: req.body.handle
       });
       newItem.save().then(item => res.json(item));
     });

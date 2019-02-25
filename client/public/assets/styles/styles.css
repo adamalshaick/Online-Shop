@@ -23,3 +23,35 @@ body {
     opacity: 1;
   }
 }
+
+.entry-card {
+  animation: entry-card 1s;
+}
+
+@keyframes entry-card {
+  from {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.entry-heading {
+  animation: entry-heading 2s;
+}
+
+@keyframes entry-heading {
+  from {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

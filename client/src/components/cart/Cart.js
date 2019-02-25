@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getItemsFromCart } from "../../actions/cartActions";
 import CartFeed from "./CartFeed";
 import Loading from "../common/Loading";
+import Navbar from "../layout/Navbar";
 
 export class Cart extends Component {
   componentDidMount() {
@@ -19,7 +20,12 @@ export class Cart extends Component {
       cartContent = <CartFeed cartItems={cart} />;
     }
 
-    return <>{cartContent}</>;
+    return (
+      <>
+        <Navbar />
+        <div className="container">{cartContent}</div>
+      </>
+    );
   }
 }
 

@@ -43,7 +43,7 @@ router.delete(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        // // Check to see if item is in cart
+        // Check to see if item is in cart
         if (
           profile.cart.items.filter(
             item => item._id.toString() === req.params.id

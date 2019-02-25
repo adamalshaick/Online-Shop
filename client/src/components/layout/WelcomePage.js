@@ -3,6 +3,7 @@ import Link from "react-router-dom/Link";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Navbar from "./Navbar";
 
 const Button = styled.figure`
   text-align: center;
@@ -45,36 +46,39 @@ const Image = styled.img`
 class WelcomePage extends Component {
   render() {
     return (
-      <div className="landing-page entry">
-        <div className="text-center">
-          <h3 className="mt-5 mb-4">Welcome {this.props.auth.user.name}</h3>
-          <Button>
-            <Link to="/dashboard">
-              <Image left src="./assets/images/rsz_dashboard.jpg" />
-              <Text left> Dashboard</Text>
-            </Link>
-          </Button>
-        </div>
-        <div className="row mt-5">
-          <div className="col-md-2" />
-          <div className="col-md-8">
-            <Link
-              to="/items"
-              style={{ border: "lightgrey solid 1px" }}
-              className="col-lg-12 btn btn-light btn-lg"
-            >
-              Browse items for sale
-            </Link>
-            <Link
-              to="/sell-item"
-              style={{ border: "lightgrey solid 1px" }}
-              className="col-lg-12 btn btn-light mt-4 btn-lg"
-            >
-              Sell Your item
-            </Link>
+      <>
+        <Navbar />
+        <div className="landing-page entry container">
+          <div className="text-center">
+            <h3 className="mt-5 mb-4">Welcome {this.props.auth.user.name}</h3>
+            <Button>
+              <Link to="/dashboard">
+                <Image left src="./assets/images/rsz_dashboard.jpg" />
+                <Text left> Dashboard</Text>
+              </Link>
+            </Button>
+          </div>
+          <div className="row mt-5">
+            <div className="col-md-2" />
+            <div className="col-md-8">
+              <Link
+                to="/items"
+                style={{ border: "lightgrey solid 1px" }}
+                className="col-lg-12 btn btn-light btn-lg"
+              >
+                Browse items for sale
+              </Link>
+              <Link
+                to="/sell-item"
+                style={{ border: "lightgrey solid 1px" }}
+                className="col-lg-12 btn btn-light mt-4 btn-lg"
+              >
+                Sell Your item
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

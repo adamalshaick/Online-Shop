@@ -152,6 +152,18 @@ router.post(
   }
 );
 
+// @route GET api/profiles
+// @desc Get profiles
+// @access Public
+router.get("/profiles", (req, res) => {
+  Profile.find()
+    .sort({ date: -1 })
+    .then(profiles => res.json(profiles))
+    .catch(err =>
+      res.status(404).json({ noprofilesfound: "No profiles found" })
+    );
+});
+
 // @route   DELETE api/profile
 // @desc    Delete user and profile
 // @access  Private

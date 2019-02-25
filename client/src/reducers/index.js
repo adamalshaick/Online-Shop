@@ -12,5 +12,5 @@ export default combineReducers({
   profile: profileReducer,
   item: itemReducer,
   cart: cartReducer,
-  reviews: reviewReducer
+  review: reviewReducer
 });

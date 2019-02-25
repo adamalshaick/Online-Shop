@@ -24,7 +24,7 @@ describe("basic item actions", () => {
 describe("getting items actions", () => {
   it("fetches items", async () => {
     httpMock.onGet("/api/items").reply(200, {
-      items: [{ name: "item #1" }, { name: "iem #2" }]
+      items: [{ name: "iem #1" }, { name: "iem #2" }]
     });
     itemActions.getItems()(store.dispatch);
     await flushAllPromises();

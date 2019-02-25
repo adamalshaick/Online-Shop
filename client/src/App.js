@@ -49,35 +49,24 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <>
-          <Navbar />
-
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Landing} />
-
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute exact path="/items" component={Items} />
-              <PrivateRoute exact path="/profile/:handle" component={Profile} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute
-                exact
-                path="/create-profile"
-                component={CreateProfile}
-              />
-              <PrivateRoute exact path="/sell-item" component={SellItem} />
-              <PrivateRoute exact path="/cart" component={Cart} />
-              <PrivateRoute
-                exact
-                path="/edit-profile"
-                component={EditProfile}
-              />
-              <PrivateRoute exact path="/welcome" component={WelcomePage} />
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-        </>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/items" component={Items} />
+          <PrivateRoute exact path="/profile/:handle" component={Profile} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
+          <PrivateRoute exact path="/sell-item" component={SellItem} />
+          <PrivateRoute exact path="/cart" component={Cart} />
+          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+          <PrivateRoute exact path="/welcome" component={WelcomePage} />
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     );
   }
