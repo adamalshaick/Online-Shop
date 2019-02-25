@@ -93,23 +93,11 @@ class Landing extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">jd</div>
-            <Waypoint
+            {/* <Waypoint
               onEnter={this.handleWaypointEnter}
               onLeave={this.handleWaypointLeave}
               bottomOffset="500px"
-            />
-            <Styled flag={this.state.flag} className="col-md-8">
-              <SecondStyled
-                flag={this.state.flag}
-                style={{
-                  width: "100%",
-                  boxShadow:
-                    "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                  borderRadius: "1rem"
-                }}
-                src="./assets/images/online-cart.png"
-              />
-            </Styled>
+            /> */}
           </div>
         </div>
       </div>
