@@ -21,26 +21,8 @@ const ProfileSchema = new Schema({
     type: String
   },
 
-  social: {
-    youtube: {
-      type: String
-    },
-
-    twitter: {
-      type: String
-    },
-
-    facebook: {
-      type: String
-    },
-
-    linkedin: {
-      type: String
-    },
-
-    instagram: {
-      type: String
-    }
+  profileImage: {
+    type: String
   },
 
   cart: {
@@ -49,6 +31,10 @@ const ProfileSchema = new Schema({
         user: {
           type: Schema.Types.ObjectId,
           ref: "users"
+        },
+        item: {
+          type: Schema.Types.ObjectId,
+          ref: "items"
         },
         text: {
           type: String,

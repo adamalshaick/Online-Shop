@@ -57,7 +57,7 @@ class SellItem extends Component {
     newItem.append("title", this.state.title);
     newItem.append("category", this.state.category);
 
-    this.props.addItem(newItem);
+    this.props.addItem(newItem, this.props.history);
     this.setState({
       text: "",
       price: "",
