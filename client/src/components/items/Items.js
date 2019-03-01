@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems } from "../../actions/itemActions";
+import { getItemsFromCart } from "../../actions/cartActions";
 import ItemFeed from "./ItemFeed";
 import Loading from "../common/Loading";
 import SelectListGroup from "../common/SelectListGroup";
@@ -18,6 +19,7 @@ class Items extends Component {
 
   componentDidMount() {
     this.props.getItems();
+    this.props.getItemsFromCart();
   }
 
   onChange = e => {
@@ -25,7 +27,9 @@ class Items extends Component {
   };
 
   render() {
-    const { items, loading } = this.props.item;
+    const { items } = this.props.item;
+    const { cart } = this.props.cart;
+
     let itemContent;
     let itemsArray;
 
@@ -42,7 +46,12 @@ class Items extends Component {
       { label: "Shoes", value: "Shoes" }
     ];
 
-    if (items === null || loading) {
+    if (
+      items === null ||
+      cart === null ||
+      this.props.cart.loading ||
+      this.props.item.loading
+    ) {
       itemContent = <Loading />;
     } else {
       if (this.state.selectedCategory !== "") {
@@ -67,7 +76,7 @@ class Items extends Component {
         }
       }
       itemContent = (
-        <div className="feed">
+        <>
           <Navbar />
           <div className="container">
             <div className="row">
@@ -99,29 +108,30 @@ class Items extends Component {
                     </form>
                   </div>
                 </div>
-
-                <ItemFeed items={itemsArray} />
+                <ItemFeed items={itemsArray} cart={cart} />
               </div>
             </div>
           </div>
-        </div>
+        </>
       );
     }
-
     return <>{itemContent}</>;
   }
 }
 
 Items.propTypes = {
+  getItemsFromCart: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  cart: state.cart
 });
 
 export default connect(
   mapStateToProps,
-  { getItems }
+  { getItems, getItemsFromCart }
 )(Items);

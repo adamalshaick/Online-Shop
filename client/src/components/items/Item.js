@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
-import { addItemToCart } from "../../actions/cartActions";
+import { addItemToCart, getItemsFromCart } from "../../actions/cartActions";
+import { getProfileById } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
 import ReactTimeout from "react-timeout";
 import Alert from "../common/Alert";
@@ -43,6 +44,11 @@ class Item extends Component {
       imageLoad: false
     };
   }
+
+  componentDidMount() {
+    this.props.getProfileById(this.props.item.user);
+  }
+
   onDeleteClick(id) {
     this.props.deleteItem(id);
   }
@@ -50,6 +56,7 @@ class Item extends Component {
   onAddClick(item) {
     const itemData = {
       user: item.user,
+      item: item._id,
       text: item.text,
       price: item.price,
       title: item.title,
@@ -73,58 +80,64 @@ class Item extends Component {
   }
 
   render() {
-    const { item, auth, showActions } = this.props;
-
+    const { item, cart, auth, showActions } = this.props;
+    const { profileById, loading } = this.props.profile;
     return (
-      <div className="col-md-6 col-lg-4 p-0 entry-2x">
-        <div>
-          <ItemCard className="text-center m-3">
-            <Image
-              style={this.getStyle()}
-              src={`../../uploads/post_image/${item.itemImage}`}
-              alt=""
-              onLoad={this.imageLoaded}
-            />
-            <p>{item.title}</p>
-            <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
-            {showActions ? (
-              <span>
-                {item.user === auth.user.id ? (
-                  <button
-                    onClick={this.onDeleteClick.bind(this, item._id)}
-                    type="button"
-                    className="btn btn-danger mr-1"
-                  >
-                    <i className="fas fa-times" />
-                  </button>
-                ) : this.state.showAlert ? (
-                  <Alert
-                    className="entry"
-                    showAlert={this.state.showAlert}
-                    text={item.title + " added to cart"}
-                  />
-                ) : (
-                  <Buttons>
-                    <button
-                      onClick={this.onAddClick.bind(this, item)}
-                      className="btn btn-dark mb-2"
-                    >
-                      Add to your cart
-                    </button>
-                    <Link
-                      to="/jd"
-                      onClick={this.onAddClick.bind(this, item)}
-                      className="btn btn-dark mt-2"
-                    >
-                      Seller's profile
-                    </Link>
-                  </Buttons>
-                )}
-              </span>
-            ) : null}
-          </ItemCard>
-        </div>
-      </div>
+      <>
+        {cart.some(cartItem => cartItem.item === item._id) ? null : (
+          <div className="col-md-6 col-lg-4 p-0 entry-2x">
+            <div>
+              <ItemCard className="text-center m-3">
+                <Image
+                  style={this.getStyle()}
+                  src={`../../uploads/post_image/${item.itemImage}`}
+                  alt=""
+                  onLoad={this.imageLoaded}
+                />
+                <p>{item.title}</p>
+                <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
+                {showActions ? (
+                  <span>
+                    {item.user === auth.user.id ? (
+                      <button
+                        onClick={this.onDeleteClick.bind(this, item._id)}
+                        type="button"
+                        className="btn btn-danger mr-1"
+                      >
+                        <i className="fas fa-times" />
+                      </button>
+                    ) : this.state.showAlert ? (
+                      <Alert
+                        className="entry"
+                        showAlert={this.state.showAlert}
+                        text={item.title + " added to cart"}
+                      />
+                    ) : (
+                      <Buttons>
+                        <button
+                          onClick={this.onAddClick.bind(this, item)}
+                          className="btn btn-dark mb-2"
+                        >
+                          Add to your cart
+                        </button>
+                        {profileById === null || loading ? null : (
+                          <Link
+                            to={`/profile/${profileById.handle}`}
+                            onClick={this.onAddClick.bind(this, item)}
+                            className="btn btn-dark mt-2"
+                          >
+                            Seller's profile
+                          </Link>
+                        )}
+                      </Buttons>
+                    )}
+                  </span>
+                ) : null}
+              </ItemCard>
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 }
@@ -137,16 +150,18 @@ Item.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default ReactTimeout(
   connect(
     mapStateToProps,
-    { deleteItem, addItemToCart }
+    { deleteItem, addItemToCart, getProfileById }
   )(Item)
 );
