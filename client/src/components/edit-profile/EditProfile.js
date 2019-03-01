@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-import InputGroup from "../common/InputGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 import Navbar from "../layout/Navbar";
@@ -13,15 +11,9 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displaySocialInputs: false,
       handle: "",
       location: "",
       bio: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
-      instagram: "",
       errors: {}
     };
   }
@@ -41,33 +33,12 @@ class CreateProfile extends Component {
       // If profile field doesnt exist, make empty string
       profile.location = !isEmpty(profile.location) ? profile.location : "";
       profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
-      profile.social = !isEmpty(profile.social) ? profile.social : {};
-      profile.twitter = !isEmpty(profile.social.twitter)
-        ? profile.social.twitter
-        : "";
-      profile.facebook = !isEmpty(profile.social.facebook)
-        ? profile.social.facebook
-        : "";
-      profile.linkedin = !isEmpty(profile.social.linkedin)
-        ? profile.social.linkedin
-        : "";
-      profile.youtube = !isEmpty(profile.social.youtube)
-        ? profile.social.youtube
-        : "";
-      profile.instagram = !isEmpty(profile.social.instagram)
-        ? profile.social.instagram
-        : "";
 
       // Set component fields state
       this.setState({
         handle: profile.handle,
         location: profile.location,
-        bio: profile.bio,
-        twitter: profile.twitter,
-        facebook: profile.facebook,
-        linkedin: profile.linkedin,
-        youtube: profile.youtube,
-        instagram: profile.instagram
+        bio: profile.bio
       });
     }
   }
@@ -78,14 +49,8 @@ class CreateProfile extends Component {
     const profileData = {
       handle: this.state.handle,
       location: this.state.location,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
+      bio: this.state.bio
     };
-
     this.props.createProfile(profileData, this.props.history);
   };
 
@@ -94,61 +59,7 @@ class CreateProfile extends Component {
   };
 
   render() {
-    const { errors, displaySocialInputs } = this.state;
-
-    let socialInputs;
-
-    if (displaySocialInputs) {
-      socialInputs = (
-        <div>
-          <InputGroup
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
-          />
-
-          <InputGroup
-            placeholder="Facebook Page URL"
-            name="facebook"
-            icon="fab fa-facebook"
-            value={this.state.facebook}
-            onChange={this.onChange}
-            error={errors.facebook}
-          />
-
-          <InputGroup
-            placeholder="Linkedin Profile URL"
-            name="linkedin"
-            icon="fab fa-linkedin"
-            value={this.state.linkedin}
-            onChange={this.onChange}
-            error={errors.linkedin}
-          />
-
-          <InputGroup
-            placeholder="YouTube Channel URL"
-            name="youtube"
-            icon="fab fa-youtube"
-            value={this.state.youtube}
-            onChange={this.onChange}
-            error={errors.youtube}
-          />
-
-          <InputGroup
-            placeholder="Instagram Page URL"
-            name="instagram"
-            icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
-          />
-        </div>
-      );
-    }
-
+    const { errors } = this.state;
     return (
       <>
         <Navbar />
@@ -194,22 +105,6 @@ class CreateProfile extends Component {
                   error={errors.bio}
                   info="Tell us a little about yourself"
                 />
-
-                <div className="mb-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
-                    }}
-                    className="btn btn-dark"
-                  >
-                    Add Social Media Links
-                  </button>
-                  <small className="text-muted d-block">(Optional)</small>
-                </div>
-                {socialInputs}
                 <input
                   type="submit"
                   value="Submit"
@@ -239,4 +134,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createProfile, getCurrentProfile }
-)(withRouter(CreateProfile));
+)(CreateProfile);

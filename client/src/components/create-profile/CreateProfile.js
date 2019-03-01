@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-import InputGroup from "../common/InputGroup";
 import { createProfile } from "../../actions/profileActions";
 import Navbar from "../layout/Navbar";
 
@@ -11,15 +10,9 @@ export class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displaySocialInputs: false,
       handle: "",
       location: "",
       bio: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
-      instagram: "",
       errors: {}
     };
   }
@@ -35,12 +28,7 @@ export class CreateProfile extends Component {
     const profileData = {
       handle: this.state.handle,
       location: this.state.location,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
+      bio: this.state.bio
     };
 
     this.props.createProfile(profileData, this.props.history);
@@ -51,65 +39,7 @@ export class CreateProfile extends Component {
   };
 
   render() {
-    const { errors, displaySocialInputs } = this.state;
-
-    let socialInputs;
-
-    if (displaySocialInputs) {
-      socialInputs = (
-        <div>
-          <InputGroup
-            id="twitter"
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
-          />
-
-          <InputGroup
-            id="facebook"
-            placeholder="Facebook Page URL"
-            name="facebook"
-            icon="fab fa-facebook"
-            value={this.state.facebook}
-            onChange={this.onChange}
-            error={errors.facebook}
-          />
-
-          <InputGroup
-            id="linkedin"
-            placeholder="Linkedin Profile URL"
-            name="linkedin"
-            icon="fab fa-linkedin"
-            value={this.state.linkedin}
-            onChange={this.onChange}
-            error={errors.linkedin}
-          />
-
-          <InputGroup
-            id="youtube"
-            placeholder="YouTube Channel URL"
-            name="youtube"
-            icon="fab fa-youtube"
-            value={this.state.youtube}
-            onChange={this.onChange}
-            error={errors.youtube}
-          />
-
-          <InputGroup
-            id="instagram"
-            placeholder="Instagram Page URL"
-            name="instagram"
-            icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
-          />
-        </div>
-      );
-    }
+    const { errors } = this.state;
 
     return (
       <>
@@ -159,22 +89,6 @@ export class CreateProfile extends Component {
                   error={errors.bio}
                   info="Tell us a little about yourself"
                 />
-
-                <div className="mb-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
-                    }}
-                    className="btn btn-dark"
-                  >
-                    Add Social Media Links
-                  </button>
-                  <small className="text-muted d-block">(Optional)</small>
-                </div>
-                {socialInputs}
                 <input
                   type="submit"
                   value="Submit"
