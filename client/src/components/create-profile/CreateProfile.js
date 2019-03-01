@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import UploadFileGroup from "../common/UploadFileGroup";
 import { createProfile } from "../../actions/profileActions";
 import Navbar from "../layout/Navbar";
 
@@ -13,6 +14,7 @@ export class CreateProfile extends Component {
       handle: "",
       location: "",
       bio: "",
+      selectedFile: null,
       errors: {}
     };
   }
@@ -22,14 +24,28 @@ export class CreateProfile extends Component {
     }
   }
 
+  fileSelectedHandler = e => {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
-    const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      bio: this.state.bio
-    };
+    const profileData = new FormData();
+
+    if (this.state.selectedFile) {
+      profileData.append(
+        "myImage",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
+
+    profileData.append("handle", this.state.handle);
+    profileData.append("location", this.state.location);
+    profileData.append("bio", this.state.bio);
 
     this.props.createProfile(profileData, this.props.history);
   };
@@ -44,7 +60,7 @@ export class CreateProfile extends Component {
     return (
       <>
         <Navbar />
-        <div className="create-profile entry mt-5 container">
+        <div className="entry mt-5 container">
           <div className="row">
             <div
               style={{
@@ -60,26 +76,39 @@ export class CreateProfile extends Component {
 
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  id="handle"
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="Your username"
-                />
+                <div className="row">
+                  <div className="col-md-6 mb-2">
+                    <UploadFileGroup
+                      error={errors.file}
+                      icon="fas fa-file-upload fa-8x"
+                      type="file"
+                      name="file"
+                      onChange={this.fileSelectedHandler}
+                      info="Profile Image"
+                    />
+                  </div>
+                  <div className="col-md-6 mb-2">
+                    <TextFieldGroup
+                      id="handle"
+                      placeholder="* Profile Handle"
+                      name="handle"
+                      value={this.state.handle}
+                      onChange={this.onChange}
+                      error={errors.handle}
+                      info="Your username"
+                    />
 
-                <TextFieldGroup
-                  id="location"
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="Your Location"
-                />
-
+                    <TextFieldGroup
+                      id="location"
+                      placeholder="Location"
+                      name="location"
+                      value={this.state.location}
+                      onChange={this.onChange}
+                      error={errors.location}
+                      info="Your Location"
+                    />
+                  </div>
+                </div>
                 <TextAreaFieldGroup
                   id="bio"
                   placeholder="Short Bio"

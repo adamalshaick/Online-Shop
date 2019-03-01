@@ -2,12 +2,21 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const UploadFileGroup = ({ error, icon, type, name, onChange, value }) => {
+const UploadFileGroup = ({
+  error,
+  icon,
+  type,
+  name,
+  onChange,
+  value,
+  info
+}) => {
   return (
     <div className="input-group mt-3">
       <div className="input-group-prepend">
         <div className=" text-center">
           <i className={`${icon} mb-4 ml-3 mt-3`} />
+          <div className="text-center">{info}</div>
           <input
             className={classnames("form-control", {
               "is-invalid": error
@@ -28,6 +37,7 @@ const UploadFileGroup = ({ error, icon, type, name, onChange, value }) => {
 UploadFileGroup.propTypes = {
   error: PropTypes.string,
   icon: PropTypes.string,
+  info: PropTypes.string,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
