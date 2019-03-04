@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <Connect(Navbar) />
+  <div
+    className="container"
+  >
+    <div
+      className="row mt-5"
+    >
+      <div
+        className="col-md-2 col-lg-3"
+      />
+      <div
+        className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry"
+      >
+        <div
+          className="card-body p-5"
+        >
+          <h3
+            className="mb-5"
+          >
+            Sign up
+          </h3>
+          <form
+            noValidate={true}
+            onSubmit={[Function]}
+          >
+            <TextFieldGroup
+              id="name"
+              name="name"
+              onChange={[Function]}
+              placeholder="Name"
+              type="text"
+              value="testName"
+            />
+            <TextFieldGroup
+              id="email"
+              name="email"
+              onChange={[Function]}
+              placeholder="Email"
+              type="email"
+              value="test@gmail.com"
+            />
+            <TextFieldGroup
+              id="password"
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+              value="passwordTest"
+            />
+            <TextFieldGroup
+              id="password2"
+              name="password2"
+              onChange={[Function]}
+              placeholder="Confirm Password"
+              type="password"
+              value="password2Test"
+            />
+            <button
+              className="btn btn-dark btn-block mt-4"
+              type="submit"
+            >
+              Create Account
+            </button>
+          </form>
+        </div>
+        <div
+          className="text-muted card-footer mt-3"
+        >
+          Already have an account? 
+          <Link
+            replace={false}
+            to="/login"
+          >
+            Log in
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
