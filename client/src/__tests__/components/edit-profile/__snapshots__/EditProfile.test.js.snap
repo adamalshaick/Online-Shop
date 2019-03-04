@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <Connect(Navbar) />
+  <div
+    className="mt-5 entry container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-8 m-auto"
+        style={
+          Object {
+            "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+            "padding": "2rem",
+          }
+        }
+      >
+        <h1
+          className="text-center mb-4"
+          style={
+            Object {
+              "fontSize": "1.7rem",
+            }
+          }
+        >
+          Edit Your Profile
+        </h1>
+        <small
+          className="d-block pb-3"
+        >
+          * = required fields
+        </small>
+        <form
+          onSubmit={[Function]}
+        >
+          <TextFieldGroup
+            id="handle"
+            info="Your username"
+            name="handle"
+            onChange={[Function]}
+            placeholder="* Profile Handle"
+            type="text"
+            value="handle value"
+          />
+          <TextFieldGroup
+            id="location"
+            info="Your Location"
+            name="location"
+            onChange={[Function]}
+            placeholder="Location"
+            type="text"
+            value="location value"
+          />
+          <TextAreaFieldGroup
+            id="bio"
+            info="Tell us a little about yourself"
+            name="bio"
+            onChange={[Function]}
+            placeholder="Short Bio"
+            value="bio value"
+          />
+          <input
+            className="btn btn-dark float-right mt-4"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
