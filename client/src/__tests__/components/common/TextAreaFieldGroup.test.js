@@ -1,21 +1,11 @@
 import React from "react";
-import { shallow } from "enzyme";
 import TextAreaFieldGroup from "../../../components/common/TextAreaFieldGroup";
 import renderer from "react-test-renderer";
 
-const Props = {
-  value: "new value",
-  name: "new name",
-  onChange: e => {
-    e.target.name = e.target.value;
-  }
-};
+const wrapper = renderer.create(<TextAreaFieldGroup />).toJSON();
 
-describe("Render TextAreaFieldGroup", () => {
-  it("render text area field group component", () => {
-    const TextAreaFieldGroupComponent = renderer
-      .create(<TextAreaFieldGroup />)
-      .toJSON();
-    expect(TextAreaFieldGroupComponent).toMatchSnapshot();
+describe("render component", () => {
+  it("renders component", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

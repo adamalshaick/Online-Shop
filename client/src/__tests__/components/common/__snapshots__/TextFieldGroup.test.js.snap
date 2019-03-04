@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render TextFieldGroup render text field group component 1`] = `
+exports[`render component renders component 1`] = `
 <div
   className="form-group"
 >

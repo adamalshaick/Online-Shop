@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render UploadFileGroup render upload file group component 1`] = `
+exports[`render component renders component 1`] = `
 <div
   className="input-group mt-3"
 >
@@ -8,14 +8,19 @@ exports[`Render UploadFileGroup render upload file group component 1`] = `
     className="input-group-prepend"
   >
     <div
-      className="card text-center"
+      className=" text-center"
     >
-      <i />
+      <i
+        className="undefined mb-4 ml-3 mt-3"
+      />
+      <div
+        className="text-center"
+      />
       <input
-        className="form-control form-control-lg"
+        className="form-control"
         style={
           Object {
-            "margin": "auto",
+            "marginLeft": "1rem",
           }
         }
         type="file"
