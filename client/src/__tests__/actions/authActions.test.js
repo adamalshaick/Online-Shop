@@ -15,9 +15,47 @@ beforeEach(() => {
 });
 
 describe("login actions", () => {
+  const decoded = "1234";
+  const userData = {
+    email: "email",
+    password: "password"
+  };
+  const errorData = {
+    email: "email error",
+    password: "password error"
+  };
+  const errorRegister = {
+    name: "name error",
+    email: "email error",
+    password: "password error",
+    password2: "password2 error"
+  }
   it("sets current user", () => {
-    const decoded = "1234";
     const action = authActions.setCurrentUser(decoded);
     expect(action).toEqual({ type: types.SET_CURRENT_USER, payload: decoded });
+  });
+
+  it("doesnt login on error", async () => {
+    httpMock.onPost("/api/users/login").reply(400, {
+      errorData
+    });
+    authActions.loginUser(userData)(store.dispatch);
+    await flushAllPromises();
+    expect(store.getActions()).toEqual([
+      { type: types.GET_ERRORS, payload: { errorData } }
+    ]);
+  });
+});
+
+describe("register actions", () => {
+  it("doesnt register on error", () => {
+    httpMock.onPost("/api/users/register").reply(400, {
+      errorRegister
+    });
+    authActions.registerUser(userData)(store.dispatch);
+    await flushAllPromises();
+    expect(store.getActions()).toEqual([
+      { type: types.GET_ERRORS, payload: {errorRegister} }
+    ]);
   });
 });
