@@ -31,6 +31,7 @@ class Items extends Component {
   render() {
     const { items } = this.props.item;
     const { cart } = this.props.cart;
+
     // const { profile, loading } = this.props.profile;
 
     let itemContent;
@@ -52,76 +53,78 @@ class Items extends Component {
     if (
       items === null ||
       cart === null ||
+      this.props.profile === null ||
       this.props.cart.loading
-      // this.props.item.loading ||
-      // loading
     ) {
       itemContent = <Loading />;
     } else {
-      // if (Object.keys(profile).length > 0) {
-      if (this.state.selectedCategory !== "") {
-        itemsArray = items.filter(
-          item => item.category === this.state.selectedCategory
-        );
-      } else {
-        itemsArray = items;
-      }
-
-      if (this.state.sortBy !== "") {
-        if (this.state.sortBy === "ascending") {
-          itemsArray.sort(function(a, b) {
-            return a.price - b.price;
-          });
+      if (Object.keys(this.props.profile).length > 0) {
+        if (this.state.selectedCategory !== "") {
+          itemsArray = items.filter(
+            item => item.category === this.state.selectedCategory
+          );
+        } else {
+          itemsArray = items;
         }
 
-        if (this.state.sortBy === "descending") {
-          itemsArray.sort(function(a, b) {
-            return b.price - a.price;
-          });
+        if (this.state.sortBy !== "") {
+          if (this.state.sortBy === "ascending") {
+            itemsArray.sort(function(a, b) {
+              return a.price - b.price;
+            });
+          }
+
+          if (this.state.sortBy === "descending") {
+            itemsArray.sort(function(a, b) {
+              return b.price - a.price;
+            });
+          }
         }
-      }
-      itemContent = (
-        <>
-          <Navbar />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <h1 style={{ fontSize: "1.7rem" }} className="m-5 text-center">
-                  Items for sale
-                </h1>
-                <div className="row">
-                  <div className="col-md-6">
-                    <form>
-                      <SelectListGroup
-                        placeholder="* Category"
-                        name="selectedCategory"
-                        value={this.state.selectedCategory}
-                        options={selectOptions}
-                        onChange={this.onChange}
-                      />
-                    </form>
+        itemContent = (
+          <>
+            <Navbar />
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <h1
+                    style={{ fontSize: "1.7rem" }}
+                    className="m-5 text-center"
+                  >
+                    Items for sale
+                  </h1>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <form>
+                        <SelectListGroup
+                          placeholder="* Category"
+                          name="selectedCategory"
+                          value={this.state.selectedCategory}
+                          options={selectOptions}
+                          onChange={this.onChange}
+                        />
+                      </form>
+                    </div>
+                    <div className="col-md-6">
+                      <form>
+                        <SelectListGroup
+                          placeholder="* Sort by..."
+                          name="sortBy"
+                          value={this.state.sortBy}
+                          options={sortOptions}
+                          onChange={this.onChange}
+                        />
+                      </form>
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <form>
-                      <SelectListGroup
-                        placeholder="* Sort by..."
-                        name="sortBy"
-                        value={this.state.sortBy}
-                        options={sortOptions}
-                        onChange={this.onChange}
-                      />
-                    </form>
-                  </div>
+                  <ItemFeed items={itemsArray} cart={cart} />
                 </div>
-                <ItemFeed items={itemsArray} cart={cart} />
               </div>
             </div>
-          </div>
-        </>
-      );
-      // } else {
-      //   this.props.history.push("/create-profile");
-      // }
+          </>
+        );
+      } else {
+        this.props.history.push("/create-profile");
+      }
     }
     return <>{itemContent}</>;
   }
