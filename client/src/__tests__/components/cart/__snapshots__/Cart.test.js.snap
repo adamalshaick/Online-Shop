@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <Connect(Navbar) />
+  <div
+    className="container"
+  >
+    <Connect(CartFeed) />
+  </div>
+</Fragment>
+`;

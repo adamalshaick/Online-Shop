@@ -8,7 +8,6 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import store from "./store";
 
 import PrivateRoute from "./components/common/PrivateRoute";
-import { Provider } from "react-redux";
 
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
@@ -17,12 +16,10 @@ import Profile from "./components/profile/Profile";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import Dashboard from "./components/dashboard/Dashboard";
 import Items from "./components/items/Items";
-import Navbar from "./components/layout/Navbar";
 import SellItem from "./components/sell-item/SellItem";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Cart from "./components/cart/Cart";
 import NotFound from "./components/not-found/NotFound";
-import WelcomePage from "./components/layout/WelcomePage";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -50,7 +47,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
+          {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/items" component={Items} />
@@ -64,7 +61,6 @@ class App extends Component {
           <PrivateRoute exact path="/sell-item" component={SellItem} />
           <PrivateRoute exact path="/cart" component={Cart} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-          <PrivateRoute exact path="/welcome" component={WelcomePage} />
           <Route component={NotFound} />
         </Switch>
       </Router>

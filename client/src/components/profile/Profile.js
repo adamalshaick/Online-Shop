@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { getProfileByHandle } from "../../actions/profileActions";
 import Loading from "../common/Loading";
 import ProfileContent from "./ProfileContent";
 import Navbar from "../layout/Navbar";
+import { Header } from "../common/styles/Header";
+import Reviews from "../reviews/Reviews";
 
 class Profile extends Component {
   componentDidMount() {
@@ -27,16 +28,24 @@ class Profile extends Component {
     if (profile === null || loading) {
       profileContent = <Loading />;
     } else {
-      profileContent = <ProfileContent profile={profile} />;
+      profileContent = (
+        <div className="container">
+          <div className="row">
+            <Header>{profile.handle}'s Profile</Header>
+            <div className="col-md-6">
+              <ProfileContent profile={profile} auth={this.props.auth} />
+            </div>
+            <div className="col-md-6">
+              <Reviews currentProfile={profile} />
+            </div>
+          </div>
+        </div>
+      );
     }
     return (
       <>
         <Navbar />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{profileContent}</div>
-          </div>
-        </div>
+        <div className="entry">{profileContent}</div>
       </>
     );
   }
@@ -44,11 +53,13 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
 export default connect(

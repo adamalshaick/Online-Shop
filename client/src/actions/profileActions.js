@@ -108,7 +108,7 @@ export const deleteAccount = () => dispatch => {
 export const getProfileById = user_id => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get(`/user/${user_id}`)
+    .get(`/api/profile/user/${user_id}`)
     .then(res => {
       dispatch({
         type: GET_PROFILE_BY_ID,

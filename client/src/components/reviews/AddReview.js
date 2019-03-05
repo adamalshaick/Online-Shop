@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addReview } from "../../actions/reviewActions";
 import ReviewForm from "../reviews/ReviewForm";
+import { Button } from "../common/styles/Button";
 
 class AddReview extends Component {
   constructor(props) {
@@ -43,13 +44,12 @@ class AddReview extends Component {
     const { errors, auth, profile } = this.props;
     return (
       <>
-        <button
-          style={{ border: "lightgray solid 1px", width: "100%" }}
+        <Button
           className="btn btn-light btn-lg mt-2 mb-3"
           onClick={this.onClickRev}
         >
           Write a review
-        </button>
+        </Button>
         <div>
           {this.state.showReviewInput ? (
             <ReviewForm

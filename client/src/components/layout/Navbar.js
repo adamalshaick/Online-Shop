@@ -4,32 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
-import styled from "styled-components";
-
-const StyledNavbar = styled.header`
-  width: 100%;
-  height: 6rem;
-  box-shadow: 0px 8px 20px 0px rgba(204, 204, 204, 0.7);
-  background-color: white;
-  display: flex;
-`;
-
-const List = styled.ul`
-  display: flex;
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  margin-top: 1.8rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: black;
-`;
-
-const ListElement = styled.li`
-  color: black;
-  margin: 0 4rem 4rem 0;
-  list-style: none;
-`;
+import { StyledNavbar, List, ListElement } from "../common/styles/Navbar";
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -39,23 +14,23 @@ class Navbar extends Component {
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     const authLinks = (
       <List>
         <ListElement>
           <Link style={{ color: "black" }} className="link" to="/items">
-            Browse Items
+            BROWSE ITEMS
           </Link>
         </ListElement>
         <ListElement>
           <Link style={{ color: "black" }} to="/dashboard">
-            Dashboard
+            DASHBOARD
           </Link>
         </ListElement>
         <ListElement>
           <Link style={{ color: "black" }} to="/cart">
-            Cart
+            CART
             <i className="ml-2 fas fa-shopping-cart" />
           </Link>
         </ListElement>
@@ -65,12 +40,7 @@ class Navbar extends Component {
             to="/"
             onClick={this.onLogoutClick.bind(this)}
           >
-            Logout
-            <img
-              src={user.avatar}
-              alt={user.name}
-              style={{ width: "35px", marginLeft: "5px" }}
-            />
+            LOGOUT
           </Link>
         </ListElement>
       </List>
@@ -80,12 +50,12 @@ class Navbar extends Component {
       <List>
         <ListElement>
           <Link style={{ color: "black" }} className="link" to="/login">
-            Login
+            LOGIN
           </Link>
         </ListElement>
         <ListElement>
           <Link style={{ color: "black" }} to="/register">
-            Sign Up
+            SIGN UP
           </Link>
         </ListElement>
       </List>

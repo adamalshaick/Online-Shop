@@ -6,6 +6,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   GET_ERRORS
 } from "./types";
+import { getItems } from "./itemActions";
 
 // Get items from cart
 export const getItemsFromCart = () => dispatch => {
@@ -35,6 +36,7 @@ export const addItemToCart = itemId => dispatch => {
         type: ADD_ITEM_TO_CART,
         payload: res.data
       });
+      window.location.reload();
     })
     .catch(err =>
       dispatch({
@@ -58,6 +60,19 @@ export const removeItemFromCart = id => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    );
+};
+
+// Buy Items from cart
+export const buyItems = (itemData, history) => dispatch => {
+  axios
+    .post(`/api/cart/${itemData.user}`, itemData)
+    .then(res => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: null
       })
     );
 };

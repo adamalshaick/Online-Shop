@@ -1,23 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { getProfileById } from "../../actions/profileActions";
 import Loading from "../common/Loading";
 
-const ReviewItem = styled.div`
-  background-color: whitesmoke;
-  margin: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 0.3rem;
-  padding: 2rem;
-`;
-
 class Review extends Component {
+  stars = review => {
+    const stars = [];
+    for (let i = 0; i < review.rate; i++) {
+      stars.push(<i style={{ color: "grey" }} className="fas fa-star" />);
+    }
+    return stars;
+  };
+
   render() {
-    const { review, auth } = this.props;
+    const { review } = this.props;
     const { loading, profile } = this.props.profile;
     let reviewItem;
 
@@ -27,15 +24,16 @@ class Review extends Component {
       reviewItem = (
         <div className="row">
           <div className="row mt-3">
-            <img
-              style={{ width: "40px", height: "40px" }}
-              className="rounded-circle  ml-4"
-              src={review.avatar}
-              alt=""
-            />
+            <div className="mt-1 ml-1">{review.buyer}</div>
+            <div
+              className="text-left"
+              style={{ position: "absolute", right: "0", width: "180px" }}
+            >
+              <strong style={{ marginRight: "10px" }}>
+                rate: {review.rate}
+              </strong>
 
-            <div className="text-center mt-2 ml-2 ">
-              <strong>rate: {review.rate}</strong>
+              {this.stars(review)}
             </div>
           </div>
           <div className="col-12">

@@ -11,7 +11,6 @@ export const addReview = reviewData => dispatch => {
         type: ADD_REVIEW,
         payload: res.data
       });
-
       window.location.reload();
     })
     .catch(err => {

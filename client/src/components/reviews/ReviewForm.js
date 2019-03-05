@@ -1,34 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import NumberInput from "../common/NumberInput";
-
-const ReviewWrapper = styled.div`
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-  filter: brightness(10%);
-`;
+import { ReviewWrapper, ReviewCard } from "../common/styles/Review";
 
 const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
   return (
     <>
       <ReviewWrapper />
       <div className="row">
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)"
-          }}
-          className="col-md-6 col-lg-4"
-        >
+        <ReviewCard className="col-md-6 col-lg-4">
           <div className="card">
             <div className="card-header text-right">
               <span
@@ -76,7 +57,7 @@ const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
               </form>
             </div>
           </div>
-        </div>
+        </ReviewCard>
       </div>
     </>
   );

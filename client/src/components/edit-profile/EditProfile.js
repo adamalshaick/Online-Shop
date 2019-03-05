@@ -7,7 +7,7 @@ import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 import Navbar from "../layout/Navbar";
 
-class CreateProfile extends Component {
+export class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,7 +63,7 @@ class CreateProfile extends Component {
     return (
       <>
         <Navbar />
-        <div className="create-profile mt-5 entry container">
+        <div className="mt-5 entry container">
           <div className="row">
             <div
               style={{
@@ -80,6 +80,7 @@ class CreateProfile extends Component {
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
+                  id="handle"
                   placeholder="* Profile Handle"
                   name="handle"
                   value={this.state.handle}
@@ -89,6 +90,7 @@ class CreateProfile extends Component {
                 />
 
                 <TextFieldGroup
+                  id="location"
                   placeholder="Location"
                   name="location"
                   value={this.state.location}
@@ -98,6 +100,7 @@ class CreateProfile extends Component {
                 />
 
                 <TextAreaFieldGroup
+                  id="bio"
                   placeholder="Short Bio"
                   name="bio"
                   value={this.state.bio}
@@ -119,7 +122,7 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
@@ -134,4 +137,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createProfile, getCurrentProfile }
-)(CreateProfile);
+)(EditProfile);

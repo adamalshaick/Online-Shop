@@ -56,24 +56,6 @@ const ProfileSchema = new Schema({
     ]
   },
 
-  itemsBought: [
-    {
-      id: {
-        type: Schema.Types.ObjectId,
-        ref: "items"
-      }
-    }
-  ],
-
-  itemsSold: [
-    {
-      id: {
-        type: Schema.Types.ObjectId,
-        ref: "items"
-      }
-    }
-  ],
-
   date: {
     type: Date,
     default: Date.now

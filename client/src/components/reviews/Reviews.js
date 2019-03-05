@@ -12,24 +12,33 @@ class Reviews extends Component {
 
   render() {
     const { reviews, loading } = this.props.review;
-    const { auth, currentProfile } = this.props;
+    const { currentProfile } = this.props;
     let reviewItems;
 
     if (reviews === null || loading) {
       reviewItems = <Loading />;
     } else {
       if (reviews.length > 0) {
-        reviewItems = reviews.reduce((reviewItems, review) => {
-          if (review.seller === currentProfile.user._id) {
-            reviewItems.push(<Review key={review._id} review={review} />);
-          }
-          if (reviewItems.length === 0) {
-            reviewItems = <div>No reviews found</div>;
-          }
-          return reviewItems;
-        }, []);
+        const usersReview = reviews.filter(
+          review => review.seller === currentProfile.user._id
+        );
+        if (usersReview > 0) {
+          reviewItems = usersReview.map(review => (
+            <Review key={review._id} review={review} />
+          ));
+        } else {
+          reviewItems = (
+            <div className="text-center">
+              <i>User has no reviews yet</i>
+            </div>
+          );
+        }
       } else {
-        reviewItems = <div>No reviews found</div>;
+        reviewItems = (
+          <div className="text-center">
+            <i>User has no reviews yet</i>
+          </div>
+        );
       }
     }
 
@@ -49,8 +58,7 @@ Reviews.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  review: state.review,
-  auth: state.auth
+  review: state.review
 });
 
 export default connect(

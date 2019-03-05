@@ -72,7 +72,7 @@ class SellItem extends Component {
   };
 
   render() {
-    const { errors, profile } = this.state;
+    const { errors } = this.state;
 
     const options = [
       { label: "* Select category", value: "" },
@@ -99,7 +99,6 @@ class SellItem extends Component {
                   <form>
                     <span>Enter a name</span>
                     <InputGroup
-                      placeholder="Add a name of your item"
                       placeholder="Name"
                       name="title"
                       icon="fas fa-signature"
@@ -112,7 +111,6 @@ class SellItem extends Component {
                   <form>
                     <span>Enter a price</span>
                     <InputGroup
-                      placeholder="Add price"
                       placeholder="Price (USD)"
                       name="price"
                       icon="fas fa-dollar-sign"

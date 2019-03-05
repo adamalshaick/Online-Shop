@@ -133,13 +133,11 @@ export class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
   errors: state.errors
 });
 

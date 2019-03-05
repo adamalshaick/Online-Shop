@@ -2,14 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { removeItemFromCart } from "../../actions/cartActions";
+import { getProfileById } from "../../actions/profileActions";
+import { Link } from "react-router-dom";
 
 export class CartItem extends Component {
+  componentDidMount() {
+    this.props.getProfileById(this.props.item.user);
+  }
+
   onDeleteClick(id) {
     this.props.removeItemFromCart(id);
   }
 
   render() {
-    const { item } = this.props;
+    const { item, loading } = this.props;
+    const { profileById } = this.props.profile;
     return (
       <div style={{ width: "100%" }}>
         <img
@@ -27,9 +34,14 @@ export class CartItem extends Component {
           Remove
         </button>
 
-        <button className="btn btn-light float-right ml-3 d-none d-sm-block">
-          Seller's Profile
-        </button>
+        {profileById === null || loading ? null : (
+          <Link
+            to={`/profile/${profileById.handle}`}
+            className="btn btn-light float-right ml-3 d-none d-sm-block"
+          >
+            Seller's Profile
+          </Link>
+        )}
 
         <span className="mt-2 float-right">{item.price} $</span>
         <hr />
@@ -40,14 +52,16 @@ export class CartItem extends Component {
 
 CartItem.propTypes = {
   item: PropTypes.object.isRequired,
-  removeItemFromCart: PropTypes.func.isRequired
+  removeItemFromCart: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { removeItemFromCart }
+  { removeItemFromCart, getProfileById }
 )(CartItem);

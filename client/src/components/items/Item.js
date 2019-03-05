@@ -2,39 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
-import { addItemToCart, getItemsFromCart } from "../../actions/cartActions";
+import { addItemToCart } from "../../actions/cartActions";
 import { getProfileById } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
 import ReactTimeout from "react-timeout";
 import Alert from "../common/Alert";
-import styled from "styled-components";
-
-const ItemCard = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 2rem;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  max-height: 400px;
-  ${ItemCard}:hover & {
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 0.25s;
-  }
-`;
-
-const Buttons = styled.div`
-  display: none;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  ${ItemCard}:hover & {
-    display: block;
-  }
-`;
+import { ItemCard, Image, Buttons } from "../common/styles/StyledItem";
 
 class Item extends Component {
   constructor(props) {

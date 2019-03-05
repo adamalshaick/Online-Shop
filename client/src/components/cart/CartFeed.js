@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CartItem from "./CartItem";
-import styled from "styled-components";
-
-const Heading = styled.header`
-  width: 100%;
-  background-color: whitesmoke;
-  height: 60px;
-  border: solid lightgrey 1px;
-  margin-bottom: 20px;
-  margin-top: 50px;
-  padding: 14px;
-`;
+import { Header } from "../common/styles/Header";
+import { connect } from "react-redux";
+import { buyItems } from "../../actions/cartActions";
 
 export class CartFeed extends Component {
   render() {
@@ -22,29 +14,47 @@ export class CartFeed extends Component {
     });
     return (
       <div className="entry">
-        <Heading>
-          <span style={{ fontSize: "18px" }} className="d-inline align-middle">
+        <Header>
+          <span style={{ fontSize: "18px", float: "left" }}>
             <i className="mr-2 fas fa-shopping-cart" />
             <strong>Your cart</strong>
           </span>
           <span style={{ fontSize: "18px", float: "right" }}>
             <strong>Amount: {cartValue} $</strong>
           </span>
-        </Heading>
+        </Header>
 
         {cartItems.map(item => (
           <CartItem key={item._id} item={item} />
         ))}
-        <button className="btn btn-success float-right">
-          Buy Items <i className="fas fa-arrow-circle-right ml-2" />
-        </button>
+        <div className="float-right mb-5">
+          <div>
+            <small>(Not working yet, about to be implemented)</small>
+          </div>
+          <button
+            type="button"
+            onClick={this.onClick}
+            className="btn btn-success float-right mb-5"
+          >
+            Buy Items <i className="fas fa-arrow-circle-right ml-2" />
+          </button>
+        </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 CartFeed.propTypes = {
-  cartItems: PropTypes.array.isRequired
+  cartItems: PropTypes.array.isRequired,
+  auth: PropTypes.object.isRequired,
+  buyItems: PropTypes.func.isRequired
 };
 
-export default CartFeed;
+export default connect(
+  mapStateToProps,
+  { buyItems }
+)(CartFeed);

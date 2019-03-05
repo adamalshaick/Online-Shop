@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems } from "../../actions/itemActions";
 import { getItemsFromCart } from "../../actions/cartActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import ItemFeed from "./ItemFeed";
 import Loading from "../common/Loading";
 import SelectListGroup from "../common/SelectListGroup";
@@ -20,6 +21,7 @@ class Items extends Component {
   componentDidMount() {
     this.props.getItems();
     this.props.getItemsFromCart();
+    this.props.getCurrentProfile();
   }
 
   onChange = e => {
@@ -29,6 +31,7 @@ class Items extends Component {
   render() {
     const { items } = this.props.item;
     const { cart } = this.props.cart;
+    const { profile, loading } = this.props.profile;
 
     let itemContent;
     let itemsArray;
@@ -50,88 +53,99 @@ class Items extends Component {
       items === null ||
       cart === null ||
       this.props.cart.loading ||
-      this.props.item.loading
+      this.props.item.loading ||
+      loading
     ) {
       itemContent = <Loading />;
     } else {
-      if (this.state.selectedCategory !== "") {
-        itemsArray = items.filter(
-          item => item.category === this.state.selectedCategory
-        );
-      } else {
-        itemsArray = items;
-      }
-
-      if (this.state.sortBy !== "") {
-        if (this.state.sortBy === "ascending") {
-          itemsArray.sort(function(a, b) {
-            return a.price - b.price;
-          });
+      if (Object.keys(profile).length > 0) {
+        if (this.state.selectedCategory !== "") {
+          itemsArray = items.filter(
+            item => item.category === this.state.selectedCategory
+          );
+        } else {
+          itemsArray = items;
         }
 
-        if (this.state.sortBy === "descending") {
-          itemsArray.sort(function(a, b) {
-            return b.price - a.price;
-          });
+        if (this.state.sortBy !== "") {
+          if (this.state.sortBy === "ascending") {
+            itemsArray.sort(function(a, b) {
+              return a.price - b.price;
+            });
+          }
+
+          if (this.state.sortBy === "descending") {
+            itemsArray.sort(function(a, b) {
+              return b.price - a.price;
+            });
+          }
         }
-      }
-      itemContent = (
-        <>
-          <Navbar />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <h1 style={{ fontSize: "1.7rem" }} className="m-5 text-center">
-                  Items for sale
-                </h1>
-                <div className="row">
-                  <div className="col-md-6">
-                    <form>
-                      <SelectListGroup
-                        placeholder="* Category"
-                        name="selectedCategory"
-                        value={this.state.selectedCategory}
-                        options={selectOptions}
-                        onChange={this.onChange}
-                      />
-                    </form>
+        itemContent = (
+          <>
+            <Navbar />
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <h1
+                    style={{ fontSize: "1.7rem" }}
+                    className="m-5 text-center"
+                  >
+                    Items for sale
+                  </h1>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <form>
+                        <SelectListGroup
+                          placeholder="* Category"
+                          name="selectedCategory"
+                          value={this.state.selectedCategory}
+                          options={selectOptions}
+                          onChange={this.onChange}
+                        />
+                      </form>
+                    </div>
+                    <div className="col-md-6">
+                      <form>
+                        <SelectListGroup
+                          placeholder="* Sort by..."
+                          name="sortBy"
+                          value={this.state.sortBy}
+                          options={sortOptions}
+                          onChange={this.onChange}
+                        />
+                      </form>
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <form>
-                      <SelectListGroup
-                        placeholder="* Sort by..."
-                        name="sortBy"
-                        value={this.state.sortBy}
-                        options={sortOptions}
-                        onChange={this.onChange}
-                      />
-                    </form>
-                  </div>
+                  <ItemFeed items={itemsArray} cart={cart} />
                 </div>
-                <ItemFeed items={itemsArray} cart={cart} />
               </div>
             </div>
-          </div>
-        </>
-      );
+          </>
+        );
+      } else {
+        this.props.history.push("/create-profile");
+      }
     }
     return <>{itemContent}</>;
   }
 }
 
 Items.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
   getItemsFromCart: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  cart: PropTypes.object.isRequired
+  cart: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   item: state.item,
-  cart: state.cart
+  cart: state.cart,
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { getItems, getItemsFromCart }
+  { getItems, getItemsFromCart, getCurrentProfile }
 )(Items);

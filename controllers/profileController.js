@@ -1,25 +1,54 @@
 const mongoose = require("mongoose");
-const passport = require("passport");
 
 // services
 const uploadService = require("../services/uploadService");
+const profileService = require("../services/profileService");
 
 // models
 const Item = require("../models/Item");
 const Profile = require("../models/Profile");
 
-const asyncMiddleware = require("../services/asyncMiddleware");
-
-// Validation
+// Load Validation
+const validateProfileInput = require("../validation/profile");
 
 module.exports = {
+  deleteProfile: (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() =>
+        res.json({ success: true })
+      );
+    });
+  },
+
+  getProfiles: (req, res) => {
+    Profile.find()
+      .sort({ date: -1 })
+      .then(profiles => res.json(profiles))
+      .catch(err =>
+        res.status(404).json({ noprofilesfound: "No profiles found" })
+      );
+  },
+
+  getProfileById: (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.params.user_id })
+      .populate("user", ["name", "avatar"])
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "There is no profile for this user";
+          res.status(404).json(errors);
+        }
+
+        res.json(profile);
+      })
+      .catch(err =>
+        res.status(404).json({ profile: "There is no profile for this user" })
+      );
+  },
+
   createProfile: (req, res) => {
     uploadService.upload(req, res, error => {
-      const { errors, isValid } = validateProfileInput(
-        req.body,
-        req.file,
-        error
-      );
+      const { errors, isValid } = validateProfileInput(req.body, error);
 
       // Check Validation
       if (!isValid) {
@@ -56,7 +85,7 @@ module.exports = {
           // Check if handle exists
           Profile.findOne({ handle: createFields.handle }).then(profile => {
             if (profile) {
-              errors.handle = "That handle already exists";
+              errors.handle = "Username already exists";
               res.status(400).json(errors);
             }
 

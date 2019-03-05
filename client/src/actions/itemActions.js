@@ -10,7 +10,7 @@ import {
 } from "./types";
 
 // Add Item
-export const addItem = itemData => dispatch => {
+export const addItem = (itemData, history) => dispatch => {
   axios
     .post("/api/items", itemData)
     .then(res => {
@@ -18,6 +18,7 @@ export const addItem = itemData => dispatch => {
         type: ADD_ITEM,
         payload: res.data
       });
+      history.push("/items");
     })
     .catch(err => {
       dispatch({

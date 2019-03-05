@@ -55,7 +55,7 @@ export class Login extends Component {
             <div className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry">
               <div className="card-body p-5">
                 <h3 className="mb-5">Log in to your account</h3>
-                <form onSubmit={this.onSubmit}>
+                <form noValidate onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     id="#email"
                     placeholder="Email Adress"
