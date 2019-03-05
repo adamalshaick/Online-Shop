@@ -63,7 +63,8 @@ class Item extends Component {
               <ItemCard className="text-center m-3">
                 <Image
                   style={this.getStyle()}
-                  src={`../../uploads/post_image/${item.itemImage}`}
+                  // src={`../../uploads/post_image/${item.itemImage}`}
+                  src="../../uploads/post_image/placeholder.png"
                   alt=""
                   onLoad={this.imageLoaded}
                 />

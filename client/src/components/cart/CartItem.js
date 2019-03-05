@@ -21,7 +21,8 @@ export class CartItem extends Component {
       <div style={{ width: "100%" }}>
         <img
           style={{ height: "50px", width: "50px" }}
-          src={`../../uploads/post_image/${item.itemImage}`}
+          // src={`../../uploads/post_image/${item.itemImage}`}
+          src="../../uploads/post_image/placeholder.png"
           alt=""
         />
         {item.title}

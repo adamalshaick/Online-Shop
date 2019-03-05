@@ -18,12 +18,7 @@ export class Cart extends Component {
     const { profile } = this.props.profile;
 
     let cartContent;
-    if (
-      cart === null ||
-      loading ||
-      profile === null ||
-      this.props.profile.loading
-    ) {
+    if (cart === null || loading || profile === null) {
       cartContent = <Loading />;
     } else {
       if (Object.keys(profile).length > 0) {

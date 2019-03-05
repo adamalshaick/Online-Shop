@@ -12,7 +12,8 @@ class ProfileContent extends Component {
         <div className="text-center">
           <img
             className="rounded-circle"
-            src={`../uploads/post_image/${profile.profileImage}`}
+            // src={`../uploads/post_image/${profile.profileImage}`}
+            src="../../uploads/post_image/placeholder.png"
             alt=""
           />
         </div>
