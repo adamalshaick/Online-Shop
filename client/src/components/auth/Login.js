@@ -3,38 +3,24 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import TextFieldGroup from "../common/TextFieldGroup";
 import Navbar from "../layout/Navbar";
+import InputGroup from "../common/InputGroup";
+import handleInputErrors from "../common/hoc/handleInputErrors";
+import redirectAuthenticated from "../common/hoc/redirectAuthenticated";
 
 export class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      password: "",
-      errors: {}
+      password: ""
     };
-  }
-
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
   onSubmit = e => {
     e.preventDefault();
     const userData = {
@@ -43,31 +29,32 @@ export class Login extends Component {
     };
     this.props.loginUser(userData);
   };
+
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
 
     return (
       <>
         <Navbar />
         <div className="container">
-          <div className="row mt-5">
+          <div className="row mt-md-5">
             <div className="col-md-2 col-lg-3" />
-            <div className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry">
+            <section className="col-md-8 col-lg-6 card mt-md-5 text-center p-0 entry">
               <div className="card-body p-5">
                 <h3 className="mb-5">Log in to your account</h3>
                 <form noValidate onSubmit={this.onSubmit}>
-                  <TextFieldGroup
-                    id="#email"
-                    placeholder="Email Adress"
-                    name="email"
-                    type="email"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                    id="email"
-                  />
-
-                  <TextFieldGroup
+                  <div className="mb-4">
+                    <InputGroup
+                      id="#email"
+                      placeholder="Email Adress"
+                      name="email"
+                      type="email"
+                      value={this.state.email}
+                      onChange={this.onChange}
+                      error={errors.email}
+                    />
+                  </div>
+                  <InputGroup
                     id="#password"
                     placeholder="Password"
                     name="password"
@@ -75,7 +62,6 @@ export class Login extends Component {
                     value={this.state.password}
                     onChange={this.onChange}
                     error={errors.password}
-                    id="password"
                   />
 
                   <button type="submit" className="btn btn-dark btn-block mt-4">
@@ -86,7 +72,7 @@ export class Login extends Component {
               <div className="text-muted card-footer mt-3">
                 Don't have an account yet? <Link to="/register">Sign Up</Link>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </>
@@ -100,12 +86,7 @@ Login.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { loginUser }
-)(Login);
+)(redirectAuthenticated(handleInputErrors(Login)));
