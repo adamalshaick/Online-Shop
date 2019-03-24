@@ -1,141 +1,65 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
 import { addItemToCart } from "../../actions/cartActions";
-import { getProfileById } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
-import ReactTimeout from "react-timeout";
-import Alert from "../common/Alert";
 import { ItemCard, Image, Buttons } from "../common/styles/StyledItem";
+import { SecondaryHeader } from "../common/styles/Header";
 
-class Item extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showAlert: false,
-      imageLoad: false
-    };
-  }
-
-  componentDidMount() {
-    this.props.getProfileById(this.props.item.user);
-  }
-
-  onDeleteClick(id) {
-    this.props.deleteItem(id);
-  }
-
-  onAddClick(item) {
-    const itemData = {
-      user: item.user,
-      item: item._id,
-      text: item.text,
-      price: item.price,
-      title: item.title,
-      itemImage: item.itemImage
-    };
-    this.props.addItemToCart(itemData);
-    this.setState({ showAlert: true });
-    this.props.setTimeout(() => {
-      this.setState({ showAlert: false });
-    }, 3000);
-  }
-
-  imageLoaded = () => {
-    this.setState({ imageLoad: true });
+const Item = ({ item, currentUser, addItemToCart, deleteItem }) => {
+  const onAdd = id => e => {
+    e.preventDefault();
+    addItemToCart(id);
   };
 
-  getStyle() {
-    return {
-      visibility: this.state.imageLoad ? "visible" : "hidden"
-    };
-  }
+  const onDelete = id => e => {
+    e.preventDefault();
+    deleteItem(id);
+  };
 
-  render() {
-    const { item, cart, auth, showActions } = this.props;
-    const { profileById, loading } = this.props.profile;
-    return (
-      <>
-        {cart.some(cartItem => cartItem.item === item._id) ? null : (
-          <div className="col-md-6 col-lg-4 p-0 entry-2x">
-            <div>
-              <ItemCard className="text-center m-3">
-                <Image
-                  style={this.getStyle()}
-                  // src={`../../uploads/post_image/${item.itemImage}`}
-                  src="../../uploads/post_image/placeholder.png"
-                  alt=""
-                  onLoad={this.imageLoaded}
-                />
-                <p>{item.title}</p>
-                <p style={{ fontSize: "1.5rem" }}>{item.price} $</p>
-                {showActions ? (
-                  <span>
-                    {item.user === auth.user.id ? (
-                      <button
-                        onClick={this.onDeleteClick.bind(this, item._id)}
-                        type="button"
-                        className="btn btn-danger mr-1"
-                      >
-                        <i className="fas fa-times" />
-                      </button>
-                    ) : this.state.showAlert ? (
-                      <Alert
-                        className="entry"
-                        showAlert={this.state.showAlert}
-                        text={item.title + " added to cart"}
-                      />
-                    ) : (
-                      <Buttons>
-                        <button
-                          onClick={this.onAddClick.bind(this, item)}
-                          className="btn btn-dark mb-2"
-                        >
-                          Add to your cart
-                        </button>
-                        {profileById === null || loading ? null : (
-                          <Link
-                            to={`/profile/${profileById.handle}`}
-                            onClick={this.onAddClick.bind(this, item)}
-                            className="btn btn-dark mt-2"
-                          >
-                            Seller's profile
-                          </Link>
-                        )}
-                      </Buttons>
-                    )}
-                  </span>
-                ) : null}
-              </ItemCard>
-            </div>
-          </div>
-        )}
-      </>
-    );
-  }
-}
-
-Item.defaultProps = {
-  showActions: true
+  return (
+    <div className="col-md-6 col-lg-4 p-0 entry-2x">
+      <div>
+        <ItemCard className="text-center m-3">
+          <Image src="../../uploads/post_image/placeholder.png" alt="" />
+          <p>{item.name}</p>
+          <SecondaryHeader>{item.price} $</SecondaryHeader>
+          <span>
+            {item.user === currentUser.id ? (
+              <button
+                onClick={onDelete(item._id)}
+                className="btn btn-danger mr-1"
+              >
+                <i className="fas fa-times" />
+              </button>
+            ) : (
+              <Buttons>
+                <button onClick={onAdd(item._id)} className="btn btn-dark mb-2">
+                  Add to your cart
+                </button>
+                <Link
+                  to={`/profile/${item.user}`}
+                  className="btn btn-dark mt-2"
+                >
+                  Seller's profile
+                </Link>
+              </Buttons>
+            )}
+          </span>
+        </ItemCard>
+      </div>
+    </div>
+  );
 };
 
 Item.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   addItemToCart: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
-});
-
-export default ReactTimeout(
-  connect(
-    mapStateToProps,
-    { deleteItem, addItemToCart, getProfileById }
-  )(Item)
-);
+export default connect(
+  null,
+  { deleteItem, addItemToCart }
+)(Item);

@@ -57,7 +57,10 @@ class Items extends Component {
                 />
               </div>
             </div>
-            <ItemFeed items={itemsArray} cart={this.props.user.cart} />
+            <ItemFeed
+              items={itemsArray}
+              currentUser={this.props.user.currentUser}
+            />
           </div>
         </div>
       </div>

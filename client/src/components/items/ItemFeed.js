@@ -1,25 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Item from "./Item";
 
-class ItemFeed extends Component {
-  render() {
-    const { items, cart } = this.props;
-
-    return (
-      <>
-        <div className="row">
-          {items.map(item => (
-            <Item key={item._id} item={item} cart={cart} />
-          ))}
-        </div>
-      </>
-    );
-  }
-}
+const ItemFeed = ({ items, currentUser }) => {
+  return (
+    <div className="row">
+      {items.map(item => (
+        <Item key={item._id} item={item} currentUser={currentUser} />
+      ))}
+    </div>
+  );
+};
 
 ItemFeed.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
 
 export default ItemFeed;
