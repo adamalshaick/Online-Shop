@@ -5,9 +5,6 @@ import toJson from "enzyme-to-json";
 
 const mockRegisterfn = jest.fn();
 const Props = {
-  auth: {
-    isAuthenticated: false
-  },
   errors: {}
 };
 let wrapper;
@@ -37,6 +34,16 @@ describe("register action", () => {
     .find("#email")
     .simulate("change", { target: { name: "email", value: "test@gmail.com" } });
 
+  wrapper
+    .find("#location")
+    .simulate("change", {
+      target: { name: "location", value: "testlocation" }
+    });
+
+  wrapper
+    .find("#bio")
+    .simulate("change", { target: { name: "bio", value: "testbio" } });
+
   wrapper.find("#password").simulate("change", {
     target: { name: "password", value: "passwordTest" }
   });
@@ -50,7 +57,9 @@ describe("register action", () => {
       name: "testName",
       email: "test@gmail.com",
       password: "passwordTest",
-      password2: "password2Test"
+      password2: "password2Test",
+      location: "testlocation",
+      bio: "testbio"
     });
   });
 });

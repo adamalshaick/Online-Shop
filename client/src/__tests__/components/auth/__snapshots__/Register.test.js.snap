@@ -10,10 +10,10 @@ exports[`render component renders component 1`] = `
       className="row mt-5"
     >
       <div
-        className="col-md-2 col-lg-3"
+        className="col-md-1 col-lg-2"
       />
       <div
-        className="col-md-8 col-lg-6 card mt-5 text-center p-0 entry"
+        className="col-md-10 col-lg-8 card mt-5 text-center p-0 entry"
       >
         <div
           className="card-body p-5"
@@ -27,38 +27,82 @@ exports[`render component renders component 1`] = `
             noValidate={true}
             onSubmit={[Function]}
           >
-            <TextFieldGroup
-              id="name"
-              name="name"
-              onChange={[Function]}
-              placeholder="Name"
-              type="text"
-              value="testName"
-            />
-            <TextFieldGroup
-              id="email"
-              name="email"
-              onChange={[Function]}
-              placeholder="Email"
-              type="email"
-              value="test@gmail.com"
-            />
-            <TextFieldGroup
-              id="password"
-              name="password"
-              onChange={[Function]}
-              placeholder="Password"
-              type="password"
-              value="passwordTest"
-            />
-            <TextFieldGroup
-              id="password2"
-              name="password2"
-              onChange={[Function]}
-              placeholder="Confirm Password"
-              type="password"
-              value="password2Test"
-            />
+            <div
+              className="row"
+            >
+              <div
+                className="col-lg-6"
+              >
+                <div
+                  className="mb-4"
+                >
+                  <InputGroup
+                    id="name"
+                    name="name"
+                    onChange={[Function]}
+                    placeholder="Name"
+                    type="text"
+                    value="testName"
+                  />
+                </div>
+                <div
+                  className="mb-4"
+                >
+                  <InputGroup
+                    id="email"
+                    name="email"
+                    onChange={[Function]}
+                    placeholder="Email"
+                    type="text"
+                    value="test@gmail.com"
+                  />
+                </div>
+                <div
+                  className="mb-4"
+                >
+                  <InputGroup
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Password"
+                    type="password"
+                    value="passwordTest"
+                  />
+                </div>
+                <InputGroup
+                  id="password2"
+                  name="password2"
+                  onChange={[Function]}
+                  placeholder="Confirm Password"
+                  type="password"
+                  value="password2Test"
+                />
+              </div>
+              <div
+                className="col-lg-6"
+              >
+                <div
+                  className="mb-4"
+                >
+                  <InputGroup
+                    id="location"
+                    name="location"
+                    onChange={[Function]}
+                    placeholder="Location"
+                    type="text"
+                    value="testlocation"
+                  />
+                </div>
+                <TextFieldGroup
+                  id="bio"
+                  name="bio"
+                  onChange={[Function]}
+                  placeholder="Bio"
+                  type="text"
+                  value="testbio"
+                />
+              </div>
+            </div>
             <button
               className="btn btn-dark btn-block mt-4"
               type="submit"

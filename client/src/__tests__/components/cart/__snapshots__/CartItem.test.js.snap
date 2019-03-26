@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="entry2x"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <img
+    alt=""
+    src="../../uploads/post_image/placeholder.png"
+    style={
+      Object {
+        "height": "50px",
+        "width": "50px",
+      }
+    }
+  />
+  <button
+    className="btn btn-danger ml-3 float-right"
+    onClick={[Function]}
+    type="button"
+  >
+    Remove
+  </button>
+  <Link
+    className="btn btn-light float-right ml-3 d-none d-sm-block"
+    replace={false}
+    to="/profile/undefined"
+  >
+    Seller's Profile
+  </Link>
+  <span
+    className="mt-2 float-right"
+  >
+     $
+  </span>
+  <hr />
+</div>
+`;

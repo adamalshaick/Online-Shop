@@ -5,9 +5,6 @@ import toJson from "enzyme-to-json";
 
 const mockLoginfn = jest.fn();
 const Props = {
-  auth: {
-    isAuthenticated: false
-  },
   errors: {}
 };
 let wrapper;

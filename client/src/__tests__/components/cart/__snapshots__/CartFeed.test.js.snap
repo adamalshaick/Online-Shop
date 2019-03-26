@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div>
+  <div
+    className="entry"
+  >
+    <styled.header>
+      <span
+        style={
+          Object {
+            "float": "left",
+            "fontSize": "18px",
+          }
+        }
+      >
+        <i
+          className="mr-2 fas fa-shopping-cart"
+        />
+        <strong>
+          Your cart
+        </strong>
+      </span>
+      <span
+        style={
+          Object {
+            "float": "right",
+            "fontSize": "18px",
+          }
+        }
+      >
+        <strong>
+          Amount: 
+          0
+           $
+        </strong>
+      </span>
+    </styled.header>
+  </div>
+</div>
+`;

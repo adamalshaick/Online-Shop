@@ -1,17 +1,13 @@
 import React from "react";
-import { Cart } from "../../../components/cart/Cart";
+import { CartFeed } from "../../../components/cart/CartFeed";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 
 const Props = {
-  user: {
-    currentUser: {
-      cart: []
-    }
-  }
+  cartItems: []
 };
 
-const wrapper = shallow(<Cart {...Props} />);
+const wrapper = shallow(<CartFeed {...Props} />);
 describe("render component", () => {
   it("renders component", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
