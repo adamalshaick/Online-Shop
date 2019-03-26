@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="col-md-6 col-lg-4 p-0 entry-2x"
+>
+  <div>
+    <styled.div
+      className="text-center m-3"
+    >
+      <styled.img
+        alt=""
+        src="../../uploads/post_image/placeholder.png"
+      />
+      <p />
+      <styled.header>
+         $
+      </styled.header>
+      <span>
+        <button
+          className="btn btn-danger mr-1"
+          id="deleteItem"
+          onClick={[Function]}
+        >
+          <i
+            className="fas fa-times"
+          />
+        </button>
+      </span>
+    </styled.div>
+  </div>
+</div>
+`;
+
+exports[`user doesn't own the item item is inside current users cart renders component 1`] = `
+<div
+  className="col-md-6 col-lg-4 p-0 entry-2x"
+>
+  <div>
+    <styled.div
+      className="text-center m-3"
+    >
+      <styled.img
+        alt=""
+        src="../../uploads/post_image/placeholder.png"
+      />
+      <p />
+      <styled.header>
+         $
+      </styled.header>
+      <span>
+        <styled.div />
+      </span>
+    </styled.div>
+  </div>
+</div>
+`;
