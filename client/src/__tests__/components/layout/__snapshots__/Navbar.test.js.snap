@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<styled.header
+  className="text-center"
+>
+  <styled.ul>
+    <styled.li>
+      <Link
+        className="link"
+        id="loginLink"
+        replace={false}
+        style={
+          Object {
+            "color": "black",
+          }
+        }
+        to="/login"
+      >
+        LOGIN
+      </Link>
+    </styled.li>
+    <styled.li>
+      <Link
+        id="registerLink"
+        replace={false}
+        style={
+          Object {
+            "color": "black",
+          }
+        }
+        to="/register"
+      >
+        SIGN UP
+      </Link>
+    </styled.li>
+  </styled.ul>
+</styled.header>
+`;

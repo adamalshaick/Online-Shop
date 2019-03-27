@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="entry"
+>
+  <div>
+    <Connect(Navbar) />
+    <img
+      src="./assets/images/rsz_online-shop-backgorund.jpg"
+      style={
+        Object {
+          "filter": "grayscale(100%)",
+          "width": "100%",
+        }
+      }
+    />
+    <styled.div>
+      <styled.div>
+        <styled.div
+          className="text-center"
+        >
+          <strong>
+            ONLINE SHOP
+          </strong>
+          <p
+            style={
+              Object {
+                "fontSize": "14px",
+                "fontWeight": "200",
+              }
+            }
+          >
+            <strong>
+              FULL-STACK ONLINE SHOP APPLICATION
+            </strong>
+          </p>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <div
+      className="text-center mt-5"
+    >
+      <Link
+        className="btn btn-lg btn-outline-dark mt-5"
+        replace={false}
+        to="/register"
+      >
+        Get Started
+      </Link>
+    </div>
+  </div>
+</div>
+`;
