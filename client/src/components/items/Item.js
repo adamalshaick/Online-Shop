@@ -26,7 +26,7 @@ export const Item = ({ item, currentUser, addItemToCart, deleteItem }) => {
           <p>{item.name}</p>
           <SecondaryHeader>{item.price} $</SecondaryHeader>
           <span>
-            {item.user === currentUser.id ? (
+            {item.user === currentUser._id ? (
               <button
                 id="deleteItem"
                 onClick={onDelete(item._id)}
