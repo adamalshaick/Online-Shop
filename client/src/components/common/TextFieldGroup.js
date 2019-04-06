@@ -1,6 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
 
 const TextFieldGroup = ({
   name,
@@ -13,20 +14,24 @@ const TextFieldGroup = ({
   disabled
 }) => {
   return (
-    <div className="form-group">
-      <input
-        type={type}
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
-        })}
-        placeholder={placeholder}
+    <div>
+      <TextField
+        style={{ width: "100%" }}
+        label={placeholder}
         name={name}
         value={value}
         onChange={onChange}
-        disabled={disabled}
+        multiline
+        rows="4"
+        margin="normal"
       />
-      {info && <small className="form-text text-muted">{info}</small>}
-      {error && <div className="invalid-feedback">{error}</div>}
+      {error ? (
+        <div>
+          <small style={{ color: "red" }} className="entry">
+            {error}
+          </small>
+        </div>
+      ) : null}
     </div>
   );
 };

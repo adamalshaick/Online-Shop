@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-12"
+    >
+      <styled.header
+        className="m-5 text-center"
+      >
+        Items for sale
+      </styled.header>
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-6"
+        >
+          <SelectListGroup
+            name="selectedCategory"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": "* Select category",
+                  "value": "",
+                },
+                Object {
+                  "label": "Clothes",
+                  "value": "Clothes",
+                },
+                Object {
+                  "label": "Electronics",
+                  "value": "Electronics",
+                },
+                Object {
+                  "label": "Shoes",
+                  "value": "Shoes",
+                },
+              ]
+            }
+            placeholder="* Category"
+            value=""
+          />
+        </div>
+        <div
+          className="col-md-6"
+        >
+          <SelectListGroup
+            name="sortBy"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": "* Sort by",
+                  "value": "",
+                },
+                Object {
+                  "label": "Price ascending",
+                  "value": "ascending",
+                },
+                Object {
+                  "label": "Price descending",
+                  "value": "descending",
+                },
+              ]
+            }
+            placeholder="* Sort by..."
+            value=""
+          />
+        </div>
+      </div>
+      <ItemFeed
+        currentUser={Object {}}
+        items={Array []}
+      />
+    </div>
+  </div>
+</div>
+`;

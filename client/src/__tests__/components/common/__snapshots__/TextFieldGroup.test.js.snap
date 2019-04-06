@@ -1,12 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render component renders component 1`] = `
-<div
-  className="form-group"
->
-  <input
-    className="form-control form-control-lg"
-    type="text"
-  />
+<div>
+  <div
+    className="MuiFormControl-root-1 MuiFormControl-marginNormal-2"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9 MuiInputBase-formControl-19 MuiInput-formControl-6 MuiInputBase-multiline-26 MuiInput-multiline-11"
+      onClick={[Function]}
+    >
+      <textarea
+        aria-invalid={false}
+        className="MuiInputBase-input-28 MuiInput-input-13 MuiInputBase-inputMultiline-30 MuiInput-inputMultiline-15"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={false}
+        rows="4"
+      />
+    </div>
+  </div>
 </div>
 `;

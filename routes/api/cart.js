@@ -9,7 +9,7 @@ const cartController = require("../../controllers/cartController");
 // @desc    Add item to cart
 // @access  Private
 router.post(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     cartController.addItemToCart(req, res);

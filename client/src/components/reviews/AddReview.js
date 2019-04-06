@@ -3,27 +3,23 @@ import { connect } from "react-redux";
 import { addReview } from "../../actions/reviewActions";
 import ReviewForm from "../reviews/ReviewForm";
 import { Button } from "../common/styles/Button";
+import handleInputErrors from "../common/hoc/handleInputErrors";
+import PropTypes from "prop-types";
 
-class AddReview extends Component {
+export class AddReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showReviewInput: false,
       text: "",
-      rate: "",
-      errors: {}
+      rate: ""
     };
-  }
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
   }
 
   onClickRev = () => {
-    this.state.showReviewInput
-      ? this.setState({ showReviewInput: false })
-      : this.setState({ showReviewInput: true });
+    this.setState(prevState => ({
+      showReviewInput: !prevState.showReviewInput
+    }));
   };
 
   onChange = e => {
@@ -41,10 +37,11 @@ class AddReview extends Component {
     this.props.addReview(reviewData);
   };
   render() {
-    const { errors, auth, profile } = this.props;
+    const { errors, user } = this.props;
     return (
       <>
         <Button
+          id="toggleBtn"
           className="btn btn-light btn-lg mt-2 mb-3"
           onClick={this.onClickRev}
         >
@@ -53,16 +50,13 @@ class AddReview extends Component {
         <div>
           {this.state.showReviewInput ? (
             <ReviewForm
+              id="reviewForm"
               onClickRev={this.onClickRev}
               text={this.state.text}
               rate={this.state.rate}
               errors={errors}
               onChange={this.onChange}
-              onSubmit={this.onSubmit(
-                profile.user._id,
-                auth.user.name,
-                auth.user.avatar
-              )}
+              onSubmit={this.onSubmit(user._id, user.name)}
             />
           ) : null}
         </div>
@@ -71,12 +65,13 @@ class AddReview extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
+AddReview.propTypes = {
+  addReview: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 export default connect(
-  mapStateToProps,
+  null,
   { addReview }
-)(AddReview);
+)(handleInputErrors(AddReview));

@@ -1,13 +1,12 @@
 module.exports = {
   itemFields: (data, user, file) => {
     const itemFields = {
-      itemImage: file.filename,
+      user: user.id,
       text: data.text,
       price: data.price,
-      title: data.title,
-      category: data.category,
-      user: user.id,
-      handle: data.handle
+      name: data.name,
+      itemImage: file.location,
+      category: data.category
     };
 
     return itemFields;

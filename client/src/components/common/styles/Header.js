@@ -11,3 +11,7 @@ export const Header = styled.header`
   font-size: 18px;
   text-align: center;
 `;
+
+export const SecondaryHeader = styled.header`
+  font-size: 1.5rem;
+`;

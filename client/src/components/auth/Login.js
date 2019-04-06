@@ -45,7 +45,7 @@ export class Login extends Component {
                 <form noValidate onSubmit={this.onSubmit}>
                   <div className="mb-4">
                     <InputGroup
-                      id="#email"
+                      id="email"
                       placeholder="Email Adress"
                       name="email"
                       type="email"
@@ -55,7 +55,7 @@ export class Login extends Component {
                     />
                   </div>
                   <InputGroup
-                    id="#password"
+                    id="password"
                     placeholder="Password"
                     name="password"
                     type="password"
@@ -82,7 +82,6 @@ export class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 

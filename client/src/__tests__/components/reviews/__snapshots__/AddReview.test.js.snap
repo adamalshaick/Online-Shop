@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <styled.button
+    className="btn btn-light btn-lg mt-2 mb-3"
+    id="toggleBtn"
+    onClick={[Function]}
+  >
+    Write a review
+  </styled.button>
+  <div>
+    <ReviewForm
+      errors={Object {}}
+      id="reviewForm"
+      onChange={[Function]}
+      onClickRev={[Function]}
+      onSubmit={[Function]}
+      rate=""
+      text=""
+    />
+  </div>
+</Fragment>
+`;

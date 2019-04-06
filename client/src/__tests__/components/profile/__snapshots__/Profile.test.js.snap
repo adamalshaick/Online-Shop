@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="entry container mt-md-5"
+>
+  <div
+    className="row"
+  >
+    <section
+      className="col-6"
+    >
+      <styled.header
+        className="text-center"
+      >
+        Profile Info 
+        <hr />
+      </styled.header>
+      <Connect(ProfileContent)
+        user={Object {}}
+      />
+    </section>
+    <section
+      className="col-6"
+    >
+      <styled.header
+        className="text-center"
+      >
+        Reviews 
+        <hr />
+      </styled.header>
+      <Connect(ComposedComponent)
+        user={Object {}}
+      />
+    </section>
+  </div>
+</div>
+`;

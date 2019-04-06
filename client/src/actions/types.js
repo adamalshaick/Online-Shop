@@ -18,3 +18,7 @@ export const REVIEW_LOADING = "REVIEW_LOADING";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const GET_USER = "GET_USER";
+export const USER_LOADING = "USER_LOADING";

@@ -1,16 +1,17 @@
-const multer = require("multer");
+const express = require("express");
+const router = express.Router();
 const path = require("path");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
+const awsKeys = require("../config/keys");
 
-// Set The Storage Engine
-const storage = multer.diskStorage({
-  destination: "./client/public/uploads/post_image/",
-  filename: function(req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  }
+aws.config.update({
+  secretAccessKey: awsKeys.secretAccessKey,
+  accessKeyId: awsKeys.accessKeyId,
+  region: "us-east-1"
 });
+const s3 = new aws.S3();
 
 // Check File Type
 function checkFileType(file, cb) {
@@ -29,9 +30,18 @@ function checkFileType(file, cb) {
 }
 
 module.exports = {
-  // Init Upload
   upload: multer({
-    storage: storage,
+    storage: multerS3({
+      s3: s3,
+      bucket: "adam-al-shaick-online-shop",
+      acl: "public-read",
+      metadata: function(req, file, cb) {
+        cb(null, { fieldName: file.fieldname });
+      },
+      key: function(req, file, cb) {
+        cb(null, Date.now().toString());
+      }
+    }),
     limits: { fileSize: 2000000 },
     fileFilter: function(req, file, cb) {
       checkFileType(file, cb);

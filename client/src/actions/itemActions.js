@@ -1,13 +1,6 @@
 import axios from "axios";
 
-import {
-  ADD_ITEM,
-  GET_ERRORS,
-  GET_ITEMS,
-  GET_ITEM,
-  DELETE_ITEM,
-  ITEM_LOADING
-} from "./types";
+import { ADD_ITEM, GET_ERRORS, GET_ITEMS, DELETE_ITEM } from "./types";
 
 // Add Item
 export const addItem = (itemData, history) => dispatch => {
@@ -30,7 +23,6 @@ export const addItem = (itemData, history) => dispatch => {
 
 // Get Items
 export const getItems = () => dispatch => {
-  dispatch(setItemLoading());
   axios
     .get("/api/items")
     .then(res => {
@@ -63,11 +55,4 @@ export const deleteItem = id => dispatch => {
         payload: err.response.data
       })
     );
-};
-
-// Set loading state
-export const setItemLoading = () => {
-  return {
-    type: ITEM_LOADING
-  };
 };

@@ -108,6 +108,7 @@ export class Register extends Component {
                         />
                       </div>
                       <TextFieldGroup
+                        id="bio"
                         placeholder="Bio"
                         name="bio"
                         value={this.state.bio}
@@ -135,7 +136,6 @@ export class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 

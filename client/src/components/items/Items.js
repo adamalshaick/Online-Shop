@@ -12,7 +12,7 @@ import {
   select
 } from "../../utils/browseItems";
 
-class Items extends Component {
+export class Items extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +70,7 @@ class Items extends Component {
 
 Items.propTypes = {
   item: PropTypes.object.isRequired,
-  cart: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 };
 
 export default fetchCurrentUser(fetchItems(Items));

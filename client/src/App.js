@@ -1,71 +1,44 @@
-import React, { Component } from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { clearCurrentProfile } from "./actions/profileActions";
-
-import store from "./store";
-
 import PrivateRoute from "./components/common/PrivateRoute";
+import handleAuth from "./utils/handleAuth";
+import SecondaryLoading from "./components/common/SecondaryLoading";
+import Navbar from "./components/layout/Navbar";
+const Landing = lazy(() => import("./components/layout/Landing"));
+const Register = lazy(() => import("./components/auth/Register"));
+const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
+const Login = lazy(() => import("./components/auth/Login"));
+const Profile = lazy(() => import("./components/profile/Profile"));
+const Items = lazy(() => import("./components/items/Items"));
+const SellItem = lazy(() => import("./components/sell-item/SellItem"));
+const Cart = lazy(() => import("./components/cart/Cart"));
+const NotFound = lazy(() => import("./components/not-found/NotFound"));
 
-import Landing from "./components/layout/Landing";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import Profile from "./components/profile/Profile";
-import CreateProfile from "./components/create-profile/CreateProfile";
-import Dashboard from "./components/dashboard/Dashboard";
-import Items from "./components/items/Items";
-import SellItem from "./components/sell-item/SellItem";
-import EditProfile from "./components/edit-profile/EditProfile";
-import Cart from "./components/cart/Cart";
-import NotFound from "./components/not-found/NotFound";
-
-// Check for token
-if (localStorage.jwtToken) {
-  // Set auth token header auth
-  setAuthToken(localStorage.jwtToken);
-  // Decode token and get user info and exp
-  const decoded = jwt_decode(localStorage.jwtToken);
-  // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
-
-  // Check for expired token
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    // Logout user
-    store.dispatch(logoutUser());
-    // Clear current Profile
-    store.dispatch(clearCurrentProfile());
-    // Rederict to login
-    window.location.href = "/login";
-  }
-}
-
-class App extends Component {
-  render() {
-    return (
-      <Router>
+const App = () => {
+  handleAuth();
+  return (
+    <Router>
+      <Suspense
+        fallback={
+          <>
+            <Navbar />
+            <SecondaryLoading />
+          </>
+        }
+      >
         <Switch>
-          {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/items" component={Items} />
-          <PrivateRoute exact path="/profile/:handle" component={Profile} />
+          <PrivateRoute exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute
-            exact
-            path="/create-profile"
-            component={CreateProfile}
-          />
           <PrivateRoute exact path="/sell-item" component={SellItem} />
           <PrivateRoute exact path="/cart" component={Cart} />
-          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <Route component={NotFound} />
         </Switch>
-      </Router>
-    );
-  }
-}
+      </Suspense>
+    </Router>
+  );
+};
 
 export default App;

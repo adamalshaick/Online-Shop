@@ -20,5 +20,5 @@ describe("render component", () => {
 
 it("should call remove item function", () => {
   wrapper.find("button").simulate("click", { preventDefault() {} });
-  expect(mockRemovefn.mock.calls.length).toBe(1);
+  expect(mockRemovefn.mock.calls.length).toEqual(1);
 });

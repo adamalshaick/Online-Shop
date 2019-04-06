@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<div
+  className="container entry text-center"
+>
+  <div
+    className="row mt-5"
+  >
+    <div
+      className="col-md-6"
+    >
+      <styled.header>
+        Your Profile 
+        <hr />
+      </styled.header>
+      <Connect(ProfileContent)
+        user={
+          Object {
+            "cart": Array [],
+          }
+        }
+      />
+      <styled.header
+        className="mt-3"
+      >
+        Actions 
+        <hr />
+      </styled.header>
+      <div
+        className="mt-3"
+      >
+        <Styled(Link)
+          className="btn btn-light btn-lg"
+          to="/sell-item"
+        >
+          Add your item for sale
+        </Styled(Link)>
+        <span
+          className="text-muted"
+        >
+          Sell your item
+        </span>
+        <hr />
+        <Styled(Link)
+          className="btn btn-light btn-lg"
+          to="/items"
+        >
+          Browse items
+        </Styled(Link)>
+        <span
+          className="text-muted"
+        >
+          Browse items for sale
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div
+      className="col-md-6"
+    >
+      <styled.header>
+        Reviews
+      </styled.header>
+       
+      <hr />
+      <Connect(ComposedComponent)
+        user={
+          Object {
+            "cart": Array [],
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

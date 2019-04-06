@@ -18,6 +18,23 @@ const UserSchema = new Schema({
     required: true
   },
 
+  bio: {
+    type: String,
+    required: true
+  },
+
+  location: {
+    type: String,
+    required: true
+  },
+
+  cart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "item"
+    }
+  ],
+
   date: {
     type: String,
     default: Date.now

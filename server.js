@@ -5,7 +5,6 @@ const passport = require("passport");
 const path = require("path");
 
 const users = require("./routes/api/users");
-const profile = require("./routes/api/profile");
 const items = require("./routes/api/items");
 const cart = require("./routes/api/cart");
 const reviews = require("./routes/api/reviews");
@@ -33,7 +32,6 @@ require("./config/passport")(passport);
 
 //Use Routes
 app.use("/api/users", users);
-app.use("/api/profile", profile);
 app.use("/api/items", items);
 app.use("/api/cart", cart);
 app.use("/api/reviews", reviews);

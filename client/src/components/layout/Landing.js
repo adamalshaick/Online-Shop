@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
-import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { Badge, Border, Text } from "../common/styles/Landing";
 
-class Landing extends Component {
+export class Landing extends Component {
   render() {
     return (
       <div className="entry">
@@ -36,12 +34,4 @@ class Landing extends Component {
   }
 }
 
-Landing.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(Landing);
+export default Landing;

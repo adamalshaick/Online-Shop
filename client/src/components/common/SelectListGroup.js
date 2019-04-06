@@ -9,7 +9,7 @@ const SelectListGroup = ({ name, value, error, onChange, options }) => {
     </option>
   ));
   return (
-    <div className="form-group">
+    <>
       <select
         className={classnames("form-control form-control-lg", {
           "is-invalid": error
@@ -21,7 +21,7 @@ const SelectListGroup = ({ name, value, error, onChange, options }) => {
         {selectOptions}
       </select>
       {error && <div className="invalid-feedback">{error}</div>}
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ADD_REVIEW, GET_REVIEWS, GET_ERRORS, REVIEW_LOADING } from "./types";
+import { ADD_REVIEW, GET_REVIEWS, GET_ERRORS } from "./types";
 
 // Add Review
 export const addReview = reviewData => dispatch => {
@@ -23,7 +23,6 @@ export const addReview = reviewData => dispatch => {
 
 // Get Reviews
 export const getReviews = () => dispatch => {
-  dispatch(setReviewLoading());
   axios
     .get("/api/reviews")
     .then(res =>
@@ -38,11 +37,4 @@ export const getReviews = () => dispatch => {
         payload: null
       })
     );
-};
-
-// Set loading state
-export const setReviewLoading = () => {
-  return {
-    type: REVIEW_LOADING
-  };
 };

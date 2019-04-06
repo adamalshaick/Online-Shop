@@ -1,55 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getItemsFromCart } from "../../actions/cartActions";
-import { getCurrentProfile } from "../../actions/profileActions";
+import React from "react";
+import fetchCurrentUser from "../common/hoc/fetchCurrentUser";
 import CartFeed from "./CartFeed";
-import Loading from "../common/Loading";
-import Navbar from "../layout/Navbar";
 import PropTypes from "prop-types";
 
-export class Cart extends Component {
-  componentDidMount() {
-    this.props.getItemsFromCart();
-    this.props.getCurrentProfile();
-  }
-
-  render() {
-    const { cart, loading } = this.props.cart;
-    const { profile } = this.props.profile;
-
-    let cartContent;
-    if (cart === null || loading || profile === null) {
-      cartContent = <Loading />;
-    } else {
-      if (Object.keys(profile).length > 0) {
-        cartContent = <CartFeed cartItems={cart} />;
-      } else {
-        this.props.history.push("/create-profile");
-      }
-    }
-
-    return (
-      <>
-        <Navbar />
-        <div className="container">{cartContent}</div>
-      </>
-    );
-  }
-}
-
-Cart.propTypes = {
-  cart: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  getItemsFromCart: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+export const Cart = ({ user }) => {
+  return (
+    <div className="container">
+      <CartFeed cartItems={user.currentUser.cart} />
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  cart: state.cart,
-  profile: state.profile
-});
+Cart.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
-export default connect(
-  mapStateToProps,
-  { getItemsFromCart, getCurrentProfile }
-)(Cart);
+export default fetchCurrentUser(Cart);

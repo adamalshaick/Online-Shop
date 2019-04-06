@@ -18,7 +18,7 @@ const ItemSchema = new Schema({
     required: true
   },
 
-  title: {
+  name: {
     type: String,
     required: true
   },

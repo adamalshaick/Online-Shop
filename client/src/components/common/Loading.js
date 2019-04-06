@@ -16,7 +16,6 @@ const Dot = styled.span`
   top: 51%;
   transform: translate(-50%, -50%);
   font-size: 10rem;
-  //   color: purple;
   opacity: 0;
   animation: sides 3s infinite;
   @keyframes sides {

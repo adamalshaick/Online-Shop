@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component renders component 1`] = `
+<Fragment>
+  <div
+    className="text-center"
+  >
+    <div
+      className="mt-3"
+    >
+      <WithStyles(TableRow)>
+        <WithStyles(TableCell)>
+          <strong>
+            User's Name
+          </strong>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          align="center"
+        />
+      </WithStyles(TableRow)>
+      <WithStyles(TableRow)>
+        <WithStyles(TableCell)>
+          <strong>
+            User's Location
+          </strong>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          align="center"
+        />
+      </WithStyles(TableRow)>
+      <WithStyles(TableRow)>
+        <WithStyles(TableCell)>
+          <strong>
+            User's Bio
+          </strong>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          align="center"
+        />
+      </WithStyles(TableRow)>
+    </div>
+  </div>
+  <div
+    className="text-center mt-3"
+  >
+    <button
+      className="btn btn-danger"
+      id="delete"
+      onClick={[Function]}
+    >
+      Delete Account
+    </button>
+  </div>
+</Fragment>
+`;

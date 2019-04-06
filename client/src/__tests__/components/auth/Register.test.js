@@ -22,7 +22,7 @@ it("displays form", () => {
 
 it("should call the mock register function", () => {
   wrapper.find("form").simulate("submit", { preventDefault() {} });
-  expect(mockRegisterfn.mock.calls.length).toBe(1);
+  expect(mockRegisterfn.mock.calls.length).toEqual(1);
 });
 
 describe("register action", () => {
@@ -34,11 +34,9 @@ describe("register action", () => {
     .find("#email")
     .simulate("change", { target: { name: "email", value: "test@gmail.com" } });
 
-  wrapper
-    .find("#location")
-    .simulate("change", {
-      target: { name: "location", value: "testlocation" }
-    });
+  wrapper.find("#location").simulate("change", {
+    target: { name: "location", value: "testlocation" }
+  });
 
   wrapper
     .find("#bio")

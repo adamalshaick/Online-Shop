@@ -14,13 +14,14 @@ describe("render component", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
+
 it("displays form", () => {
   expect(wrapper.find("form").length).toEqual(1);
 });
 
 it("should call the mock login function", () => {
   wrapper.find("form").simulate("submit", { preventDefault() {} });
-  expect(mockLoginfn.mock.calls.length).toBe(1);
+  expect(mockLoginfn.mock.calls.length).toEqual(1);
 });
 
 describe("login action", () => {

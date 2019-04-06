@@ -5,12 +5,16 @@ module.exports = function validateItemInput(data, formData, uploadError) {
   let errors = {};
 
   data.text = !isEmpty(data.text) ? data.text : "";
-  data.title = !isEmpty(data.title) ? data.title : "";
+  data.name = !isEmpty(data.name) ? data.name : "";
   data.price = !isEmpty(data.price) ? data.price : "";
   data.category = !isEmpty(data.category) ? data.category : "";
 
-  if (Validator.isEmpty(data.title)) {
-    errors.title = "Name field is required";
+  if (!Validator.isLength(data.name, { min: 2, max: 20 })) {
+    errors.name = "Name must be between 2 and 20 characters";
+  }
+
+  if (Validator.isEmpty(data.name)) {
+    errors.name = "Name field is required";
   }
 
   if (!Validator.isLength(data.text, { min: 10, max: 400 })) {
@@ -18,7 +22,11 @@ module.exports = function validateItemInput(data, formData, uploadError) {
   }
 
   if (Validator.isEmpty(data.text)) {
-    errors.text = "Text field is required";
+    errors.text = "Item description is required";
+  }
+
+  if (!Validator.isLength(data.price, { min: 1, max: 9 })) {
+    errors.price = "9 characters maximum";
   }
 
   if (isNaN(data.price)) {

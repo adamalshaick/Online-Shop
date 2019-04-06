@@ -33,7 +33,7 @@ module.exports = {
         return res.status(400).json(errors);
       }
       const item = itemService.itemFields(req.body, req.user, req.file);
-      const newItem = new Item({ item });
+      const newItem = new Item(item);
       newItem.save().then(item => res.json(item));
     });
   },

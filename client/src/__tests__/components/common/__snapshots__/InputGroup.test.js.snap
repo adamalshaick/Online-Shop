@@ -1,21 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render component renders component 1`] = `
-<div
-  className="input-group mb-3"
->
+<div>
   <div
-    className="input-group-prepend"
+    className="MuiFormControl-root-1"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
-    <span
-      className="input-group-text"
+    <div
+      className="MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9 MuiInputBase-formControl-19 MuiInput-formControl-6"
+      onClick={[Function]}
     >
-      <i />
-    </span>
+      <input
+        aria-invalid={false}
+        className="MuiInputBase-input-28 MuiInput-input-13"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={false}
+        type="text"
+      />
+    </div>
   </div>
-  <input
-    className="form-control form-control-lg"
-    type="text"
-  />
 </div>
 `;

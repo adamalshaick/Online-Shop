@@ -1,67 +1,44 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Loading from "../common/Loading";
-import { getReviews } from "../../actions/reviewActions";
 import Review from "./Review";
+import fetchReviews from "../common/hoc/fetchReviews";
 
-class Reviews extends Component {
-  componentDidMount() {
-    this.props.getReviews();
-  }
-
-  render() {
-    const { reviews, loading } = this.props.review;
-    const { currentProfile } = this.props;
-    let reviewItems;
-
-    if (reviews === null || loading) {
-      reviewItems = <Loading />;
+const Reviews = ({ user, review }) => {
+  let reviewItems;
+  if (review.reviews.length > 0) {
+    const usersReview = review.reviews.filter(
+      review => review.seller === user._id
+    );
+    if (usersReview.length > 0) {
+      reviewItems = usersReview.map(review => (
+        <Review key={review._id} review={review} />
+      ));
     } else {
-      if (reviews.length > 0) {
-        const usersReview = reviews.filter(
-          review => review.seller === currentProfile.user._id
-        );
-        if (usersReview > 0) {
-          reviewItems = usersReview.map(review => (
-            <Review key={review._id} review={review} />
-          ));
-        } else {
-          reviewItems = (
-            <div className="text-center">
-              <i>User has no reviews yet</i>
-            </div>
-          );
-        }
-      } else {
-        reviewItems = (
-          <div className="text-center">
-            <i>User has no reviews yet</i>
-          </div>
-        );
-      }
+      reviewItems = (
+        <div className="text-center col-12">
+          <p>
+            <i>You don't have any reviews yet</i>
+          </p>
+        </div>
+      );
     }
-
-    return (
-      <div className="row">
-        <div className="col-md-12">{reviewItems}</div>
+  } else {
+    reviewItems = (
+      <div className="text-center">
+        <i>User has no reviews yet</i>
       </div>
     );
   }
-}
-
-Reviews.propTypes = {
-  getReviews: PropTypes.func.isRequired,
-  review: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  currentProfile: PropTypes.object.isRequired
+  return (
+    <div className="container">
+      <div className="row">{reviewItems}</div>
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  review: state.review
-});
+Reviews.propTypes = {
+  review: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
 
-export default connect(
-  mapStateToProps,
-  { getReviews }
-)(Reviews);
+export default fetchReviews(Reviews);

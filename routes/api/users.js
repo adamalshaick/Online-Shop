@@ -19,6 +19,24 @@ router.post("/login", (req, res) => {
   usersController.login(req, res);
 });
 
+// @route GET api/users/user/:id
+// @desc Get user by ID
+// @access Public
+router.get("/user/:id", (req, res) => {
+  usersController.getUserById(req, res);
+});
+
+// @route   DELETE api/users
+// @desc    Delete user
+// @access  Private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    usersController.deleteUser(req, res);
+  }
+);
+
 //@route    GET api/users/current
 //@desc     Return current user
 //@access   Private

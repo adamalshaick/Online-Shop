@@ -2,15 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import NumberInput from "../common/NumberInput";
-import { ReviewWrapper, ReviewCard } from "../common/styles/Review";
+import { ReviewCard } from "../common/styles/Review";
+import { ShadowCard } from "../common/styles/ShadowCard";
 
-const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
+export const ReviewForm = ({
+  onClickRev,
+  errors,
+  text,
+  rate,
+  onSubmit,
+  onChange
+}) => {
   return (
     <>
-      <ReviewWrapper />
       <div className="row">
         <ReviewCard className="col-md-6 col-lg-4">
-          <div className="card">
+          <ShadowCard className="card p-0">
             <div className="card-header text-right">
               <span
                 style={{ fontSize: "1.3rem", fontWeight: "bold" }}
@@ -56,7 +63,7 @@ const ReviewForm = ({ onClickRev, errors, text, rate, onSubmit, onChange }) => {
                 </button>
               </form>
             </div>
-          </div>
+          </ShadowCard>
         </ReviewCard>
       </div>
     </>

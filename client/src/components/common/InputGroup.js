@@ -1,34 +1,27 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
-const InputGroup = ({
-  name,
-  placeholder,
-  value,
-  error,
-  icon,
-  type,
-  onChange
-}) => {
+const InputGroup = ({ name, placeholder, value, error, type, onChange }) => {
   return (
-    <div className="input-group mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className={icon} />
-        </span>
-      </div>
-      <input
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
-        })}
-        placeholder={placeholder}
+    <div>
+      <TextField
+        style={{ width: "100%" }}
+        label={placeholder}
         name={name}
         value={value}
         onChange={onChange}
         type={type}
       />
-      {error && <div className="invalid-feedback">{error}</div>}
+      {error ? (
+        <div>
+          <small style={{ color: "red" }} className="entry">
+            {error}
+          </small>
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -37,7 +30,6 @@ InputGroup.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
-  icon: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
