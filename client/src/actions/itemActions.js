@@ -11,7 +11,6 @@ export const addItem = (itemData, history) => dispatch => {
         type: ADD_ITEM,
         payload: res.data
       });
-      history.push("/items");
     })
     .catch(err => {
       dispatch({

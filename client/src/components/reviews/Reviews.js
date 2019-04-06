@@ -25,7 +25,9 @@ const Reviews = ({ user, review }) => {
   } else {
     reviewItems = (
       <div className="text-center">
-        <i>User has no reviews yet</i>
+        <p>
+          <i>User has no reviews yet</i>
+        </p>
       </div>
     );
   }
