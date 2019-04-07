@@ -1,6 +1,6 @@
 # Online-Shop
-Technology Stack:
-Frontend: React, Redux, material-ui (currently migrating from Bootstrap)
+Technology Stack:\
+Frontend: React, Redux, material-ui (currently migrating from Bootstrap)\
 Backend: Node.js, Express.js, MongoDB
 Tests: Jest, Enzyme
 
