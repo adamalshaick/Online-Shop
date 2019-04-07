@@ -4,7 +4,12 @@ import { connect } from "react-redux";
 import { deleteItem } from "../../actions/itemActions";
 import { addItemToCart } from "../../actions/cartActions";
 import { Link } from "react-router-dom";
-import { ItemCard, Image, Buttons } from "../common/styles/StyledItem";
+import {
+  ItemCard,
+  Image,
+  Buttons,
+  ImageWrapper
+} from "../common/styles/StyledItem";
 import { SecondaryHeader } from "../common/styles/Header";
 
 const onAdd = (id, addItemToCart) => e => {
@@ -21,7 +26,9 @@ export const Item = ({ item, currentUser, addItemToCart, deleteItem }) => {
   return (
     <div className="col-md-6 col-lg-4 p-0 entry-2x">
       <ItemCard className="text-center m-3">
-        <Image src={item.itemImage} alt="" />
+        <ImageWrapper>
+          <Image src={item.itemImage} alt="" />
+        </ImageWrapper>
         <p>{item.name}</p>
         <SecondaryHeader>{item.price} $</SecondaryHeader>
         <span>

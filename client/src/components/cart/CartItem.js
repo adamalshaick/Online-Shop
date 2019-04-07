@@ -13,7 +13,7 @@ export const CartItem = ({ item, removeItemFromCart }) => {
   return (
     <div className="entry2x" style={{ width: "100%" }}>
       <img
-        style={{ height: "50px", width: "50px" }}
+        style={{ maxWidth: "50px", maxHeight: "50px" }}
         src={item.itemImage}
         alt=""
       />

@@ -5,9 +5,16 @@ export const ItemCard = styled.div`
   padding: 2rem;
 `;
 
+export const ImageWrapper = styled.div`
+  height: 300px;
+`;
+
 export const Image = styled.img`
-  width: 100%;
-  max-height: 400px;
+  max-height: 300px;
+  max-width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   ${ItemCard}:hover & {
     opacity: 0.5;
     cursor: pointer;
